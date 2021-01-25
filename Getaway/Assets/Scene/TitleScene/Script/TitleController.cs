@@ -9,15 +9,17 @@ public class TitleController : MonoBehaviour
 {
     // Fadeオブジェクト
     GameObject m_Fade;
-    // タイトルロゴ
-    GameObject m_TitleLogos;
+    // タイトルキャンバス
+    GameObject m_TitleCanvas;
+
+    // アニメーション関係
+    int s_TitleHash = Animator.StringToHash("TitleTrigger");
 
     void Start() {
         // Fadeオブジェクトを取得
         m_Fade = GameObject.FindGameObjectWithTag("Fade");
-        // タイトルロオブジェクトを取得
-        m_TitleLogos = GameObject.Find("TitleLogos");
-
+        // タイトルキャンバスを取得
+        m_TitleCanvas = GameObject.Find("TitleCanvas");
         // フェードイン
         FadeIn();
     }
