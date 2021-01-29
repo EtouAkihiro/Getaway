@@ -43,18 +43,28 @@ public class TitleController : MonoBehaviour
     void FadeOut() {
         m_Fade.GetComponent<Image>().DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
-            // SceneManager.LoadScene("");
+            SceneManager.LoadScene("TNOPScene");
         });
     }
 
     void isSelectButtonColor() {
         // 現在のテキストの色を取得
         Color NormalColor = GameObject.Find("GameStartText").GetComponent<Text>().color;
+        // フェードの色を取得
+        Color FadeColor = m_Fade.GetComponent<Image>().color;
 
         // 現在のテキストカラーの透明度が1以上で、現在セレクトされていない場合
-        if (NormalColor.a >= 1 && EventSystem.current.currentSelectedGameObject == null) {
+        if (NormalColor.a >= 1 && 
+            FadeColor.a <= 0 &&
+            EventSystem.current.currentSelectedGameObject == null) {
             // ボタンをセットする
             EventSystem.current.SetSelectedGameObject(m_GameStartButton);
         }
+    }
+
+    /// <summary> ゲームスタートボタンが押された時</summary>
+    public void OnGameStartClick() {
+        GameObject.Find("GameStartButton").GetComponent<Animator>().SetTrigger(s_TitleHash);
+        FadeOut();
     }
 }
