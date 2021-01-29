@@ -7,6 +7,7 @@ TagManager:
   - Shootable
   - TitleController
   - Fade
+  - TNOPController
   layers:
   - Default
   - TransparentFX

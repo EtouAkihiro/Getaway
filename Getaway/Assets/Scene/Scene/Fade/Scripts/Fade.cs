@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
@@ -18,12 +19,21 @@ public class Fade : MonoBehaviour
     }
 
     /// <summary>フェードイン</summary>
-    void FadeIn() {
+    public void FadeIn() {
         m_Image.DOFade(0.0f, 1.0f);
     }
 
     /// <summary>フェードアウト</summary>
-    void FadeOut() {
+    public void FadeOut() {
         m_Image.DOFade(1.0f, 1.0f);
+    }
+
+    /// <summary>フェードアウト(シーン遷移付き)</summary>
+    /// <param name="SceneName">次のシーン名</param>
+    public void FadeOut(string SceneName) {
+        GetComponent<Image>().DOFade(1.0f, 1.0f).OnComplete(() => {
+            // シーン遷移
+            SceneManager.LoadScene(SceneName);
+        });
     }
 }

@@ -8,43 +8,31 @@ using UnityEngine.EventSystems;
 
 public class TitleController : MonoBehaviour
 {
-    // Fadeオブジェクト
-    GameObject m_Fade;
     // タイトルキャンバス
     GameObject m_TitleCanvas;
     // ゲームスタートボタン
     GameObject m_GameStartButton;
+
+    // Fadeスクリプトの参照
+    Fade m_Fade;
 
     // アニメーション関係
     int s_TitleHash = Animator.StringToHash("TitleTrigger");
 
     void Start() {
         // Fadeオブジェクトを取得
-        m_Fade = GameObject.FindGameObjectWithTag("Fade");
+        m_Fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
         // タイトルキャンバスを取得
         m_TitleCanvas = GameObject.Find("TitleCanvas");
         // ゲームスタートボタンを取得
         m_GameStartButton = GameObject.Find("GameStartButton");
         // フェードイン
-        FadeIn();
+        m_Fade.FadeIn();
     }
 
     void Update() {
         // 現在の色を確認
         isSelectButtonColor();
-    }
-
-    /// <summary>フェードイン</summary>
-    void FadeIn() {
-        m_Fade.GetComponent<Image>().DOFade(0.0f, 1.0f);
-    }
-
-    /// <summary>フェードアウト(シーン遷移付き)</summary>
-    void FadeOut() {
-        m_Fade.GetComponent<Image>().DOFade(1.0f, 1.0f).OnComplete(() => {
-            // シーン遷移
-            SceneManager.LoadScene("TNOPScene");
-        });
     }
 
     void isSelectButtonColor() {
@@ -64,7 +52,9 @@ public class TitleController : MonoBehaviour
 
     /// <summary> ゲームスタートボタンが押された時</summary>
     public void OnGameStartClick() {
-        GameObject.Find("GameStartButton").GetComponent<Animator>().SetTrigger(s_TitleHash);
-        FadeOut();
+        // ゲームスタートボタンのアニメーションを再生
+        m_GameStartButton.GetComponent<Animator>().SetTrigger(s_TitleHash);
+        // Fadeアウトしたら次のシーンへ
+        m_Fade.FadeOut("TNOPScene");
     }
 }
