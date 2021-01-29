@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TNOPController : MonoBehaviour
 {
-    /// <summary>フェードオブジェクト</summary>
-    GameObject m_Fade;
+    /// <summary>フェードの参照</summary>
+    Fade m_Fade;
 
     void Start() {
         // フェードオブジェクトの取得
-        m_Fade = GameObject.FindGameObjectWithTag("Fade");
+        m_Fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
         // フェードイン
-        m_Fade.GetComponent<Fade>().FadeIn();
+        m_Fade.FadeIn();
     }
 
     void Update() {    
