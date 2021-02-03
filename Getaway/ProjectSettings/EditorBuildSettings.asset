@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: 23e1e9bf1aa4162478258a0e5df23b2e
-  - enabled: 1
-    path: Assets/Scenes/TNOPScene.unity
-    guid: 95af7d058388f8f4b876894d820befb6
   m_configObjects: {}
