@@ -8,6 +8,7 @@ TagManager:
   - TitleController
   - Fade
   - TNOPController
+  - Door
   layers:
   - Default
   - TransparentFX
