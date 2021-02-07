@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class Fade : MonoBehaviour
 {
-    // imageの参照
+    /// <summary>フェードのフラグ</summary>
+    bool m_FadeFlag = false;
+
+    /// <summary>Imageの参照</summary>
     Image m_Image;
 
     void Start() {
@@ -20,12 +23,16 @@ public class Fade : MonoBehaviour
 
     /// <summary>フェードイン</summary>
     public void FadeIn() {
-        m_Image.DOFade(0.0f, 1.0f);
+        m_Image.DOFade(0.0f, 1.0f).OnComplete(() => {
+            m_FadeFlag = true;
+        });
     }
 
     /// <summary>フェードアウト</summary>
     public void FadeOut() {
-        m_Image.DOFade(1.0f, 1.0f);
+        m_Image.DOFade(1.0f, 1.0f).OnComplete(() => {
+            m_FadeFlag = false;
+        });
     }
 
     /// <summary>フェードアウト(シーン遷移付き)</summary>
@@ -35,5 +42,11 @@ public class Fade : MonoBehaviour
             // シーン遷移
             SceneManager.LoadScene(SceneName);
         });
+    }
+
+    /// <summary>フェードフラグを返す</summary>
+    /// <returns></returns>
+    public bool isFade() {
+        return m_FadeFlag;
     }
 }
