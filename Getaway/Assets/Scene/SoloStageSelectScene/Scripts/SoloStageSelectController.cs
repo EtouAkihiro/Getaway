@@ -65,6 +65,10 @@ public class SoloStageSelectController : MonoBehaviour
 
     /// <summary>研究所がクリックされた時</summary>
     public void OnClick_Laboratory() {
+        // ステージの番号を指定(1を指定)
+        m_StageNumber = 1;
+        // シーンチェンジ
+        m_FadeScript.FadeOut("GamePlayScene");
 
     }
 
