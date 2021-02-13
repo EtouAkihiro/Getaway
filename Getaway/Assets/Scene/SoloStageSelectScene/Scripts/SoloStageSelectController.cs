@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SoloStageSelectController : MonoBehaviour
 {
+    /// <summary>研究所のカメラの位置</summary>
+    public GameObject m_LaboratoryCameraPoint;
+    /// <summary>ステージの番号</summary>
+    public int m_StageNumber = 0;
 
     enum State
     {
@@ -13,15 +17,19 @@ public class SoloStageSelectController : MonoBehaviour
     /// <summary>状態</summary>
     State m_State;
 
+    /// <summary>メインカメラ</summary>
+    GameObject m_StageCamera;
 
     /// <summary>フェードのスクリプトを参照</summary>
     Fade m_FadeScript;
 
     void Start() {
         // フェードのスクリプトを取得
-        m_FadeScript = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
+        // m_FadeScript = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
+        // ステージカメラの取得
+        m_StageCamera = GameObject.Find("StageCamera");
         // フェードイン
-        m_FadeScript.FadeIn();
+        // m_FadeScript.FadeIn();
         // 状態を設定
         m_State = State.Laboratory;
     }
@@ -32,10 +40,37 @@ public class SoloStageSelectController : MonoBehaviour
         {
             case State.Laboratory : LaboratoryUpdate(); break; 
         }
+
+        // カメラの更新
+        MainCameraUpdate(m_State);
     }
 
-    // 研究所
-    void LaboratoryUpdate() {
+    /// <summary>状態ごとにカメラの更新</summary>
+    /// <param name="state">状態</param>
+    void MainCameraUpdate(State state)
+    {
+        // 研究所が選択されていた場合
+        if(state == State.Laboratory)
+        {
+            // カメラの位置を研究所のカメラの位置を設定
+            m_StageCamera.transform.position = m_LaboratoryCameraPoint.transform.position;
+            // カメラの回転
+            m_StageCamera.transform.eulerAngles += new Vector3(0.0f, 0.2f, 0.0f);
+        }
+    }
 
+    /// <summary>研究所が選択されたときの更新</summary>
+    void LaboratoryUpdate() {
+    }
+
+    /// <summary>研究所がクリックされた時</summary>
+    public void OnClick_Laboratory() {
+
+    }
+
+    /// <summary>ステージの番号を返す</summary>
+    /// <returns></returns>
+    public int isStageNumber() {
+        return m_StageNumber;
     }
 }
