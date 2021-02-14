@@ -6,8 +6,13 @@ public class SoloStageSelectController : MonoBehaviour
 {
     /// <summary>研究所のカメラの位置</summary>
     public GameObject m_LaboratoryCameraPoint;
+    /// <summary>最初に選択されるオブジェクト</summary>
+    public GameObject m_StartSelectObject;
+    /// <summary>カメラの回転スピード</summary>
+    public float m_StageCameraRotateSpeed = 0.0f;
+
     /// <summary>ステージの番号</summary>
-    public int m_StageNumber = 0;
+    int m_StageNumber = 0;
 
     enum State
     {
@@ -25,11 +30,11 @@ public class SoloStageSelectController : MonoBehaviour
 
     void Start() {
         // フェードのスクリプトを取得
-        // m_FadeScript = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
+        m_FadeScript = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
         // ステージカメラの取得
         m_StageCamera = GameObject.Find("StageCamera");
         // フェードイン
-        // m_FadeScript.FadeIn();
+        m_FadeScript.FadeIn();
         // 状態を設定
         m_State = State.Laboratory;
     }
@@ -55,7 +60,7 @@ public class SoloStageSelectController : MonoBehaviour
             // カメラの位置を研究所のカメラの位置を設定
             m_StageCamera.transform.position = m_LaboratoryCameraPoint.transform.position;
             // カメラの回転
-            m_StageCamera.transform.eulerAngles += new Vector3(0.0f, 0.2f, 0.0f);
+            m_StageCamera.transform.eulerAngles += new Vector3(0.0f, 1.0f, 0.0f) * m_StageCameraRotateSpeed * Time.deltaTime;
         }
     }
 
