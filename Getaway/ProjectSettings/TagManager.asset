@@ -10,6 +10,9 @@ TagManager:
   - TNOPController
   - Door
   - SoloStageSelectController
+  - thc6
+  - thc6_PatrolPoint
+  - zombie
   layers:
   - Default
   - TransparentFX
