@@ -107,7 +107,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.6
+    agentRadius: 0.65
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -115,7 +115,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.2
+    cellSize: 0.21666665
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -44950,38 +44950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bfa04a364ed5d48b42bc845eda5025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PatrolPoints:
-  - {fileID: 1999947497}
-  - {fileID: 1935426160}
-  - {fileID: 1944669933}
-  - {fileID: 17105847}
-  - {fileID: 615939689}
-  - {fileID: 1569354424}
-  - {fileID: 1182914006}
-  - {fileID: 429349532}
-  - {fileID: 1433208090}
-  - {fileID: 695206375}
-  - {fileID: 2075859200}
-  - {fileID: 666963546}
-  - {fileID: 1453582236}
-  - {fileID: 1429245993}
-  - {fileID: 1772197494}
-  - {fileID: 331269946}
-  - {fileID: 1561531339}
-  - {fileID: 470753314}
-  - {fileID: 287602174}
-  - {fileID: 1155772680}
-  - {fileID: 846528384}
-  - {fileID: 2080732977}
-  - {fileID: 983485988}
-  - {fileID: 1451902486}
-  - {fileID: 564878036}
-  - {fileID: 223466833}
-  - {fileID: 585372024}
-  - {fileID: 1093687462}
-  - {fileID: 1861120168}
-  - {fileID: 15732397}
-  - {fileID: 120637885}
 --- !u!195 &878355317
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -45719,7 +45687,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14738
+  m_Name: pb_Mesh14734
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
