@@ -48,7 +48,27 @@ public class Thc6 : MonoBehaviour
 
     /// <summary>次に向かう場所を決定</summary>
     void SetNewPatrolPointToDestination() {
+        // 徘徊ルートの番号を指定
+        m_CurrentPatrolPointIndex = RandomPatrolPointIndex(m_CurrentPatrolPointIndex); 
+        // 現在の徘徊ルートが現在設定されている徘徊ルートの番号以上だった場合
+        if (m_CurrentPatrolPointIndex >= m_PatrolPoints.Length) {
+            // 現在の徘徊ルートのリセット
+            m_CurrentPatrolPointIndex = 0;
+        }
+        // 現在の徘徊ルートを反映
+        m_NavMeshAgent.destination = m_PatrolPoints[m_CurrentPatrolPointIndex].transform.position;
+    }
 
+    /// <summary>到着したか？</summary>
+    /// <returns></returns>
+    bool HasArrived() {
+        return Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.1f;
+    }
+
+    /// <summary>徘徊ルートの番号を指定</summary>
+    /// <param name="CurrentPatrolPointIndex">現在の徘徊ルートの番号</param>
+    /// <returns></returns>
+    int RandomPatrolPointIndex(int CurrentPatrolPointIndex) {
         // 徘徊ルートの番号を保存
         m_LastTimePatrolPointIndex.Enqueue(m_CurrentPatrolPointIndex);
         // 徘徊ルートのランダム
@@ -64,24 +84,13 @@ public class Thc6 : MonoBehaviour
             }
         }
 
-        // 現在の徘徊ルートが現在設定されている徘徊ルートの番号以上だった場合
-        if (m_CurrentPatrolPointIndex >= m_PatrolPoints.Length) {
-            // 現在の徘徊ルートのリセット
-            m_CurrentPatrolPointIndex = 0;
-        }
-        // 現在の徘徊ルートを反映
-        m_NavMeshAgent.destination = m_PatrolPoints[m_CurrentPatrolPointIndex].transform.position;
-
         // 保存するキューの要素数が15以上になった場合
-        if(m_LastTimePatrolPointIndex.Count >= 15) {
+        if (m_LastTimePatrolPointIndex.Count >= 15) {
             // 古い要素を削除
             m_LastTimePatrolPointIndex.Dequeue();
         }
-    }
 
-    /// <summary>到着したか？</summary>
-    /// <returns></returns>
-    bool HasArrived() {
-        return Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.1f;
+        // 結果を返す
+        return m_CurrentPatrolPointIndex;
     }
 }
