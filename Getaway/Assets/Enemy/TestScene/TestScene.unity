@@ -107,7 +107,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.65
+    agentRadius: 0.6
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -115,7 +115,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.21666665
+    cellSize: 0.2
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -132,11 +132,11 @@ GameObject:
   m_Component:
   - component: {fileID: 15732397}
   m_Layer: 0
-  m_Name: PatrolPoint (29)
+  m_Name: thc6_PatrolPoint (29)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &15732397
 Transform:
@@ -162,11 +162,11 @@ GameObject:
   m_Component:
   - component: {fileID: 17105847}
   m_Layer: 0
-  m_Name: PatrolPoint (3)
+  m_Name: thc6_PatrolPoint (3)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &17105847
 Transform:
@@ -192,11 +192,11 @@ GameObject:
   m_Component:
   - component: {fileID: 120637885}
   m_Layer: 0
-  m_Name: PatrolPoint (30)
+  m_Name: thc6_PatrolPoint (30)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &120637885
 Transform:
@@ -222,11 +222,11 @@ GameObject:
   m_Component:
   - component: {fileID: 223466833}
   m_Layer: 0
-  m_Name: PatrolPoint (25)
+  m_Name: thc6_PatrolPoint (25)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &223466833
 Transform:
@@ -252,11 +252,11 @@ GameObject:
   m_Component:
   - component: {fileID: 287602174}
   m_Layer: 0
-  m_Name: PatrolPoint (18)
+  m_Name: thc6_PatrolPoint (18)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &287602174
 Transform:
@@ -282,11 +282,11 @@ GameObject:
   m_Component:
   - component: {fileID: 331269946}
   m_Layer: 0
-  m_Name: PatrolPoint (15)
+  m_Name: thc6_PatrolPoint (15)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &331269946
 Transform:
@@ -44482,11 +44482,11 @@ GameObject:
   m_Component:
   - component: {fileID: 403436058}
   m_Layer: 0
-  m_Name: PatrolPoints
+  m_Name: thc6_PatrolPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &403436058
 Transform:
@@ -44543,11 +44543,11 @@ GameObject:
   m_Component:
   - component: {fileID: 429349532}
   m_Layer: 0
-  m_Name: PatrolPoint (7)
+  m_Name: thc6_PatrolPoint (7)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &429349532
 Transform:
@@ -44573,11 +44573,11 @@ GameObject:
   m_Component:
   - component: {fileID: 470753314}
   m_Layer: 0
-  m_Name: PatrolPoint (17)
+  m_Name: thc6_PatrolPoint (17)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &470753314
 Transform:
@@ -44655,11 +44655,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -44677,11 +44677,11 @@ GameObject:
   m_Component:
   - component: {fileID: 564878036}
   m_Layer: 0
-  m_Name: PatrolPoint (24)
+  m_Name: thc6_PatrolPoint (24)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &564878036
 Transform:
@@ -44707,11 +44707,11 @@ GameObject:
   m_Component:
   - component: {fileID: 585372024}
   m_Layer: 0
-  m_Name: PatrolPoint (26)
+  m_Name: thc6_PatrolPoint (26)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &585372024
 Transform:
@@ -44737,11 +44737,11 @@ GameObject:
   m_Component:
   - component: {fileID: 615939689}
   m_Layer: 0
-  m_Name: PatrolPoint (4)
+  m_Name: thc6_PatrolPoint (4)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &615939689
 Transform:
@@ -44767,11 +44767,11 @@ GameObject:
   m_Component:
   - component: {fileID: 666963546}
   m_Layer: 0
-  m_Name: PatrolPoint (11)
+  m_Name: thc6_PatrolPoint (11)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &666963546
 Transform:
@@ -44797,11 +44797,11 @@ GameObject:
   m_Component:
   - component: {fileID: 695206375}
   m_Layer: 0
-  m_Name: PatrolPoint (9)
+  m_Name: thc6_PatrolPoint (9)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &695206375
 Transform:
@@ -44817,75 +44817,6 @@ Transform:
   m_Father: {fileID: 403436058}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &807635559
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 111292, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_Name
-      value: thc6
-      objectReference: {fileID: 0}
-    - target: {fileID: 111292, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 111292, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_TagString
-      value: thc6
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 21.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.00000016292068
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 494698, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500310, guid: 332254905319da1469830bd3e8725b48, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 332254905319da1469830bd3e8725b48, type: 3}
 --- !u!1 &846528383
 GameObject:
   m_ObjectHideFlags: 0
@@ -44896,11 +44827,11 @@ GameObject:
   m_Component:
   - component: {fileID: 846528384}
   m_Layer: 0
-  m_Name: PatrolPoint (20)
+  m_Name: thc6_PatrolPoint (20)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &846528384
 Transform:
@@ -44916,62 +44847,6 @@ Transform:
   m_Father: {fileID: 403436058}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &878355314 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 111292, guid: 332254905319da1469830bd3e8725b48,
-    type: 3}
-  m_PrefabInstance: {fileID: 807635559}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &878355315
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878355314}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &878355316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878355314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67bfa04a364ed5d48b42bc845eda5025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!195 &878355317
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878355314}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &983485987
 GameObject:
   m_ObjectHideFlags: 0
@@ -44982,11 +44857,11 @@ GameObject:
   m_Component:
   - component: {fileID: 983485988}
   m_Layer: 0
-  m_Name: PatrolPoint (22)
+  m_Name: thc6_PatrolPoint (22)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &983485988
 Transform:
@@ -45012,11 +44887,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1093687462}
   m_Layer: 0
-  m_Name: PatrolPoint (27)
+  m_Name: thc6_PatrolPoint (27)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1093687462
 Transform:
@@ -45042,11 +44917,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1155772680}
   m_Layer: 0
-  m_Name: PatrolPoint (19)
+  m_Name: thc6_PatrolPoint (19)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1155772680
 Transform:
@@ -45072,11 +44947,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1182914006}
   m_Layer: 0
-  m_Name: PatrolPoint (6)
+  m_Name: thc6_PatrolPoint (6)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1182914006
 Transform:
@@ -45168,13 +45043,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211194267}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 15, y: 30, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1429245992
 GameObject:
   m_ObjectHideFlags: 0
@@ -45185,11 +45060,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1429245993}
   m_Layer: 0
-  m_Name: PatrolPoint (13)
+  m_Name: thc6_PatrolPoint (13)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1429245993
 Transform:
@@ -45215,11 +45090,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1433208090}
   m_Layer: 0
-  m_Name: PatrolPoint (8)
+  m_Name: thc6_PatrolPoint (8)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1433208090
 Transform:
@@ -45245,11 +45120,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1451902486}
   m_Layer: 0
-  m_Name: PatrolPoint (23)
+  m_Name: thc6_PatrolPoint (23)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1451902486
 Transform:
@@ -45275,11 +45150,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1453582236}
   m_Layer: 0
-  m_Name: PatrolPoint (12)
+  m_Name: thc6_PatrolPoint (12)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1453582236
 Transform:
@@ -45305,11 +45180,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1561531339}
   m_Layer: 0
-  m_Name: PatrolPoint (16)
+  m_Name: thc6_PatrolPoint (16)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1561531339
 Transform:
@@ -45335,11 +45210,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1569354424}
   m_Layer: 0
-  m_Name: PatrolPoint (5)
+  m_Name: thc6_PatrolPoint (5)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1569354424
 Transform:
@@ -45517,7 +45392,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6c92a7ddf944fbc499b830e27e20b937,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6c92a7ddf944fbc499b830e27e20b937,
         type: 3}
@@ -45541,11 +45416,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1772197494}
   m_Layer: 0
-  m_Name: PatrolPoint (14)
+  m_Name: thc6_PatrolPoint (14)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1772197494
 Transform:
@@ -45571,11 +45446,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1861120168}
   m_Layer: 0
-  m_Name: PatrolPoint (28)
+  m_Name: thc6_PatrolPoint (28)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1861120168
 Transform:
@@ -45601,11 +45476,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1935426160}
   m_Layer: 0
-  m_Name: PatrolPoint (1)
+  m_Name: thc6_PatrolPoint (1)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1935426160
 Transform:
@@ -45631,11 +45506,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1944669933}
   m_Layer: 0
-  m_Name: PatrolPoint (2)
+  m_Name: thc6_PatrolPoint (2)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1944669933
 Transform:
@@ -45661,11 +45536,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1999947497}
   m_Layer: 0
-  m_Name: PatrolPoint
+  m_Name: thc6_PatrolPoint
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1999947497
 Transform:
@@ -45854,11 +45729,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2075859200}
   m_Layer: 0
-  m_Name: PatrolPoint (10)
+  m_Name: thc6_PatrolPoint (10)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2075859200
 Transform:
@@ -45884,11 +45759,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2080732977}
   m_Layer: 0
-  m_Name: PatrolPoint (21)
+  m_Name: thc6_PatrolPoint (21)
   m_TagString: thc6_PatrolPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2080732977
 Transform:
@@ -45904,3 +45779,77 @@ Transform:
   m_Father: {fileID: 403436058}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8427000405584730233
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8427000406387810466, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_Name
+      value: thc6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406387810466, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 21.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000016292068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427000406388203124, guid: 640218011632b8541922d2b9d6365ee1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 640218011632b8541922d2b9d6365ee1, type: 3}

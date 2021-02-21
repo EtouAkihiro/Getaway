@@ -22,6 +22,13 @@ public class Thc6 : MonoBehaviour
 
     /// <summary>重力加速度</summary>
     float m_Gravity = -9.81f;
+    /// <summary>時間</summary>
+    float m_Time = 0.0f;
+
+    /// <summary>移動量のアニメーションハッシュ</summary>
+    int s_moveingHash = Animator.StringToHash("moving");
+    /// <summary>バトルのアニメーションハッシュ</summary>
+    int s_battleHash = Animator.StringToHash("battle");
 
     void Start() {
         // 徘徊ルートを取得
@@ -37,13 +44,23 @@ public class Thc6 : MonoBehaviour
     }
 
     void Update() {
-
         // 到着した場合
-        if (HasArrived())
-        {
+        if (HasArrived() && m_Time >= 2) {
             // 次に向かう場所を決定
             SetNewPatrolPointToDestination();
+            // 経過時間をリセット
+            m_Time = 0.0f;
         }
+
+        // 目的地についた場合
+        if (HasArrived()) {
+            // 時間経過
+            m_Time += Time.deltaTime;
+        }
+
+        // アニメーションを反映
+        m_Animator.SetInteger(s_moveingHash, (int)m_NavMeshAgent.velocity.sqrMagnitude);
+        print(m_Time);
     }
 
     /// <summary>次に向かう場所を決定</summary>
@@ -62,23 +79,23 @@ public class Thc6 : MonoBehaviour
     /// <summary>到着したか？</summary>
     /// <returns></returns>
     bool HasArrived() {
-        return Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.1f;
+        return Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.5f;
     }
 
-    /// <summary>徘徊ルートの番号を指定</summary>
+    /// <summary>ランダムで徘徊ルートの番号を指定</summary>
     /// <param name="CurrentPatrolPointIndex">現在の徘徊ルートの番号</param>
     /// <returns></returns>
     int RandomPatrolPointIndex(int CurrentPatrolPointIndex) {
         // 徘徊ルートの番号を保存
-        m_LastTimePatrolPointIndex.Enqueue(m_CurrentPatrolPointIndex);
+        m_LastTimePatrolPointIndex.Enqueue(CurrentPatrolPointIndex);
         // 徘徊ルートのランダム
-        m_CurrentPatrolPointIndex = Random.Range(0, m_PatrolPoints.Length);
+        int Result = Random.Range(0, m_PatrolPoints.Length);
         // 今まで保存していた徘徊ルートの番号と比較し、同じ番号がある場合
-        while (m_LastTimePatrolPointIndex.Contains(m_CurrentPatrolPointIndex)) {
+        while (m_LastTimePatrolPointIndex.Contains(Result)) {
             // 再ランダム
-            m_CurrentPatrolPointIndex = Random.Range(0, m_PatrolPoints.Length);
+            Result = Random.Range(0, m_PatrolPoints.Length);
             // 今まで保存していた徘徊ルートの番号と比較し、同じ番号がない場合
-            if (!m_LastTimePatrolPointIndex.Contains(m_CurrentPatrolPointIndex)) {
+            if (!m_LastTimePatrolPointIndex.Contains(Result)) {
                 // 無限ループから抜ける
                 break;
             }
@@ -91,6 +108,6 @@ public class Thc6 : MonoBehaviour
         }
 
         // 結果を返す
-        return m_CurrentPatrolPointIndex;
+        return Result;
     }
 }
