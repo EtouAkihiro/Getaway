@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SoloStageSelectScene.unity
     guid: c0e1da92ea8f22048a734813d54b6aa3
+  - enabled: 1
+    path: Assets/Scenes/Solo_GamePlay_LaboratoryScene.unity
+    guid: a46c201f7db2d2742944ca38fcbdec63
   m_configObjects: {}

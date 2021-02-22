@@ -73,7 +73,7 @@ public class SoloStageSelectController : MonoBehaviour
         // ステージの番号を指定(1を指定)
         m_StageNumber = 1;
         // シーンチェンジ
-        m_FadeScript.FadeOut("GamePlayScene");
+        m_FadeScript.FadeOut("Solo_GamePlay_LaboratoryScene");
 
     }
 

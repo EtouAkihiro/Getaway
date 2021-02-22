@@ -177,6 +177,8 @@ public class TNOPController : MonoBehaviour
             !m_TNOPCanvasScript.isSoloPlay_Display()) {
             // ドアの奥に進むアニメーションを再生
             m_MainCameraAnimator.SetTrigger(s_MainCamera_OnClick_SoloPlayHash);
+            // フェードアウトする
+            m_FadeScript.FadeOut("SoloStageSelectScene");
         }
     }
 
@@ -218,7 +220,6 @@ public class TNOPController : MonoBehaviour
         m_SoloPlayDoor.GetComponent<Animator>().SetBool(s_OpeningAndClosingDoorHash, true);
         // 一人でプレイする画面を非表示にする
         m_CanvasAnimator.SetTrigger(s_Canvas_OnClick_SoloPlayHash);
-        // フェードアウトする
     }
 
     /// <summary>複数人でゲームを開始する</summary>
