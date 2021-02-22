@@ -53,7 +53,7 @@ public class zombie : MonoBehaviour
         }
 
         // 目的地についた場合
-        if (HasArrived()) {
+        if (HasArrived() && m_StandUpAnimatorEnd) {
             // 時間経過
             m_Time += Time.deltaTime;
         }
