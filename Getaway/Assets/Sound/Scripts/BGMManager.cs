@@ -22,6 +22,21 @@ public class BGMManager : MonoBehaviour
     }
 
     void Update() {
+        // 現在のシーン名を取得
+        string SceneName = SceneManager.GetActiveScene().name;
+        // シーンごとにBGMの再生を行う
+        SceneUpdate(SceneName);
+        // 常にBGMマネージャーを管理
+        BGMManagerTwoOrmore();
+    }
+
+    /// <summary>シーンごとにBGMの再生を行う</summary>
+    /// <param name="SceneName"></param>
+    void SceneUpdate(string SceneName) {
+        // シーンごとにBGMの再生
+        switch (SceneName)
+        {
+        }
     }
 
     /// <summary>BGMの再生</summary>

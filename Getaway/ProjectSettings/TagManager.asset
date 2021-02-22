@@ -13,6 +13,7 @@ TagManager:
   - thc6
   - thc6_PatrolPoint
   - zombie
+  - BGMManager
   layers:
   - Default
   - TransparentFX
