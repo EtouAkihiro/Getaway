@@ -57,8 +57,6 @@ public class zombie : MonoBehaviour
             // 時間経過
             m_Time += Time.deltaTime;
         }
-
-
         // アニメーションを反映
         m_Animator.SetFloat(s_moveingHash, m_NavMeshAgent.velocity.sqrMagnitude);
     }
