@@ -19,7 +19,8 @@ public class TitleController : MonoBehaviour
     // アニメーション関係
     int s_TitleHash = Animator.StringToHash("TitleTrigger");
 
-    void Start() {
+    void Start()
+    {
         // Fadeオブジェクトを取得
         m_Fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
         // タイトルキャンバスを取得
@@ -30,12 +31,14 @@ public class TitleController : MonoBehaviour
         m_Fade.FadeIn();
     }
 
-    void Update() {
+    void Update()
+    {
         // 現在の色を確認
         isSelectButtonColor();
     }
 
-    void isSelectButtonColor() {
+    void isSelectButtonColor()
+    {
         // 現在のテキストの色を取得
         Color NormalColor = GameObject.Find("GameStartText").GetComponent<Text>().color;
         // フェードの色を取得
@@ -44,14 +47,16 @@ public class TitleController : MonoBehaviour
         // 現在のテキストカラーの透明度が1以上で、現在セレクトされていない場合
         if (NormalColor.a >= 1 && 
             FadeColor.a <= 0 &&
-            EventSystem.current.currentSelectedGameObject == null) {
+            EventSystem.current.currentSelectedGameObject == null)
+        {
             // ボタンをセットする
             EventSystem.current.SetSelectedGameObject(m_GameStartButton);
         }
     }
 
     /// <summary> ゲームスタートボタンが押された時</summary>
-    public void OnGameStartClick() {
+    public void OnGameStartClick()
+    {
         // ゲームスタートボタンのアニメーションを再生
         m_GameStartButton.GetComponent<Animator>().SetTrigger(s_TitleHash);
         // Fadeアウトしたら次のシーンへ

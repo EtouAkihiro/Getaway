@@ -13,23 +13,27 @@ public class Fade : MonoBehaviour
     /// <summary>Imageの参照</summary>
     Image m_Image;
 
-    void Start() {
+    void Start()
+    {
         // Imageを取得
         m_Image = GetComponent<Image>();
     }
 
-    void Update() {
+    void Update()
+    {
     }
 
     /// <summary>フェードイン</summary>
-    public void FadeIn() {
+    public void FadeIn()
+    {
         m_Image.DOFade(0.0f, 1.0f).OnComplete(() => {
             m_FadeFlag = true;
         });
     }
 
     /// <summary>フェードアウト</summary>
-    public void FadeOut() {
+    public void FadeOut()
+    {
         m_Image.DOFade(1.0f, 1.0f).OnComplete(() => {
             m_FadeFlag = false;
         });
@@ -37,7 +41,8 @@ public class Fade : MonoBehaviour
 
     /// <summary>フェードアウト(シーン遷移付き)</summary>
     /// <param name="SceneName">次のシーン名</param>
-    public void FadeOut(string SceneName) {
+    public void FadeOut(string SceneName)
+    {
         GetComponent<Image>().DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
@@ -46,7 +51,8 @@ public class Fade : MonoBehaviour
 
     /// <summary>フェードフラグを返す</summary>
     /// <returns></returns>
-    public bool isFade() {
+    public bool isFade()
+    {
         return m_FadeFlag;
     }
 }

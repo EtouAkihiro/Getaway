@@ -28,7 +28,8 @@ public class zombie : MonoBehaviour
     /// <summary>移動量のアニメーションハッシュ</summary>
     int s_moveingHash = Animator.StringToHash("moving");
 
-    void Start() {
+    void Start()
+    {
         // 徘徊ルートを取得
         m_PatrolPoints = GameObject.FindGameObjectsWithTag("thc6_PatrolPoint");
         // キャラクターコントローラーの取得
@@ -41,11 +42,13 @@ public class zombie : MonoBehaviour
         m_CurrentPatrolPointIndex = Random.Range(0, m_PatrolPoints.Length);
     }
 
-    void Update() {
+    void Update()
+    {
         // 徘徊ルートの位置に到着した場合
         // なおかつ、経過時間が2以上ある場合
         // なおかつ、立ち上がるアニメーションの終了している場合
-        if (HasArrived() && m_Time >= 2 && m_StandUpAnimatorEnd)　{
+        if (HasArrived() && m_Time >= 2 && m_StandUpAnimatorEnd)
+        {
             // 次に向かう場所を決定
             SetNewPatrolPointToDestination();
             // 経過時間をリセット
@@ -53,7 +56,8 @@ public class zombie : MonoBehaviour
         }
 
         // 目的地についた場合
-        if (HasArrived() && m_StandUpAnimatorEnd) {
+        if (HasArrived() && m_StandUpAnimatorEnd)
+        {
             // 時間経過
             m_Time += Time.deltaTime;
         }
@@ -62,7 +66,8 @@ public class zombie : MonoBehaviour
     }
 
     /// <summary>次に向かう場所を決定</summary>
-    void SetNewPatrolPointToDestination() {
+    void SetNewPatrolPointToDestination()
+    {
         // 徘徊ルートの番号を指定
         m_CurrentPatrolPointIndex = RandomPatrolPointIndex(m_CurrentPatrolPointIndex);
         // 現在の徘徊ルートが現在設定されている徘徊ルートの番号以上だった場合
@@ -76,31 +81,36 @@ public class zombie : MonoBehaviour
 
     /// <summary>到着したか？</summary>
     /// <returns></returns>
-    bool HasArrived() {
+    bool HasArrived()
+    {
         return Vector3.Distance(m_NavMeshAgent.destination, transform.position) < 0.5f;
     }
 
     /// <summary>ランダムで徘徊ルートの番号を指定</summary>
     /// <param name="CurrentPatrolPointIndex">現在の徘徊ルートの番号</param>
     /// <returns></returns>
-    int RandomPatrolPointIndex(int CurrentPatrolPointIndex) {
+    int RandomPatrolPointIndex(int CurrentPatrolPointIndex)
+    {
         // 徘徊ルートの番号を保存
         m_LastTimePatrolPointIndex.Enqueue(CurrentPatrolPointIndex);
         // 徘徊ルートのランダム
         int Result = Random.Range(0, m_PatrolPoints.Length);
         // 今まで保存していた徘徊ルートの番号と比較し、同じ番号がある場合
-        while (m_LastTimePatrolPointIndex.Contains(Result)) {
+        while (m_LastTimePatrolPointIndex.Contains(Result))
+        {
             // 再ランダム
             Result = Random.Range(0, m_PatrolPoints.Length);
             // 今まで保存していた徘徊ルートの番号と比較し、同じ番号がない場合
-            if (!m_LastTimePatrolPointIndex.Contains(Result)) {
+            if (!m_LastTimePatrolPointIndex.Contains(Result))
+            {
                 // 無限ループから抜ける
                 break;
             }
         }
 
         // 保存するキューの要素数が15以上になった場合
-        if (m_LastTimePatrolPointIndex.Count >= 15) {
+        if (m_LastTimePatrolPointIndex.Count >= 15)
+        {
             // 古い要素を削除
             m_LastTimePatrolPointIndex.Dequeue();
         }
@@ -111,7 +121,8 @@ public class zombie : MonoBehaviour
 
     /// <summary>立ち上がるアニメーションの終了</summary>
     /// <returns></returns>
-    bool isStandUpAnimatorEnd() {
+    bool isStandUpAnimatorEnd()
+    {
         return m_StandUpAnimatorEnd = true;
     }
 }

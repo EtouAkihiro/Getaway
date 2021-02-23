@@ -9,18 +9,21 @@ public class Door : MonoBehaviour
     bool m_OpeningAndClosingDoorFrag = false;
 
     /// <summary>ドアが開き終わった時</summary>
-    public void OpenDoor() {
+    public void OpenDoor()
+    {
         m_OpeningAndClosingDoorFrag = true;
     }
 
     /// <summary>ドアが閉まり切った時</summary>
-    public void CloseDoor() {
+    public void CloseDoor()
+    {
         m_OpeningAndClosingDoorFrag = false;
     }
 
     /// <summary>開閉のフラグを返す</summary>
     /// <returns>trueが開いている状態・falseが閉じている状態</returns>
-    public bool isOpeningAndClosingDoor() {
+    public bool isOpeningAndClosingDoor()
+    {
         return m_OpeningAndClosingDoorFrag;
     }
 }

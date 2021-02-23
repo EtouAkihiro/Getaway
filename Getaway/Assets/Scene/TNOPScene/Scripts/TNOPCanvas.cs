@@ -23,44 +23,67 @@ public class TNOPCanvas : MonoBehaviour
     int s_OnClick_PluralPlayHash = Animator.StringToHash("OnClick_PluralPlayTrigger ");
 
     /// <summary>開始</summary>
-    void Start() {
+    void Start()
+    {
         // アニメーターを参照
         m_Animator = GetComponent<Animator>();
     }
 
+    /// <summary>一人でプレイする画面を表示するアニメーションの再生</summary>
+    /// <param name="Frag">フラグ</param>
+    public void SoloSelectDispPlayAnimator_Play(bool Frag)
+    {
+        m_Animator.SetBool(s_SoloSelectDispPlayHash, Frag);
+    }
+
+    /// <summary>複数でプレイする画面を表示するアニメーションの再生</summary>
+    /// <param name="Frag">フラグ</param>
+    public void PluralPlaySelectDispPlay_Play(bool Frag)
+    {
+        m_Animator.SetBool(s_PluralPlaySelectDispPlayHash, Frag);
+    }
+
+
+
     /// <summary>一人でプレイする画面が表示されている</summary>
-    public void SoloPlay_DisPlay() {
+    public void SoloPlay_DisPlay()
+    {
         // 表示されているフラグにする
         m_SoloPlay_DisplayFlag = true;
     }
 
     /// <summary>一人でプレイする画面が非表示されている</summary>
-    public void SoloPlay_Hide() {
+    public void SoloPlay_Hide()
+    {
         // 非表示になっているフラグにする
         m_SoloPlay_DisplayFlag = false;
     }
 
     /// <summary>一人でプレイする画面の表示・非表示のフラグを返す</summary>
     /// <returns></returns>
-    public bool isSoloPlay_Display() {
+    public bool isSoloPlay_Display()
+    {
         return m_SoloPlay_DisplayFlag;
     }
 
     /// <summary>複数人でプレイする画面が表示されている</summary>
-    public void PluralPlay_DisPlay() {
+    public void PluralPlay_DisPlay()
+    {
         // 表示されているフラグにする
         m_PluralPlay_DosplayFlag = true;
     }
 
     /// <summary>複数人でプレイする画面が非表示されている</summary>
-    public void PluralPlay_Hide() {
+    public void PluralPlay_Hide()
+    {
         // 非表示になっているフラグにする
         m_PluralPlay_DosplayFlag = false;
     }
 
     /// <summary>複数人でプレイする画面の表示・非表示のフラグを返す</summary>
     /// <returns></returns>
-    public bool isPluralPlay_Dosplay() {
+    public bool isPluralPlay_Dosplay()
+    {
         return m_PluralPlay_DosplayFlag;
     }
 }

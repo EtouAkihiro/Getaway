@@ -12,16 +12,19 @@ public class BGMManager : MonoBehaviour
     // オーディオソース
     AudioSource m_AudioSource;
 
-    void Awake() {
+    void Awake()
+    {
         // 全シーンにまたがって存在する（シーン切り替えで破壊されない）ようにする
         DontDestroyOnLoad(gameObject);
     }
-    void Start() {
+    void Start()
+    {
         // オーディオソースを参照
         m_AudioSource = GetComponent<AudioSource>();
     }
 
-    void Update() {
+    void Update()
+    {
         // 現在のシーン名を取得
         string SceneName = SceneManager.GetActiveScene().name;
         // シーンごとにBGMの再生を行う
@@ -32,7 +35,8 @@ public class BGMManager : MonoBehaviour
 
     /// <summary>シーンごとにBGMの再生を行う</summary>
     /// <param name="SceneName"></param>
-    void SceneUpdate(string SceneName) {
+    void SceneUpdate(string SceneName)
+    {
         // シーンごとにBGMの再生
         switch (SceneName)
         {
@@ -41,11 +45,13 @@ public class BGMManager : MonoBehaviour
 
     /// <summary>BGMの再生</summary>
     /// <param name="audioClip">サウンドクリップ</param>
-    void PlayBGM(AudioClip audioClip) {
+    void PlayBGM(AudioClip audioClip)
+    {
         // 現在のBGMと同じBGMじゃあない場合
         // または、クリップの中に何もなかった場合
         if(m_AudioSource.clip != audioClip ||
-           m_AudioSource.clip == null) {
+           m_AudioSource.clip == null)
+        {
             // 入れ替えて、再生
             m_AudioSource.clip = audioClip;
             m_AudioSource.Play();
@@ -53,7 +59,8 @@ public class BGMManager : MonoBehaviour
     }
 
     /// <summary>BGMの停止</summary>
-    void StopBGM() {
+    void StopBGM()
+    {
         // もし、BGMの再生されていた場合
         if (m_AudioSource.isPlaying) {
             // BGMの停止
@@ -64,7 +71,8 @@ public class BGMManager : MonoBehaviour
     }
 
     /// <summary>BGMマネージャーが2個以上存在する場合、新しく生成されたBGMマネージャーを削除</summary>
-    void BGMManagerTwoOrmore() {
+    void BGMManagerTwoOrmore()
+    {
         // 現在のシーンにあるBGMマネージャーを取得
         GameObject[] BGMManagers = GameObject.FindGameObjectsWithTag("BGMManager");
 

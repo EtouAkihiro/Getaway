@@ -28,7 +28,8 @@ public class SoloStageSelectController : MonoBehaviour
     /// <summary>フェードのスクリプトを参照</summary>
     Fade m_FadeScript;
 
-    void Start() {
+    void Start()
+    {
         // フェードのスクリプトを取得
         m_FadeScript = GameObject.FindGameObjectWithTag("Fade").GetComponent<Fade>();
         // ステージカメラの取得
@@ -39,7 +40,8 @@ public class SoloStageSelectController : MonoBehaviour
         m_State = State.Laboratory;
     }
 
-    void Update() {
+    void Update()
+    {
         // 状態ごとに更新
         switch (m_State)
         {
@@ -65,11 +67,13 @@ public class SoloStageSelectController : MonoBehaviour
     }
 
     /// <summary>研究所が選択されたときの更新</summary>
-    void LaboratoryUpdate() {
+    void LaboratoryUpdate()
+    {
     }
 
     /// <summary>研究所がクリックされた時</summary>
-    public void OnClick_Laboratory() {
+    public void OnClick_Laboratory()
+    {
         // ステージの番号を指定(1を指定)
         m_StageNumber = 1;
         // シーンチェンジ
@@ -79,7 +83,8 @@ public class SoloStageSelectController : MonoBehaviour
 
     /// <summary>ステージの番号を返す</summary>
     /// <returns></returns>
-    public int isStageNumber() {
+    public int isStageNumber()
+    {
         return m_StageNumber;
     }
 }

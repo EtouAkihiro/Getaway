@@ -66,7 +66,8 @@ public class Player : MonoBehaviour
     /// <summary>ダメージ状態のアニメーションのZ軸の移動量</summary>
     int s_Damage_VelocityZ_AnimeHash = Animator.StringToHash("VelocityZ");
 
-    void Start() {
+    void Start()
+    {
         // キャラクターコントローラーの参照
         m_CharacterController = GetComponent<CharacterController>();
         // アニメーターの参照
@@ -89,7 +90,8 @@ public class Player : MonoBehaviour
 
     }
 
-    void Update() {
+    void Update()
+    {
         // 状態ごとの更新
         switch (m_State)
         {
@@ -105,7 +107,8 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>通常状態</summary>
-    void Normal() {
+    void Normal()
+    {
         // 現在のコントローラーの名前を取得
         string[] TheCurrentGameController = Input.GetJoystickNames();
 
@@ -122,12 +125,14 @@ public class Player : MonoBehaviour
         m_Animator.SetFloat(s_Normal_VelocityZ_AnimeHash, Velocity.z);
 
         // コントローラーが接続されている場合
-        if(m_CacheJoysticNames.Length < TheCurrentGameController.Length) {
+        if(m_CacheJoysticNames.Length < TheCurrentGameController.Length)
+        {
             // コントローラーの回転量
             m_Normal_Rotate.y = Input.GetAxis("AngleHorizontal") * m_Normal_RotateSpeed * Time.deltaTime;
         }
         // コントローラーが接続されていない場合
-        else {
+        else
+        {
             // マウスの回転量
             m_Normal_Rotate.y = (Input.GetAxis("AngleMouseX") * m_Normal_RotateSpeed +
                                 Input.GetAxis("AngleMouseY") * m_Normal_RotateSpeed)  * Time.deltaTime;
@@ -137,7 +142,8 @@ public class Player : MonoBehaviour
         transform.Rotate(m_Normal_Rotate);
 
         // 地面に触れている場合
-        if (m_CharacterController.isGrounded) {
+        if (m_CharacterController.isGrounded)
+        {
             Velocity.y = 0.0f;
         }
 
@@ -150,7 +156,8 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>ダメージ状態</summary>
-    void Damage() {
+    void Damage()
+    {
         // 現在のコントローラーの名前を取得
         string[] TheCurrentGameController = Input.GetJoystickNames();
 
@@ -167,12 +174,14 @@ public class Player : MonoBehaviour
         m_Animator.SetFloat(s_Damage_VelocityZ_AnimeHash, Velocity.z);
 
         // コントローラーが接続されている場合
-        if (m_CacheJoysticNames.Length < TheCurrentGameController.Length) {
+        if (m_CacheJoysticNames.Length < TheCurrentGameController.Length)
+        {
             // コントローラーの回転量
             m_Damage_Rotate.y = Input.GetAxis("AngleHorizontal") * m_Normal_RotateSpeed * Time.deltaTime;
         }
         // コントローラーが接続されていない場合
-        else {
+        else
+        {
             // マウスの回転量
             m_Damage_Rotate.y = Input.GetAxis("AngleMouseX") * m_Normal_RotateSpeed * Time.deltaTime;
         }
@@ -180,7 +189,8 @@ public class Player : MonoBehaviour
         transform.Rotate(m_Damage_Rotate);
 
         // 地面に触れている場合
-        if (m_CharacterController.isGrounded) {
+        if (m_CharacterController.isGrounded)
+        {
             Velocity.y = 0.0f;
         }
 
@@ -193,20 +203,24 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>カーソルの表示・非表示</summary>
-    void CursorVisibe() {
+    void CursorVisibe()
+    {
         // カーソルが表示されている場合
-        if (Cursor.visible) {
+        if (Cursor.visible)
+        {
             // カーソルを非表示
             Cursor.visible = false;
         }
         // カーソルが非表示されている場合
-        else {
+        else
+        {
             // カーソルを表示
             Cursor.visible = true;
         }
 
         // カーソルがロックされている場合
-        if(Cursor.lockState == CursorLockMode.Locked) {
+        if(Cursor.lockState == CursorLockMode.Locked)
+        {
             // カーソルのロックを解除
             Cursor.lockState = CursorLockMode.None;
         }
@@ -214,7 +228,8 @@ public class Player : MonoBehaviour
 
     /// <summary>SEを流す</summary>
     /// <param name="PlaySE">流すSE</param>
-    void PlaySE(AudioClip PlaySE) {
+    void PlaySE(AudioClip PlaySE)
+    {
         m_AudioSource.PlayOneShot(PlaySE);
     }
 
@@ -224,7 +239,8 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>歩くSE</summary>
-    public void WalkSE() {
+    public void WalkSE()
+    {
         PlaySE(m_WalkSE);
     }
 }
