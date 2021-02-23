@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Fade : MonoBehaviour
+public class Fade : SingletonMOnoBehaviour<Fade>
 {
     /// <summary>フェードのフラグ</summary>
     bool m_FadeFlag = false;

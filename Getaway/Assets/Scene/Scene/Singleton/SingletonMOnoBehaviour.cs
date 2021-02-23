@@ -1,5 +1,4 @@
 ﻿using System;
-
 using UnityEngine;
 
 public abstract class SingletonMOnoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
