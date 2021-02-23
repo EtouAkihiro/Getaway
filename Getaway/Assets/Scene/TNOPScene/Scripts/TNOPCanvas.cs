@@ -38,9 +38,21 @@ public class TNOPCanvas : MonoBehaviour
 
     /// <summary>複数でプレイする画面を表示するアニメーションの再生</summary>
     /// <param name="Frag">フラグ</param>
-    public void PluralPlaySelectDispPlay_Play(bool Frag)
+    public void PluralPlaySelectDispPlayAnimatpr_Play(bool Frag)
     {
         m_Animator.SetBool(s_PluralPlaySelectDispPlayHash, Frag);
+    }
+
+    /// <summary>>一人でプレイする画面を非表示にするアニメーションの再生</summary>
+    public void OnClick_SoloPlayAnimator_Play()
+    {
+        m_Animator.SetTrigger(s_OnClick_SoloPlayHash);
+    }
+
+    /// <summary>複数でプレイする画面を非表示にするアニメーションの再生</summary>
+    public void OnClick_PluralPlayAnimator_Play()
+    {
+        m_Animator.SetTrigger(s_OnClick_PluralPlayHash);
     }
 
 

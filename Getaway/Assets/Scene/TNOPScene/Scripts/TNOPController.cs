@@ -35,8 +35,7 @@ public class TNOPController : MonoBehaviour
 
     /// <summary>状態</summary>
     State m_State;
-    /// <summary>キャンバスアニメーター</summary>
-    Animator m_CanvasAnimator;
+
     /// <summary>>一人でプレイする画面側の扉のスクリプトを参照</summary>
     Door m_SoloPlayDoorScript;
     /// <summary>複数人でプレイする画面側の扉のスクリプトを参照</summary>
@@ -45,24 +44,8 @@ public class TNOPController : MonoBehaviour
     Fade m_FadeScript;
     /// <summary>メインカメラのスクリプトを参照</summary>
     MainCamera m_MainCameraScript;
-
     /// <summary>キャンバスのスクリプトを参照</summary>
     TNOPCanvas m_TNOPCanvasScript;
-
-
-    /// キャンバスのアニメーション
-    /// <summary>一人でプレイする画面を表示するアニメーション</summary>
-    int s_SoloSelectDispPlayHash = Animator.StringToHash("soloSelectFrag");
-    /// <summary>複数でプレイする画面を表示するアニメーション</summary>
-    int s_PluralPlaySelectDispPlayHash = Animator.StringToHash("PluralPlaySelectFrag");
-    /// <summary>>一人でプレイする画面を非表示にするアニメーション</summary>
-    int s_Canvas_OnClick_SoloPlayHash = Animator.StringToHash("OnClick_SoloPlayTrigger");
-    /// <summary>>複数でプレイする画面を非表示にするアニメーション</summary>
-    int s_Camvas_OnClick_PluralPlayHash = Animator.StringToHash("OnClick_PluralPlayTrigger ");
-
-    /// ドアのアニメーション
-    /// <summary>扉の開閉のフラグ</summary>
-    int s_OpeningAndClosingDoorHash = Animator.StringToHash("DoorFlag");
 
     /// ボタンのアニメーション
     /// <summary>クリックされた時に点滅を速くするアニメーション</summary>
@@ -76,8 +59,6 @@ public class TNOPController : MonoBehaviour
         m_TNOPCanvasScript = GameObject.Find("TNOPCanvas").GetComponent<TNOPCanvas>();
         // メインカメラのスクリプトの取得
         m_MainCameraScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCamera>();
-        // キャンバスのアニメーターの取得
-        m_CanvasAnimator = GameObject.Find("TNOPCanvas").GetComponent<Animator>();
         // 一人でプレイする画面のオブジェクトの長方形の位置を取得
         m_SoloSelectObjectsRT = GameObject.Find("soloSelectObjects").GetComponent<RectTransform>();
         // 複数人でプレイする画面のオブジェクトの長方形の位置を取得
@@ -145,14 +126,14 @@ public class TNOPController : MonoBehaviour
             // 状態が、一人でプレイする状態だった場合
             if(m_State == State.Solo) {
                 // 一人でプレイする画面を表示
-                m_CanvasAnimator.SetBool(s_SoloSelectDispPlayHash, true);
+                m_TNOPCanvasScript.SoloSelectDispPlayAnimator_Play(true);
                 // 一人でプレイする状態のアニメーションを再生
                 m_MainCameraScript.SoloSelectAnimator_Play(true);
             }
             // 状態が、複数人でプレイする状態だった場合
             else if (m_State == State.plural) {
                 // 複数人でプレイする画面を表示
-                m_CanvasAnimator.SetBool(s_PluralPlaySelectDispPlayHash, true);
+                m_TNOPCanvasScript.PluralPlaySelectDispPlayAnimatpr_Play(true);
                 // 複数人でプレイする状態のアニメーションを再生
                 m_MainCameraScript.PluralPlaySelectAnimator_Play(true);
             }
@@ -224,9 +205,9 @@ public class TNOPController : MonoBehaviour
         }
 
         // 一人でプレイする画面側のドアを開く
-        m_SoloPlayDoor.GetComponent<Animator>().SetBool(s_OpeningAndClosingDoorHash, true);
+        m_SoloPlayDoorScript.OpenAndClosingDoorAnimator_Play(true);
         // 一人でプレイする画面を非表示にする
-        m_CanvasAnimator.SetTrigger(s_Canvas_OnClick_SoloPlayHash);
+        m_MainCameraScript.OnClick_SoloPlayAnimator_Play();
     }
 
     /// <summary>複数人でゲームを開始する</summary>
@@ -250,9 +231,9 @@ public class TNOPController : MonoBehaviour
         }
 
         // 複数人でプレイする画面側のドアを開く
-        m_PluralPlayDoor.GetComponent<Animator>().SetBool(s_OpeningAndClosingDoorHash, true);
+        m_PluralPlayDoorScript.OpenAndClosingDoorAnimator_Play(true);
         // 複数人でプレイする画面を非表示にする
-        m_CanvasAnimator.SetTrigger(s_Camvas_OnClick_PluralPlayHash);
+        m_TNOPCanvasScript.OnClick_PluralPlayAnimator_Play();
     }
 
     /// <summary>一人でプレイするから選択画面に戻る</summary>
@@ -262,7 +243,7 @@ public class TNOPController : MonoBehaviour
         if(m_State == State.Solo)
         {
             // 選択画面を表示
-            m_CanvasAnimator.SetBool(s_SoloSelectDispPlayHash, false);
+            m_TNOPCanvasScript.SoloSelectDispPlayAnimator_Play(false);
             // 選択画面へ移動するアニメーションを再生
             m_MainCameraScript.SoloSelectAnimator_Play(false);
             // 状態を選択状態に遷移
@@ -286,7 +267,7 @@ public class TNOPController : MonoBehaviour
             // 選択画面へ移動するアニメーションを再生
             m_MainCameraScript.PluralPlaySelectAnimator_Play(false);
             // 選択画面を表示
-            m_CanvasAnimator.SetBool(s_PluralPlaySelectDispPlayHash, false);
+            m_TNOPCanvasScript.PluralPlaySelectDispPlayAnimatpr_Play(false);
             // 状態を選択状態に遷移
             m_State = State.Select;
             // 現在の選択されているオブジェクトがある場合

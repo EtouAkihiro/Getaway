@@ -8,6 +8,23 @@ public class Door : MonoBehaviour
     /// trueが開いている状態・falseが閉じている状態
     bool m_OpeningAndClosingDoorFrag = false;
 
+    /// <summary>アニメーター</summary>
+    Animator m_Animator;
+
+    void Start()
+    {
+        m_Animator = GetComponent<Animator>();
+    }
+
+    /// ドアのアニメーション
+    /// <summary>扉の開閉のフラグ</summary>
+    int s_OpeningAndClosingDoorHash = Animator.StringToHash("DoorFlag");
+
+    public void OpenAndClosingDoorAnimator_Play(bool Frag)
+    {
+        m_Animator.SetBool(s_OpeningAndClosingDoorHash, Frag);
+    }
+
     /// <summary>ドアが開き終わった時</summary>
     public void OpenDoor()
     {
