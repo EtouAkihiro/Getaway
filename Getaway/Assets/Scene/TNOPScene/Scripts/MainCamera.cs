@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class MainCamera : SingletonMOnoBehaviour<MainCamera>
 {
     /// <summary>アニメーター</summary>
     Animator m_Animator;

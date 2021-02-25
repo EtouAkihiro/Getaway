@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TNOPCanvas : MonoBehaviour
+public class TNOPCanvas : SingletonMOnoBehaviour<TNOPCanvas>
 {
     /// <summary>一人でプレイする画面の表示・非表示のフラグ</summary>
     bool m_SoloPlay_DisplayFlag = false;

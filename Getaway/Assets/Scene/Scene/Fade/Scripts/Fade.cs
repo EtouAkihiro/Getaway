@@ -43,10 +43,17 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     /// <param name="SceneName">次のシーン名</param>
     public void FadeOut(string SceneName)
     {
-        GetComponent<Image>().DOFade(1.0f, 1.0f).OnComplete(() => {
+        m_Image.DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
         });
+    }
+
+    /// <summary>色を返す</summary>
+    /// <returns></returns>
+    public Image isImage()
+    {
+        return m_Image;
     }
 
     /// <summary>フェードフラグを返す</summary>
