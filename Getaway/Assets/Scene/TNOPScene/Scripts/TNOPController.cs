@@ -90,7 +90,7 @@ public class TNOPController : MonoBehaviour
 
         // フェードインが終わった場合
         // 入力を受けれるようにする
-        if (Fade.Instance.isFade())
+        if (Fade.Instance.FadeFrag)
         {
             // 左右の入力値
             H = Input.GetAxis("Horizontal");

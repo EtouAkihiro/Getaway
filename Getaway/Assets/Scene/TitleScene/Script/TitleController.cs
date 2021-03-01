@@ -37,7 +37,7 @@ public class TitleController : MonoBehaviour
         // 現在のテキストの色を取得
         Color NormalColor = GameObject.Find("GameStartText").GetComponent<Text>().color;
         // フェードの色を取得
-        Color FadeColor = Fade.Instance.isImage().color;
+        Color FadeColor = Fade.Instance.Image.color;
 
         // 現在のテキストカラーの透明度が1以上で、現在セレクトされていない場合
         if (NormalColor.a >= 1 && 

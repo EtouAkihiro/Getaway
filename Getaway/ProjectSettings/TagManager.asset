@@ -15,6 +15,7 @@ TagManager:
   - zombie
   - BGMManager
   - SEManager
+  - Creature
   layers:
   - Default
   - TransparentFX

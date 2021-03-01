@@ -19,10 +19,6 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         m_Image = GetComponent<Image>();
     }
 
-    void Update()
-    {
-    }
-
     /// <summary>フェードイン</summary>
     public void FadeIn()
     {
@@ -49,17 +45,20 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         });
     }
 
-    /// <summary>色を返す</summary>
+    /// <summary>色を返す(プロパティ)</summary>
     /// <returns></returns>
-    public Image isImage()
+    public Image Image
     {
-        return m_Image;
+        get { return m_Image; }
+        private set { m_Image = value; }
     }
 
-    /// <summary>フェードフラグを返す</summary>
+    /// <summary>フェードフラグを返す(プロパティ)</summary>
     /// <returns></returns>
-    public bool isFade()
+    public bool FadeFrag
     {
-        return m_FadeFlag;
+        get { return m_FadeFlag; }
+        private set { m_FadeFlag = value; }
+
     }
 }
