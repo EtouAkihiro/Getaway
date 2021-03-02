@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     /// <summary>カメラ位置</summary>
     public GameObject m_CameraPoint;
+    /// <summary>プレイヤーカメラ</summary>
+    public GameObject m_PlayerCamera;
 
     /// <summary>通常状態の歩く速度</summary>
     public float m_Normal_WalkSpeed = 10.0f;
@@ -30,9 +32,6 @@ public class Player : MonoBehaviour
         Normal,
         Damage,
     }
-
-    /// <summary>メインカメラ</summary>
-    GameObject m_MainCamera;
 
     /// <summary>キャラクターコントローラー</summary>
     CharacterController m_CharacterController;
@@ -74,10 +73,6 @@ public class Player : MonoBehaviour
         m_Animator = GetComponent<Animator>();
         // サウンドソースの参照
         m_AudioSource = GetComponent<AudioSource>();
-        // メインカメラの参照
-        m_MainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        // メインカメラの位置を設定
-        m_MainCamera.transform.position = m_CameraPoint.transform.position;
         // コントローラーの名前を取得
         m_CacheJoysticNames = Input.GetJoystickNames();
         // カーソルを設定
@@ -113,12 +108,12 @@ public class Player : MonoBehaviour
         string[] TheCurrentGameController = Input.GetJoystickNames();
 
         // プレイヤーの正面向きのベクトルを取得
-        Vector3 forward = m_MainCamera.transform.forward;
+        Vector3 forward = m_PlayerCamera.transform.forward;
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
         // 移動量
         Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_Normal_WalkSpeed +
-                           m_MainCamera.transform.right * Input.GetAxis("Horizontal") * m_Normal_WalkSpeed;
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_Normal_WalkSpeed;
 
         // 通常の歩きのアニメーション
         m_Animator.SetFloat(s_Normal_VelocityX_AnimeHash, Velocity.x);
@@ -162,12 +157,12 @@ public class Player : MonoBehaviour
         string[] TheCurrentGameController = Input.GetJoystickNames();
 
         // プレイヤーの正面向きのベクトルを取得
-        Vector3 forward = m_MainCamera.transform.forward;
+        Vector3 forward = m_PlayerCamera.transform.forward;
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
         // 移動量
         Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_Damage_WalkSpeed +
-                           m_MainCamera.transform.right * Input.GetAxis("Horizontal") * m_Damage_WalkSpeed;
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_Damage_WalkSpeed;
 
         // ダメージ状態の歩きのアニメーション
         m_Animator.SetFloat(s_Damage_VelocityX_AnimeHash, Velocity.x);
