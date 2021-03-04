@@ -8,10 +8,13 @@ using UnityEngine.EventSystems;
 
 public class TitleController : MonoBehaviour
 {
-    // ゲームスタートボタン
+    /// <summary>ゲームスタートボタン</summary>
     GameObject m_GameStartButton;
-    // ゲームスタートボタンのスクリプトの参照
+    /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
     GameStartButton m_GameStartButtonScript;
+
+    /// <summary>タイトルキャンバスのスクリプトの参照</summary>
+    TitleCanvas m_TitleCanvasScript;
 
     void Start()
     {
@@ -19,6 +22,8 @@ public class TitleController : MonoBehaviour
         m_GameStartButton = GameObject.Find("GameStartButton");
         // ゲームスタートボタンのスクリプトの取得
         m_GameStartButtonScript = m_GameStartButton.GetComponent<GameStartButton>();
+        // タイトルキャンバスのスクリプトの取得
+        m_TitleCanvasScript = GameObject.Find("TitleCanvas").GetComponent<TitleCanvas>();
         // フェードイン
         Fade.Instance.FadeIn();
     }
@@ -51,5 +56,7 @@ public class TitleController : MonoBehaviour
     {
         // ゲームスタートボタンのアニメーションを再生
         m_GameStartButtonScript.Play_OnClick_AnimatorBlinking();
+        // ボタンを消す
+        m_TitleCanvasScript.TltleCanvasFade(true);
     }
 }
