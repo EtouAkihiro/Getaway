@@ -8,20 +8,17 @@ using UnityEngine.EventSystems;
 
 public class TitleController : MonoBehaviour
 {
-    // タイトルキャンバス
-    GameObject m_TitleCanvas;
     // ゲームスタートボタン
     GameObject m_GameStartButton;
-
-    // アニメーション関係
-    int s_TitleHash = Animator.StringToHash("TitleTrigger");
+    // ゲームスタートボタンのスクリプトの参照
+    GameStartButton m_GameStartButtonScript;
 
     void Start()
     {
-        // タイトルキャンバスを取得
-        m_TitleCanvas = GameObject.Find("TitleCanvas");
         // ゲームスタートボタンを取得
         m_GameStartButton = GameObject.Find("GameStartButton");
+        // ゲームスタートボタンのスクリプトの取得
+        m_GameStartButtonScript = m_GameStartButton.GetComponent<GameStartButton>();
         // フェードイン
         Fade.Instance.FadeIn();
     }
@@ -53,8 +50,6 @@ public class TitleController : MonoBehaviour
     public void OnGameStartClick()
     {
         // ゲームスタートボタンのアニメーションを再生
-        m_GameStartButton.GetComponent<Animator>().SetTrigger(s_TitleHash);
-        // Fadeアウトしたら次のシーンへ
-        Fade.Instance.FadeOut("TNOPScene");
+        m_GameStartButtonScript.Play_OnClick_AnimatorBlinking();
     }
 }
