@@ -5,6 +5,9 @@ using DG.Tweening;
 
 public class TitleCanvas : MonoBehaviour
 {
+    /// <summary>タイトル</summary>
+    public GameObject m_Title;
+
     /// <summary>アニメーター</summary>
     Animator m_Animator;
 

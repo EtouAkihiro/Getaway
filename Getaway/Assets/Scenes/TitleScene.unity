@@ -1997,6 +1997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c687c972a0f72d44cb1f4bffd53b72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Title: {fileID: 1504790001}
 --- !u!1 &1504790001
 GameObject:
   m_ObjectHideFlags: 0
