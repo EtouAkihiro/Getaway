@@ -11,7 +11,7 @@ public class TitleCanvas : MonoBehaviour
     /// <summary>アニメーター</summary>
     Animator m_Animator;
 
-    int s_TitleCanvasFade = Animator.StringToHash("TitleFadeFrag");
+    int s_TitleDisPlayFrag = Animator.StringToHash("TiteDisPlayFrag");
 
     void Start()
     {
@@ -22,6 +22,6 @@ public class TitleCanvas : MonoBehaviour
     /// <param name="Frag">フラグ</param>
     public void TltleCanvasFade(bool Frag)
     {
-        m_Animator.SetBool(s_TitleCanvasFade, Frag);
+        m_Animator.SetBool(s_TitleDisPlayFrag, Frag);
     }
 }
