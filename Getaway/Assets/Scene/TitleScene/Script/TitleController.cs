@@ -50,27 +50,9 @@ public class TitleController : MonoBehaviour
     }
 
     /// <summary>タイトル</summary>
-    void Title()
-    {
-        // 現在の色を確認
-        isSelectButtonColor();
-    }
+    void Title() {}
 
     void Select() {}
-
-    void isSelectButtonColor()
-    {
-        // 現在のボタンのノーマルの色を取得
-        Color NormalColor = m_GameStartButton.GetComponent<Button>().colors.normalColor;
-        // フェードの色を取得
-        Color FadeColor = Fade.Instance.Image.color;
-
-        if(NormalColor.a >= 1 &&
-           FadeColor.a <= 0)
-        {
-            EventSystem.current.SetSelectedGameObject(m_GameStartButton);
-        }
-    }
 
     /// <summary> ゲームスタートボタンが押された時</summary>
     public void OnGameStartClick()
