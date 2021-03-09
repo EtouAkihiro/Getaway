@@ -6,10 +6,14 @@ using DG.Tweening;
 
 public class TitleCanvas : MonoBehaviour
 {
-    /// <summary>タイトル</summary>
+    /// <summary>タイトルオブジェクト</summary>
     public GameObject m_Title;
+    /// <summary>セレクトオブジェクト</summary>
+    public GameObject m_Select;
     /// <summary>ゲームスタート</summary>
     public GameObject m_GameStart;
+    /// <summary>名前を入力</summary>
+    public GameObject m_NameInput;
 
     /// <summary>アニメーター</summary>
     Animator m_Animator;
@@ -18,7 +22,11 @@ public class TitleCanvas : MonoBehaviour
 
     void Start()
     {
+        // アニメーターの取得
         m_Animator = GetComponent<Animator>();
+        // セレクトオブジェクトを非表示にする
+        m_Select.SetActive(false);
+
     }
 
     /// <summary>タイトルのフェードをする(true:フェードアウト, false:フェードイン)</summary>
@@ -29,9 +37,35 @@ public class TitleCanvas : MonoBehaviour
     }
 
     /// <summary>タイトルのボタンセット</summary>
-    public void TitleButtonSet()
+    public void ButtonSet(int Frag)
     {
-        // ボタンをセットする。
-        EventSystem.current.SetSelectedGameObject(m_GameStart);
+        // フラグごとにボタンをセットする。
+        switch (Frag)
+        {
+            case 0: EventSystem.current.SetSelectedGameObject(m_GameStart); break;
+            case 1: EventSystem.current.SetSelectedGameObject(m_NameInput); break;
+        }
+    }
+
+    /// <summary>UIの表示・非表示</summary>
+    /// <param name="Frag"></param>
+    public void Active_UI(int Frag)
+    {
+        // フラグが0だった場合、
+        // タイトルを非表示にして
+        // セレクトを表示する。
+        if(Frag == 0)
+        {
+            m_Select.SetActive(true);
+            m_Title.SetActive(false);
+        }
+        // フラグが1だった場合
+        // セレクトを非表示にして
+        // タイトルを表示する。
+        else if(Frag == 1)
+        {
+            m_Title.SetActive(true);
+            m_Select.SetActive(false);
+        }
     }
 }
