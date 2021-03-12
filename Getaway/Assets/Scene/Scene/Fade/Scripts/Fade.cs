@@ -7,22 +7,26 @@ using UnityEngine.SceneManagement;
 
 public class Fade : SingletonMOnoBehaviour<Fade>
 {
+    /// <summary>Imageの参照</summary>
+    public Image m_FadeImage;
+
     /// <summary>フェードのフラグ</summary>
     bool m_FadeFlag = false;
 
-    /// <summary>Imageの参照</summary>
-    Image m_Image;
+    /// <summary>ロードされているか</summary>
+    static bool m_Loaded = false;
 
-    void Start()
+    private void Awake()
     {
-        // Imageを取得
-        m_Image = GetComponent<Image>();
+        if (m_Loaded) return;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>フェードイン</summary>
     public void FadeIn()
     {
-        m_Image.DOFade(0.0f, 1.0f).OnComplete(() => {
+        m_FadeImage.DOFade(0.0f, 1.0f).OnComplete(() => {
             m_FadeFlag = true;
         });
     }
@@ -30,7 +34,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     /// <summary>フェードアウト</summary>
     public void FadeOut()
     {
-        m_Image.DOFade(1.0f, 1.0f).OnComplete(() => {
+        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             m_FadeFlag = false;
         });
     }
@@ -39,7 +43,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     /// <param name="SceneName">次のシーン名</param>
     public void FadeOut(string SceneName)
     {
-        m_Image.DOFade(1.0f, 1.0f).OnComplete(() => {
+        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
         });
@@ -47,10 +51,10 @@ public class Fade : SingletonMOnoBehaviour<Fade>
 
     /// <summary>色を返す(プロパティ)</summary>
     /// <returns></returns>
-    public Image Image
+    public Image FadeImage
     {
-        get { return m_Image; }
-        private set { m_Image = value; }
+        get { return m_FadeImage; }
+        private set { m_FadeImage = value; }
     }
 
     /// <summary>フェードフラグを返す(プロパティ)</summary>
