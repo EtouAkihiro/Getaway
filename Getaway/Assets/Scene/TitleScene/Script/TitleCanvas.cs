@@ -15,10 +15,14 @@ public class TitleCanvas : MonoBehaviour
     /// <summary>名前を入力</summary>
     public GameObject m_NameInput;
 
+    public GameObject m_Test;
+
     /// <summary>アニメーター</summary>
     Animator m_Animator;
 
+    // アニメーションハッシュ
     int s_TitleDisPlayFrag = Animator.StringToHash("TiteDisPlayFrag");
+    int s_SelectDisPlayFrag = Animator.StringToHash("SelectDisPlayFrag");
 
     void Start()
     {
@@ -36,6 +40,13 @@ public class TitleCanvas : MonoBehaviour
         m_Animator.SetBool(s_TitleDisPlayFrag, Frag);
     }
 
+    /// <summary>セレクトのフェードする(true:フェードアウト, false:フェードイン)</summary>
+    /// <param name="Frag">フラグ</param>
+    public void SelectCanvasFade(bool Frag)
+    {
+        m_Animator.SetBool(s_SelectDisPlayFrag, Frag);
+    }
+
     /// <summary>タイトルのボタンセット</summary>
     public void ButtonSet(int Frag)
     {
@@ -43,7 +54,7 @@ public class TitleCanvas : MonoBehaviour
         switch (Frag)
         {
             case 0: EventSystem.current.SetSelectedGameObject(m_GameStart); break;
-            case 1: EventSystem.current.SetSelectedGameObject(m_NameInput); break;
+            case 1: EventSystem.current.SetSelectedGameObject(m_Test); break;
         }
     }
 
