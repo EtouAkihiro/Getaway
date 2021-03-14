@@ -47,4 +47,10 @@ public class TitleController : MonoBehaviour
         // タイトルを表示
         m_TitleCanvasScript.TltleCanvasFade(false);
     }
+
+    public void OnRoomCreationClick()
+    {
+        // ルーム作成のシーンに遷移する。
+        Fade.Instance.FadeOut("RoomCreationScene");
+    }
 }
