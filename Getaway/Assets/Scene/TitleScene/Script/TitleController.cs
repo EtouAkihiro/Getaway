@@ -8,6 +8,14 @@ using UnityEngine.EventSystems;
 
 public class TitleController : MonoBehaviour
 {
+    /// <summary>エラーメッセージのオブジェクト</summary>
+    public GameObject m_WarningTextObject;
+
+    /// <summary>名前の入力</summary>
+    public InputField m_NameInputField;
+    /// <summary>パスワードの入力</summary>
+    public InputField m_PaswadInputField;
+
     /// <summary>ゲームスタートボタン</summary>
     GameObject m_GameStartButton;
     /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
@@ -48,9 +56,43 @@ public class TitleController : MonoBehaviour
         m_TitleCanvasScript.TltleCanvasFade(false);
     }
 
+    /// <summary>ルーム作成シーンに遷移する。</summary>
     public void OnRoomCreationClick()
     {
+        // 入力された名前を取得
+        string Name = m_NameInputField.text;
+
+        // もし、名前が入力されていなかったら、
+        // エラーメッセージを表示する。
+        if (Name == "")
+        {
+            WarningTextDisPlay();
+            return;
+        }
+
         // ルーム作成のシーンに遷移する。
         Fade.Instance.FadeOut("RoomCreationScene");
+    }
+
+    /// <summary>エラーメッセージを表示・非表示</summary>
+    void WarningTextDisPlay()
+    {
+        // テキストオブジェクトが非表示になってたら、表示する。
+        if (m_WarningTextObject.activeSelf == false) m_WarningTextObject.SetActive(true);
+
+        // エラーメッセージのテキストを取得
+        Text WarningText = m_WarningTextObject.GetComponent<Text>();
+
+        // 現在のテキストカラーを取得
+        Color WarningTextColor = WarningText.color;
+        // Alpha値に1を入れる。
+        WarningTextColor.a = 1.0f;
+        // テキストカラーを反映
+        WarningText.color = WarningTextColor;
+
+        // エラーメッセージをフェードインする。
+        WarningText.DOFade(0.0f, 1.0f).OnComplete(() => {
+            m_WarningTextObject.SetActive(false);
+        });
     }
 }
