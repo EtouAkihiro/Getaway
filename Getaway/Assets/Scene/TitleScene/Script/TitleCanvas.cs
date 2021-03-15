@@ -18,6 +18,8 @@ public class TitleCanvas : MonoBehaviour
     public GameObject m_GameStart;
     /// <summary>ゲームスタートボタン</summary>
     public GameObject m_GameStartButton;
+    /// <summary>ルームパスワードを入力する画面</summary>
+    public GameObject m_RoomPaswadInput;
 
     /// <summary>名前の入力</summary>
     public InputField m_NameInputField;
@@ -68,7 +70,7 @@ public class TitleCanvas : MonoBehaviour
         switch (Frag)
         {
             case 0: EventSystem.current.SetSelectedGameObject(m_GameStart); break;
-            case 1: EventSystem.current.SetSelectedGameObject(m_Test); break;
+            case 1: EventSystem.current.SetSelectedGameObject(null); break;
         }
     }
 
@@ -132,9 +134,61 @@ public class TitleCanvas : MonoBehaviour
         Fade.Instance.FadeOut("RoomCreationScene");
     }
 
+    /// <summary>パスワードの入力画面を表示・非表示</summary>
     public void OnRoomPasswordClick()
     {
+        // 入力された名前を取得
+        string Name = m_NameInputField.text;
 
+        // もし、名前が入力されていなかったら、
+        // エラーメッセージを表示する。
+        if (Name == "")
+        {
+            WarningTextDisPlay();
+            return;
+        }
+
+        // パスワードの入力画面が非表示だった場合、表示する。
+        // パスワードの入力画面が表示だった場合、非表示する。
+        if(!m_RoomPaswadInput.activeSelf)
+        {
+            m_RoomPaswadInput.SetActive(true);
+            m_Select.SetActive(false);
+        }
+        else if(m_RoomPaswadInput.activeSelf)
+        {
+            m_RoomPaswadInput.SetActive(false);
+            m_Select.SetActive(true);
+        }
+    }
+
+    /// <summary>マッチング</summary>
+    public void OnMatingClick()
+    {
+        // 入力された名前を取得
+        string Name = m_NameInputField.text;
+
+        // もし、名前が入力されていなかったら、
+        // エラーメッセージを表示する。
+        if (Name == "")
+        {
+            WarningTextDisPlay();
+            return;
+        }
+
+        // 入力されたパスワードを取得
+        string Paswad = m_PaswadInputField.text;
+
+        // もし、パスワード画面が表示されていて、
+        // パスワードが入力された場合
+        // パスワードを保存する。
+        if (Paswad != "" && m_RoomPaswadInput.activeSelf)
+        {
+            GameController.Instance.Paswad = Paswad;
+        }
+
+        // シーン切替する。
+        Fade.Instance.FadeOut("MatchingScene");
     }
 
     /// <summary>エラーメッセージを表示・非表示</summary>
@@ -153,9 +207,13 @@ public class TitleCanvas : MonoBehaviour
         // テキストカラーを反映
         WarningText.color = WarningTextColor;
 
+        // アルファ値が0だった場合
         // エラーメッセージをフェードインする。
-        WarningText.DOFade(0.0f, 1.0f).OnComplete(() => {
-            m_WarningTextObject.SetActive(false);
-        });
+        if (WarningText.color.a == 1.0f)
+        {
+            WarningText.DOFade(0.0f, 1.0f).OnComplete(() => {
+                m_WarningTextObject.SetActive(false);
+            });
+        }
     }
 }
