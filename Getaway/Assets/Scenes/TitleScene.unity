@@ -392,8 +392,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1280, y: 195}
-  m_SizeDelta: {x: 160, y: 60.029358}
+  m_AnchoredPosition: {x: 1321, y: 176}
+  m_SizeDelta: {x: 404.4436, y: 72.35426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124574978
 MonoBehaviour:
@@ -521,8 +521,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1280, y: -413}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1321, y: -425}
+  m_SizeDelta: {x: 495.91797, y: 74.69873}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &356877810
 MonoBehaviour:
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792671925}
+      - m_Target: {fileID: 1453753436}
         m_MethodName: OnBackToTitle
         m_Mode: 1
         m_Arguments:
@@ -1164,8 +1164,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1280, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1321, y: 7}
+  m_SizeDelta: {x: 368.9182, y: 75.4787}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &750261259
 MonoBehaviour:
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792671925}
+      - m_Target: {fileID: 1453753436}
         m_MethodName: OnRoomCreationClick
         m_Mode: 1
         m_Arguments:
@@ -1336,9 +1336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641d911e1c764d43b1621dc3f5a85b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WarningTextObject: {fileID: 2077286950}
-  m_NameInputField: {fileID: 1298965952}
-  m_PaswadInputField: {fileID: 1482264554}
 --- !u!4 &792671926
 Transform:
   m_ObjectHideFlags: 0
@@ -2135,7 +2132,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792671925}
+      - m_Target: {fileID: 1453753436}
         m_MethodName: OnGameStartClick
         m_Mode: 1
         m_Arguments:
@@ -3302,10 +3299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c687c972a0f72d44cb1f4bffd53b72e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_WarningTextObject: {fileID: 2077286950}
   m_Title: {fileID: 1504790001}
   m_Select: {fileID: 332721932}
   m_GameStart: {fileID: 1244857167}
-  m_NameInput: {fileID: 1298965950}
+  m_GameStartButton: {fileID: 1244857167}
+  m_NameInputField: {fileID: 1298965952}
+  m_PaswadInputField: {fileID: 1482264554}
   m_Test: {fileID: 356877808}
 --- !u!1 &1482264552
 GameObject:
@@ -3975,8 +3975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1280, y: -205}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1321, y: -184}
+  m_SizeDelta: {x: 566.9353, y: 92.37692}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1931252636
 MonoBehaviour:
