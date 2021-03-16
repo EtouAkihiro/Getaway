@@ -20,11 +20,15 @@ public class TitleCanvas : MonoBehaviour
     public GameObject m_GameStartButton;
     /// <summary>ルームパスワードを入力する画面</summary>
     public GameObject m_RoomPaswadInput;
+    /// <summary>ルーム作成画面</summary>
+    public GameObject m_RoomCreationInput;
 
     /// <summary>名前の入力</summary>
     public InputField m_NameInputField;
     /// <summary>パスワードの入力</summary>
     public InputField m_PaswadInputField;
+    /// <summary>ルーム名の入力</summary>
+    public InputField m_RoomInputField;
 
     /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
     GameStartButton m_GameStartButtonScript;
@@ -116,7 +120,7 @@ public class TitleCanvas : MonoBehaviour
         TltleCanvasFade(false);
     }
 
-    /// <summary>ルーム作成シーンに遷移する。</summary>
+    /// <summary>ルーム作成画面の表示・非表示する。</summary>
     public void OnRoomCreationClick()
     {
         // 入力された名前を取得
@@ -130,8 +134,30 @@ public class TitleCanvas : MonoBehaviour
             return;
         }
 
-        // ルーム作成のシーンに遷移する。
-        Fade.Instance.FadeOut("RoomCreationScene");
+        // ルーム作成が非表示だった場合、表示する。
+        // ルーム作成が表示だった場合、非表示する。
+        if (!m_RoomCreationInput.activeSelf)
+        {
+            m_RoomCreationInput.SetActive(true);
+            m_Select.SetActive(false);
+        }
+        else
+        {
+            m_RoomCreationInput.SetActive(false);
+            m_Select.SetActive(true);
+        }
+    }
+
+    /// <summary>ルーム画面にシーン遷移</summary>
+    public void OnRoomClick()
+    {
+        // ルーム名を取得
+        string RoomName = m_RoomInputField.text;
+        // ルーム名が入力されていなかったら、シーン遷移しない
+        if(RoomName == "") return;
+
+        // ルームシーンに遷移
+        Fade.Instance.FadeOut("RoomScene");
     }
 
     /// <summary>パスワードの入力画面を表示・非表示</summary>
