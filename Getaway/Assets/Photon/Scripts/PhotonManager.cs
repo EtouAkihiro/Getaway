@@ -34,4 +34,17 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     {
         m_PhotonController.ConnectedToServer();
     }
+
+    /// <summary>サーバーから切断</summary>
+    public void DisconnectSavar()
+    {
+        m_PhotonController.DisconnectSavar();
+    }
+
+    /// <summary>ルームを作成</summary>
+    /// <param name="RoomName">ルーム名</param>
+    public void CreateRoom(string RoomName)
+    {
+        PhotonManager.Instance.CreateRoom(RoomName);
+    }
 }

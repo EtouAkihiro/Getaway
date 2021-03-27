@@ -26,6 +26,18 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
     {
         base.OnDisconnected(cause);
     }
+
+    /// <summary>ルームを作成した</summary>
+    public override void OnCreatedRoom()
+    {
+        base.OnCreatedRoom();
+    }
+
+    /// <summary>ルーム作成に失敗した</summary>
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        base.OnCreateRoomFailed(returnCode, message);
+    }
 }
 
 public partial class PhotonController
@@ -33,6 +45,32 @@ public partial class PhotonController
     /// <summary>Photonサーバーに接続する</summary>
     public void ConnectedToServer()
     {
+        // サーバーに接続されている場合は、処理を行わない
+        if (PhotonNetwork.IsConnected) return;
+
+        // サーバーに接続
         PhotonNetwork.ConnectUsingSettings();
+    }
+
+    /// <summary>Photonサーバーから切断する</summary>
+    public void DisconnectSavar()
+    {
+        // サーバーに接続されていない場合は、処理を行わない
+        if (!PhotonNetwork.IsConnected) return;
+
+        // サーバーから切断する
+        PhotonNetwork.Disconnect();
+    }
+
+    /// <summary>ルームを作成</summary>
+    /// <param name="RoomName">ルーム名</param>
+    public void CreateRoom(string RoomName)
+    {
+        // ルームオプションを作成
+        RoomOptions options = new RoomOptions();
+        // ルームのプレイ人数を4人に設定
+        options.MaxPlayers = 4;
+        // ルームの作成
+        PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
 }
