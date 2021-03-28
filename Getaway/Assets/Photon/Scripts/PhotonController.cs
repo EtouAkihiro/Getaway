@@ -43,7 +43,8 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
     /// <param name="roomList">ルーム一覧</param>
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        SetRoomList(roomList);
+        // ルーム一覧を取得
+        RoomList = roomList;
     }
 }
 
@@ -84,22 +85,30 @@ public partial class PhotonController
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
 
-    /// <summary>現在のルーム一覧を取得</summary>
-    /// <param name="roomlist">現在のルーム一覧</param>
-    public void SetRoomList(List<RoomInfo> roomlist)
+    /// <summary>現在、参加しているルームのプレイヤー名を取得</summary>
+    /// <param name="RoomName"></param>
+    /// <returns></returns>
+    public string CurrentRoomNames(string RoomName)
     {
-        // もし、現在のルーム一覧と保存したルーム一覧が違う場合
-        if(m_RoomList != roomlist)
+        // ルームナンバーを保存
+        int RoomNumberSave = 0;
+
+        for(int RoomNumber = 0; RoomNumber <= m_RoomList.Count; RoomNumber++)
         {
-            // 現在のルーム一覧を取得
-            m_RoomList = roomlist;
+            if(m_RoomList[RoomNumber].Name == RoomName)
+            {
+                RoomNumberSave = RoomNumber;
+                break;
+            }
         }
+
+        return m_RoomList[RoomNumberSave].ToStringFull();
     }
 
     /// <summary>ルーム一覧(プロパティ)</summary>
     public List<RoomInfo> RoomList
     {
         get { return m_RoomList; }
-        private set { m_RoomList = value; }
+        set { m_RoomList = value; }
     }
 }
