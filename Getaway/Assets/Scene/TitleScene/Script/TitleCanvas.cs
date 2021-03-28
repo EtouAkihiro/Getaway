@@ -33,8 +33,6 @@ public class TitleCanvas : MonoBehaviour
     /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
     GameStartButton m_GameStartButtonScript;
 
-    public GameObject m_Test;
-
     /// <summary>アニメーター</summary>
     Animator m_Animator;
 
@@ -109,6 +107,8 @@ public class TitleCanvas : MonoBehaviour
         TltleCanvasFade(true);
         // セレクト画面を表示
         SelectCanvasFade(true);
+        // サーバーに接続
+        PhotonManager.Instance.ConnectedToServer();
     }
 
     /// <summary>タイトルに戻る</summary>
@@ -118,6 +118,8 @@ public class TitleCanvas : MonoBehaviour
         SelectCanvasFade(false);
         // タイトルを表示
         TltleCanvasFade(false);
+        // サーバーから切断
+        PhotonManager.Instance.DisconnectSavar();
     }
 
     /// <summary>ルーム作成画面の表示・非表示する。</summary>
