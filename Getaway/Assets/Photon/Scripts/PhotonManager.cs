@@ -47,6 +47,13 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     /// <param name="RoomName">ルーム名</param>
     public void CreateRoom(string RoomName)
     {
-        PhotonManager.Instance.CreateRoom(RoomName);
+        m_PhotonController.CreateRoom(RoomName);
+    }
+
+    /// <summary>ルーム名を返します</summary>
+    /// <returns></returns>
+    public string CurrentRoomName()
+    {
+        return m_PhotonController.RoomName;
     }
 }

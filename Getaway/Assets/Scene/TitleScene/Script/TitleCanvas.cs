@@ -158,6 +158,8 @@ public class TitleCanvas : MonoBehaviour
         // ルーム名が入力されていなかったら、シーン遷移しない
         if(RoomName == "") return;
 
+        // ルームを作成
+        PhotonManager.Instance.CreateRoom(RoomName);
         // ルームシーンに遷移
         Fade.Instance.FadeOut("RoomScene");
     }

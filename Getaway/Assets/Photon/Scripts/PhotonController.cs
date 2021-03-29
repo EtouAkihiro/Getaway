@@ -31,6 +31,8 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         base.OnCreatedRoom();
+        // ルーム名を取得
+        RoomName = PhotonNetwork.CurrentRoom.Name;
     }
 
     /// <summary>ルーム作成に失敗した</summary>
@@ -46,12 +48,21 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
         // ルーム一覧を取得
         RoomList = roomList;
     }
+
+    /// <summary>ルームにプレイヤーが入ってきた</summary>
+    /// <param name="newPlayer">入ってきたプレイヤー</param>
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+    }
 }
 
 public partial class PhotonController
 {
     /// <summary>ルーム一覧</summary>
     List<RoomInfo> m_RoomList = new List<RoomInfo>();
+    /// <summary>ルーム名</summary>
+    string m_RoomName;
 
     /// <summary>Photonサーバーに接続する</summary>
     public void ConnectedToServer()
@@ -85,30 +96,17 @@ public partial class PhotonController
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
 
-    /// <summary>現在、参加しているルームのプレイヤー名を取得</summary>
-    /// <param name="RoomName"></param>
-    /// <returns></returns>
-    public string CurrentRoomNames(string RoomName)
-    {
-        // ルームナンバーを保存
-        int RoomNumberSave = 0;
-
-        for(int RoomNumber = 0; RoomNumber <= m_RoomList.Count; RoomNumber++)
-        {
-            if(m_RoomList[RoomNumber].Name == RoomName)
-            {
-                RoomNumberSave = RoomNumber;
-                break;
-            }
-        }
-
-        return m_RoomList[RoomNumberSave].ToStringFull();
-    }
-
     /// <summary>ルーム一覧(プロパティ)</summary>
     public List<RoomInfo> RoomList
     {
         get { return m_RoomList; }
         set { m_RoomList = value; }
+    }
+
+    /// <summary>ルーム名(プロパティ)</summary>
+    public string RoomName
+    {
+        get { return m_RoomName; }
+        set { m_RoomName = value; }
     }
 }

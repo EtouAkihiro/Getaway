@@ -577,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47eacdb8caadf6e42af410d0825318a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RoomNameText: {fileID: 1728975912}
   m_PlayerNames:
   - {fileID: 1447035026}
   - {fileID: 1317378028}
