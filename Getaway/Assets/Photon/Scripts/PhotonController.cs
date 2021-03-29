@@ -96,6 +96,14 @@ public partial class PhotonController
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
 
+    /// <summary>プレイヤーの名前を登録</summary>
+    /// <param name="PlayerName">プレイヤーの名前</param>
+    public void SetPlayerName(string PlayerName)
+    {
+        // プレイヤー名を登録
+        PhotonNetwork.NickName = PlayerName;
+    }
+
     /// <summary>ルーム一覧(プロパティ)</summary>
     public List<RoomInfo> RoomList
     {

@@ -122,6 +122,24 @@ public class TitleCanvas : MonoBehaviour
         PhotonManager.Instance.DisconnectSavar();
     }
 
+    /// <summary>プレイヤーの名前を登録</summary>
+    public void OnSetPlayerName()
+    {
+        // プレイヤーの名前を取得
+        string PlayerName = m_NameInputField.text;
+
+        // もし、名前が入力された場合
+        if (PlayerName != "")
+        {
+            // プレイヤー名を登録
+            PhotonManager.Instance.SetPlayerName(PlayerName);
+        }
+        else
+        {
+            print("プレイヤー名が入力されてません。");
+        }
+    }
+
     /// <summary>ルーム作成画面の表示・非表示する。</summary>
     public void OnRoomCreationClick()
     {

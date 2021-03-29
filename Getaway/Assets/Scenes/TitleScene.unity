@@ -3187,7 +3187,18 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1453753436}
+        m_MethodName: OnSetPlayerName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4201,7 +4212,6 @@ MonoBehaviour:
   m_NameInputField: {fileID: 1298965952}
   m_PaswadInputField: {fileID: 1482264554}
   m_RoomInputField: {fileID: 1782847719}
-  m_Test: {fileID: 356877808}
 --- !u!1 &1482264552
 GameObject:
   m_ObjectHideFlags: 0
