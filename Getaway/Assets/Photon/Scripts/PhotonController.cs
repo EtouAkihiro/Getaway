@@ -59,6 +59,10 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
 
 public partial class PhotonController
 {
+    /// <summary>ルームインフォ</summary>
+    RoomInfo m_RoomInfo;
+    
+
     /// <summary>ルーム一覧</summary>
     List<RoomInfo> m_RoomList = new List<RoomInfo>();
     /// <summary>ルーム名</summary>
@@ -92,9 +96,29 @@ public partial class PhotonController
         RoomOptions options = new RoomOptions();
         // ルームのプレイ人数を4人に設定
         options.MaxPlayers = 4;
+        //ルームの入室を許可
+        options.IsOpen = true;
         // ルームの作成
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
+
+    /// <summary>ルーム参加(パスワード)</summary>
+    /// <param name="passwad">パスワード</param>
+    public void OnJoinedRoom(string passwad)
+    {
+    }
+
+    /// <summary>ルーム参加(ランダム)</summary>
+    public void OnRandomJoinedRoom()
+    {
+    }
+
+    /// <summary>ルームから退出</summary>
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
 
     /// <summary>プレイヤーの名前を登録</summary>
     /// <param name="PlayerName">プレイヤーの名前</param>
@@ -102,6 +126,48 @@ public partial class PhotonController
     {
         // プレイヤー名を登録
         PhotonNetwork.NickName = PlayerName;
+    }
+
+    /// <summary>現在使用されているルーム分のルーム名を返します。</summary>
+    /// <returns></returns>
+    public List<string> RoomNames()
+    {
+        // 現在使用されている分を確保する。
+        List<string> RoomNames = new List<string>();
+
+        // 現在ルーム分のルーム名を取得
+        for(int Roomid = 0; Roomid < PhotonNetwork.CountOfRooms; Roomid++)
+        {
+            RoomNames[Roomid] = m_RoomList[Roomid].Name;
+        }
+
+        // 現在使用されているルーム分のルーム名を返します。
+        return RoomNames;
+    }
+
+    /// <summary>現在のルームにいるプレイヤー名を返す</summary>
+    /// <returns></returns>
+    public string[] PlayerNames()
+    {
+        // 現在のルームにいるプレイヤー分を確保する。
+        string[] PlayerNames = new string[m_RoomInfo.PlayerCount];
+
+        // 現在のルームにいるプレイヤー人数と
+        // ルームの制限人数とが、異なる場合
+        // ルームにいるプレイヤー分の名前を取得
+        if(m_RoomInfo.PlayerCount != m_RoomInfo.MaxPlayers)
+        {
+            for (int id = 0; id < m_RoomInfo.PlayerCount; id++)
+            {
+                PlayerNames[id] = PhotonNetwork.PlayerList[id].NickName;
+            }
+        }
+
+        // もし、何も追加されていない場合、nullで返す。
+        if (PlayerNames == null) return null;
+
+        // 現在、参加しているプレイヤー分の名前を返す。
+        return PlayerNames;
     }
 
     /// <summary>ルーム一覧(プロパティ)</summary>

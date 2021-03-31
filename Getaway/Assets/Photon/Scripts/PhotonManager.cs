@@ -50,11 +50,31 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
         m_PhotonController.CreateRoom(RoomName);
     }
 
+    /// <summary>ルームから退出</summary>
+    public void LeaveRoom()
+    {
+        m_PhotonController.LeaveRoom();
+    }
+
     /// <summary>プレイヤー名を登録</summary>
     /// <param name="PlayerName">登録したいプレイヤー名</param>
     public void SetPlayerName(string PlayerName)
     {
         m_PhotonController.SetPlayerName(PlayerName);
+    }
+
+    /// <summary>現在使用されているルーム分のルーム名を返します。</summary>
+    /// <returns></returns>
+    public List<string> RoomNames()
+    {
+        return m_PhotonController.RoomNames();
+    }
+
+    /// <summary>現在のルームにいるプレイヤー分のプレイヤー名を返します。</summary>
+    /// <returns></returns>
+    public string[] PlayerNames()
+    {
+        return m_PhotonController.PlayerNames();
     }
 
     /// <summary>ルーム名を返します</summary>
