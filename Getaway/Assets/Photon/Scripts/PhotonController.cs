@@ -59,14 +59,12 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
 
 public partial class PhotonController
 {
-    /// <summary>ルームインフォ</summary>
-    RoomInfo m_RoomInfo;
-    
-
     /// <summary>ルーム一覧</summary>
     List<RoomInfo> m_RoomList = new List<RoomInfo>();
     /// <summary>ルーム名</summary>
     string m_RoomName;
+    /// <summary>プレイヤー名の一覧</summary>
+    string[] m_PlayerNames;
 
     /// <summary>Photonサーバーに接続する</summary>
     public void ConnectedToServer()
@@ -149,25 +147,32 @@ public partial class PhotonController
     /// <returns></returns>
     public string[] PlayerNames()
     {
-        // 現在のルームにいるプレイヤー分を確保する。
-        string[] PlayerNames = new string[m_RoomInfo.PlayerCount];
-
-        // 現在のルームにいるプレイヤー人数と
-        // ルームの制限人数とが、異なる場合
-        // ルームにいるプレイヤー分の名前を取得
-        if(m_RoomInfo.PlayerCount != m_RoomInfo.MaxPlayers)
+        foreach (RoomInfo roomInfo in m_RoomList)
         {
-            for (int id = 0; id < m_RoomInfo.PlayerCount; id++)
+            if(roomInfo.Name == PhotonNetwork.CurrentRoom.Name)
             {
-                PlayerNames[id] = PhotonNetwork.PlayerList[id].NickName;
+                // 現在のルームにいるプレイヤー分を確保する。
+                m_PlayerNames = new string[roomInfo.PlayerCount];
+
+                // 現在のルームにいるプレイヤー人数と
+                // ルームの制限人数とが、異なる場合
+                // ルームにいるプレイヤー分の名前を取得
+                if (roomInfo.PlayerCount != roomInfo.MaxPlayers)
+                {
+                    for (int id = 0; id < roomInfo.PlayerCount; id++)
+                    {
+                        m_PlayerNames[id] = PhotonNetwork.PlayerList[id].NickName;
+                    }
+                }
+                break;
             }
         }
 
         // もし、何も追加されていない場合、nullで返す。
-        if (PlayerNames == null) return null;
+        if (m_PlayerNames == null) return null;
 
         // 現在、参加しているプレイヤー分の名前を返す。
-        return PlayerNames;
+        return m_PlayerNames;
     }
 
     /// <summary>ルーム一覧(プロパティ)</summary>
