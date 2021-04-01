@@ -12,7 +12,7 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     /// <summary>プレイヤーの名前</summary>
     public GameObject[] m_PlayerNamesObjects;
     /// <summary>プレイヤーの名前のテキスト</summary>
-    Text[] m_PlayerNameTexts;
+    Text[] m_PlayerNameTexts = new Text[4];
 
     void Start()
     {

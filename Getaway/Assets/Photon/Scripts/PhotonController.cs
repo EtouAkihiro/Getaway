@@ -63,8 +63,6 @@ public partial class PhotonController
     List<RoomInfo> m_RoomList = new List<RoomInfo>();
     /// <summary>ルーム名</summary>
     string m_RoomName;
-    /// <summary>プレイヤー名の一覧</summary>
-    string[] m_PlayerNames;
 
     /// <summary>Photonサーバーに接続する</summary>
     public void ConnectedToServer()
@@ -147,32 +145,26 @@ public partial class PhotonController
     /// <returns></returns>
     public string[] PlayerNames()
     {
-        foreach (RoomInfo roomInfo in m_RoomList)
-        {
-            if(roomInfo.Name == PhotonNetwork.CurrentRoom.Name)
-            {
-                // 現在のルームにいるプレイヤー分を確保する。
-                m_PlayerNames = new string[roomInfo.PlayerCount];
+        // プレイヤー名一覧
+        string[] PlayerNames = new string[PhotonNetwork.CountOfPlayers];
 
-                // 現在のルームにいるプレイヤー人数と
-                // ルームの制限人数とが、異なる場合
-                // ルームにいるプレイヤー分の名前を取得
-                if (roomInfo.PlayerCount != roomInfo.MaxPlayers)
-                {
-                    for (int id = 0; id < roomInfo.PlayerCount; id++)
-                    {
-                        m_PlayerNames[id] = PhotonNetwork.PlayerList[id].NickName;
-                    }
-                }
-                break;
+        int id = 0;
+
+        foreach(Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            PlayerNames[id] = player.NickName;
+
+            if(PlayerNames[id] != null)
+            {
+                id++;
             }
         }
 
         // もし、何も追加されていない場合、nullで返す。
-        if (m_PlayerNames == null) return null;
+        if (PlayerNames == null) return null;
 
         // 現在、参加しているプレイヤー分の名前を返す。
-        return m_PlayerNames;
+        return PlayerNames;
     }
 
     /// <summary>ルーム一覧(プロパティ)</summary>
