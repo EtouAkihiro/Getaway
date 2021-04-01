@@ -107,6 +107,7 @@ public partial class PhotonController
     /// <summary>ルーム参加(ランダム)</summary>
     public void OnRandomJoinedRoom()
     {
+        PhotonNetwork.JoinRandomRoom();
     }
 
     /// <summary>ルームから退出</summary>
