@@ -239,6 +239,12 @@ public class TitleCanvas : MonoBehaviour
         Fade.Instance.FadeOut("MatchingScene");
     }
 
+    /// <summary>マウスに選択されているものの説明文を表示させる</summary>
+    public void MouseSelectMessageEvent()
+    {
+        
+    }
+
     /// <summary>エラーメッセージを表示・非表示</summary>
     void WarningTextDisPlay()
     {
