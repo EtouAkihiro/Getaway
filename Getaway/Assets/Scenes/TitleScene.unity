@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 48362984}
   - component: {fileID: 48362983}
   m_Layer: 5
-  m_Name: SelectMatchingText
+  m_Name: SelectMatchingMessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 295383213}
   - component: {fileID: 295383212}
   m_Layer: 5
-  m_Name: BackToTitleText
+  m_Name: BackToTitleMessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 549247408}
   - component: {fileID: 549247407}
   m_Layer: 5
-  m_Name: SelecRoomPasswordText
+  m_Name: SelecRoomPasswordMessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4424,6 +4424,7 @@ GameObject:
   - component: {fileID: 1453753431}
   - component: {fileID: 1453753435}
   - component: {fileID: 1453753436}
+  - component: {fileID: 1453753437}
   m_Layer: 5
   m_Name: TitleCanvas
   m_TagString: Untagged
@@ -4556,6 +4557,23 @@ MonoBehaviour:
   m_NameInputField: {fileID: 1298965952}
   m_PaswadInputField: {fileID: 1482264554}
   m_RoomInputField: {fileID: 1782847719}
+--- !u!114 &1453753437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453753430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2129f0f1beb4ee488f6acfa8ee64835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SelectPlayerNameMessageObject: {fileID: 0}
+  m_SelectMatchingMessageObject: {fileID: 0}
+  m_SelectRoomCreationMessageObject: {fileID: 0}
+  m_SelectRoomPasswordMessageObject: {fileID: 0}
+  m_SelectBackToTitleMessageObject: {fileID: 0}
 --- !u!1 &1482264552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5600,7 +5618,7 @@ GameObject:
   - component: {fileID: 1942630311}
   - component: {fileID: 1942630310}
   m_Layer: 5
-  m_Name: SelectNameText
+  m_Name: SelectPlayerNameMessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5882,7 +5900,7 @@ GameObject:
   - component: {fileID: 2038100953}
   - component: {fileID: 2038100952}
   m_Layer: 5
-  m_Name: SelecRoomCreationText
+  m_Name: SelecRoomCreationMessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

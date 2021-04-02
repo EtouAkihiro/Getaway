@@ -7,6 +7,17 @@ using DG.Tweening;
 /// <summary>タイトル画面のEventTiggerを管理するクラス</summary>
 public class TitleEventTrigger : MonoBehaviour
 {
+    /// <summary>プレイヤー名の説明文</summary>
+    public RectTransform m_SelectPlayerNameMessageObject;
+    /// <summary>マッチングの説明文</summary>
+    public RectTransform m_SelectMatchingMessageObject;
+    /// <summary>ルーム作成の説明文</summary>
+    public RectTransform m_SelectRoomCreationMessageObject;
+    /// <summary>ルームパスワードの説明文</summary>
+    public RectTransform m_SelectRoomPasswordMessageObject;
+    /// <summary>タイトルに戻るの説明文</summary>
+    public RectTransform m_SelectBackToTitleMessageObject;
+
 /// 表示 //////////////////////////////////////////////////////////////////////////////////////////////
 
     /// <summary>マウスが名前入力が選択されている時、プレイヤー名の説明文を表示</summary>
