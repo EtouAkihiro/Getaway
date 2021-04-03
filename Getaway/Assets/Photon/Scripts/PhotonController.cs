@@ -94,6 +94,8 @@ public partial class PhotonController
         options.MaxPlayers = 4;
         //ルームの入室を許可
         options.IsOpen = true;
+        // ルームがロビーにリスト化
+        options.IsVisible = true;
         // ルームの作成
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
