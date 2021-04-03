@@ -314,7 +314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &48362982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -564,8 +564,23 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1453753436}
-          m_MethodName: MouseSelectEvent
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DisPlay_Matching
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DontDisPlay_Matching
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -592,7 +607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295383211
 RectTransform:
   m_ObjectHideFlags: 0
@@ -811,7 +826,33 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DisPlay_BackToTitle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DontDisPlay_BackToTitle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &376149910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &549247406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1817,7 +1858,33 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DisPlay_RoomCreation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DontDisPlay_RoomCreation
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &758689943
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,8 +3599,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1453753436}
-          m_MethodName: MouseSelectMessageDisPlayEvent
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DisPlay_PlayerName
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3547,8 +3614,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1453753436}
-          m_MethodName: MouseSelectMessageDontDisPlayEvent
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DontDisPlay_PlayerName
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4569,11 +4636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2129f0f1beb4ee488f6acfa8ee64835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SelectPlayerNameMessageObject: {fileID: 0}
-  m_SelectMatchingMessageObject: {fileID: 0}
-  m_SelectRoomCreationMessageObject: {fileID: 0}
-  m_SelectRoomPasswordMessageObject: {fileID: 0}
-  m_SelectBackToTitleMessageObject: {fileID: 0}
+  m_SelectPlayerNameMessageObject: {fileID: 1942630308}
+  m_SelectMatchingMessageObject: {fileID: 48362981}
+  m_SelectRoomCreationMessageObject: {fileID: 2038100950}
+  m_SelectRoomPasswordMessageObject: {fileID: 549247405}
+  m_SelectBackToTitleMessageObject: {fileID: 295383210}
 --- !u!1 &1482264552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5076,7 +5143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1738749217
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5605,7 +5672,33 @@ MonoBehaviour:
   - eventID: 0
     callback:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DisPlay_RoomPaswwoed
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1453753437}
+          m_MethodName: MouseSelectMessageEvent_DontDisPlay_RoomPassword
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1942630308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,7 +5716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1942630309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5905,7 +5998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2038100951
 RectTransform:
   m_ObjectHideFlags: 0
