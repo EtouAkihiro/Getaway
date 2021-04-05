@@ -412,7 +412,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 353034186}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1280094579}
+        m_MethodName: StageSelectButtonRightOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &353034186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,7 +619,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 437399215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1280094579}
+        m_MethodName: StageSelectButtonLeftOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &437399215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1063,7 +1085,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89ae48304d29ab4fbf2fa71fceb628d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SelectStageTextObjects: []
+  m_SelectStageTextObjects:
+  - {fileID: 1290553813}
+  - {fileID: 1203911799}
 --- !u!1 &1290553813
 GameObject:
   m_ObjectHideFlags: 0

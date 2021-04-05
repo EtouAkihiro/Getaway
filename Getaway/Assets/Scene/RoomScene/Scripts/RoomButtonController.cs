@@ -20,7 +20,6 @@ public class RoomButtonController : MonoBehaviour
     {
         Random,
         Underground
-
     }
 
     /// <summary>選択されているステージの状態</summary>
@@ -30,111 +29,55 @@ public class RoomButtonController : MonoBehaviour
     {
         // 最初はRandomを選択した状態にする。
         m_StageSelectStage = StageSelectStage.Random;
+        // 地下のテキストオブジェクトを非表示にする
+        m_SelectStageTextObjects[1].SetActive(false);
+
     }
 
     /// <summary>ステージ選択の左側のボタンが押された時</summary>
     public void StageSelectButtonLeftOnClick()
     {
-        switch (m_StageSelectStage)
+        if (m_StageSelectStage == StageSelectStage.Underground)
         {
-            case StageSelectStage.Random : StageSelectMoveLeft(m_SelectStageTextObjects[1], m_SelectStageTextObjects[0]); break;
-            case StageSelectStage.Underground : StageSelectMoveLeft(m_SelectStageTextObjects[0], m_SelectStageTextObjects[1]); break;
+            StageSelectTextCange(m_StageSelectStage);
         }
     }
 
-    void StageSelectMoveLeft(GameObject NextSelectStageText, GameObject CurrentSelectStageText)
+    /// <summary>ステージ選択の右側のボタンが押された時</summary>
+    public void StageSelectButtonRightOnClick()
     {
-        float LeftEndPositionX = 150.0f;
-
-        if (!NextSelectStageText.activeSelf)
+        if (m_StageSelectStage == StageSelectStage.Random)
         {
-            NextSelectStageText.SetActive(true);
+            StageSelectTextCange(m_StageSelectStage);
+        }
+    }
+
+    void StageSelectTextCange(StageSelectStage stageSelectStage)
+    {
+        int StateNumber = 0;
+
+        switch (stageSelectStage)
+        {
+            case StageSelectStage.Random : StateNumber = 1; break;
+            case StageSelectStage.Underground : StateNumber = 0; break; 
         }
 
-        // 非表示
-        TextDontDisPlay(CurrentSelectStageText, -LeftEndPositionX);
-        // 表示
-        TextDisPlay(NextSelectStageText, LeftEndPositionX);
-
-        if(m_DisPlayFrag && m_DontDisPlayFrag)
+        for(int StageNumber = 0; StageNumber < m_SelectStageTextObjects.Length; StageNumber++)
         {
-            switch (m_StageSelectStage)
+            if(StageNumber == StateNumber)
             {
-                case StageSelectStage.Random : m_StageSelectStage = StageSelectStage.Underground; break;
-                case StageSelectStage.Underground : m_StageSelectStage = StageSelectStage.Random; break;
+                m_SelectStageTextObjects[StageNumber].SetActive(true);
             }
-
-            // フラグを初期化
-            m_DisPlayFrag = false;
-            m_DontDisPlayFrag = false;
+            else
+            {
+                m_SelectStageTextObjects[StageNumber].SetActive(false);
+            }
         }
-    }
 
-    void StageSelectMoveRight(GameObject NextSelectStageText, GameObject CurrentSelectStageText, int StageSelectStage)
-    {
-        // 表示
-
-        // 非表示
-    }
-
-    /// <summary>テキストの表示</summary>
-    /// <param name="DisPlayObject">表示するオブジェクト</param>
-    /// <param name="EndPositionX">最終的なX座標の位置</param>
-    void TextDisPlay(GameObject DisPlayObject, float EndPositionX)
-    {
-        bool MovedFrag = false;
-        bool TextColorChangedFrag = false;
-
-        // 表示位置に移動
-        Transform DisPlayObjectTr = DisPlayObject.transform;
-        DisPlayObjectTr.DOMoveX(EndPositionX, 1.0f)
-            .From()
-            .SetEase(Ease.OutQuart)
-            .OnComplete(() => {
-                // 表示位置に移動したら、フラグをtrue
-                MovedFrag = true;
-            });
-
-        // 徐々に表示
-        Text DisPlayObjectTx = DisPlayObject.GetComponent<Text>();
-        DisPlayObjectTx.DOColor(new Color(1.0f, 1.0f, 1.0f, 1.0f), 1.0f)
-            .From()
-            .SetEase(Ease.OutQuart)
-            .OnComplete(() => {
-                // 表示されたら、フラグをtrue
-                TextColorChangedFrag = true;
-            });
-
-        // 表示位置に移動し、尚且つ、表示された状態なら
-        if(MovedFrag && TextColorChangedFrag)
+        switch (StateNumber)
         {
-            // 表示された状態にする。
-            m_DisPlayFrag = true;
-        }
-    }
-
-    /// <summary>テキストの非表示</summary>
-    /// <param name="DontDisPlayObject">非表示にするオブジェクト</param>
-    /// <param name="EndPositionX">最終的なX座標の位置</param>
-    void TextDontDisPlay(GameObject DontDisPlayObject, float EndPositionX)
-    {
-        bool MovedFrag = false;
-        bool TextColorChangedFrag = false;
-
-        // 非表示位置に移動
-        Transform DontDisPlayTr = DontDisPlayObject.transform;
-
-        // 徐々に非表示
-        Text DontDisPlayTx = DontDisPlayObject.GetComponent<Text>();
-        DontDisPlayTx.DOColor(new Color(1.0f, 1.0f, 1.0f, 0.0f), 1.0f)
-            .From()
-            .SetEase(Ease.OutQuart)
-            .OnComplete(() => {
-                TextColorChangedFrag = true;
-            });
-
-        if(MovedFrag && TextColorChangedFrag)
-        {
+            case 0 : m_StageSelectStage = StageSelectStage.Random; break;
+            case 1 : m_StageSelectStage = StageSelectStage.Underground; break;
         }
     }
 }
