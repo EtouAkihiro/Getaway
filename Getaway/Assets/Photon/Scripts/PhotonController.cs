@@ -41,6 +41,30 @@ public partial　class PhotonController : MonoBehaviourPunCallbacks
         base.OnCreateRoomFailed(returnCode, message);
     }
 
+    /// <summary>ルーム参加に成功</summary>
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+    }
+
+    /// <summary>ルーム参加に失敗</summary>
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+    }
+
+    /// <summary>ロビーにログインした</summary>
+    public override void OnJoinedLobby()
+    {
+        base.OnJoinedLobby();
+    }
+
+    /// <summary>ロビーから離脱した</summary>
+    public override void OnLeftLobby()
+    {
+        base.OnLeftLobby();
+    }
+
     /// <summary>現在のルーム一覧の更新</summary>
     /// <param name="roomList">ルーム一覧</param>
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
