@@ -9,11 +9,18 @@ public class BGMManager : MonoBehaviour
     [SerializeField, Header("タイトルBGM")]
     private AudioClip m_TitleBGM;
 
+    /// <summary>ロード済みかどうか</summary>
+    bool m_Loaded = false;
+
     // オーディオソース
     AudioSource m_AudioSource;
 
     void Awake()
     {
+        // ロード済みだった場合、処理を行わない
+        if (m_Loaded) return;
+        // ロード済みにする。
+        m_Loaded = true;
         // 全シーンにまたがって存在する（シーン切り替えで破壊されない）ようにする
         DontDestroyOnLoad(gameObject);
     }
@@ -29,8 +36,6 @@ public class BGMManager : MonoBehaviour
         string SceneName = SceneManager.GetActiveScene().name;
         // シーンごとにBGMの再生を行う
         SceneUpdate(SceneName);
-        // 常にBGMマネージャーを管理
-        BGMManagerTwoOrmore();
     }
 
     /// <summary>シーンごとにBGMの再生を行う</summary>
@@ -67,19 +72,6 @@ public class BGMManager : MonoBehaviour
             m_AudioSource.Stop();
             // サウンドクリップの中身を空にする
             m_AudioSource.clip = null;
-        }
-    }
-
-    /// <summary>BGMマネージャーが2個以上存在する場合、新しく生成されたBGMマネージャーを削除</summary>
-    void BGMManagerTwoOrmore()
-    {
-        // 現在のシーンにあるBGMマネージャーを取得
-        GameObject[] BGMManagers = GameObject.FindGameObjectsWithTag("BGMManager");
-
-        // BGMマネージャーが2個以上存在する場合
-        if(BGMManagers.Length >= 2) {
-            // 新しく生成されたBGMマネージャーを削除
-            Destroy(BGMManagers[BGMManagers.Length - 1]);
         }
     }
 }

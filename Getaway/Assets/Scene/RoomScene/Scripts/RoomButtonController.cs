@@ -18,7 +18,9 @@ public class RoomButtonController : MonoBehaviour
     /// <summary>選択できるステージの状態</summary>
     enum StageSelectStage
     {
+        /// <summary>ランダム</summary>
         Random,
+        /// <summary>地下</summary>
         Underground
     }
 
@@ -37,6 +39,8 @@ public class RoomButtonController : MonoBehaviour
     /// <summary>ステージ選択の左側のボタンが押された時</summary>
     public void StageSelectButtonLeftOnClick()
     {
+        // 現在のステージ選択の状態が地下が選択された場合
+        // 状態の遷移を行う。
         if (m_StageSelectStage == StageSelectStage.Underground)
         {
             StageSelectTextCange(m_StageSelectStage);
@@ -46,24 +50,34 @@ public class RoomButtonController : MonoBehaviour
     /// <summary>ステージ選択の右側のボタンが押された時</summary>
     public void StageSelectButtonRightOnClick()
     {
+        // 現在のステージ選択の状態がランダムが選択された場合
+        // 状態の遷移を行う。
         if (m_StageSelectStage == StageSelectStage.Random)
         {
             StageSelectTextCange(m_StageSelectStage);
         }
     }
 
+    /// <summary>ステージ選択のテキストの状態遷移</summary>
+    /// <param name="stageSelectStage">ステージ選択の状態</param>
     void StageSelectTextCange(StageSelectStage stageSelectStage)
     {
+        // ステージ選択の状態を値で表すための変数
         int StateNumber = 0;
 
+        // 次のステージ選択の値を取得
         switch (stageSelectStage)
         {
             case StageSelectStage.Random : StateNumber = 1; break;
             case StageSelectStage.Underground : StateNumber = 0; break; 
         }
 
+        // 表示されるかどうか
         for(int StageNumber = 0; StageNumber < m_SelectStageTextObjects.Length; StageNumber++)
         {
+            // ステージ選択の値とステージの値が等しい場合
+            // そのテキストを表示する。
+            // それ以外は、非表示にする。
             if(StageNumber == StateNumber)
             {
                 m_SelectStageTextObjects[StageNumber].SetActive(true);
@@ -74,6 +88,7 @@ public class RoomButtonController : MonoBehaviour
             }
         }
 
+        // 状態の値で状態遷移
         switch (StateNumber)
         {
             case 0 : m_StageSelectStage = StageSelectStage.Random; break;
