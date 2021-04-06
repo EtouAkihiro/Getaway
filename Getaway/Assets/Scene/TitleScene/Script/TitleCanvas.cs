@@ -235,8 +235,10 @@ public class TitleCanvas : MonoBehaviour
             GameController.Instance.Paswad = Paswad;
         }
 
-        // シーン切替する。
-        Fade.Instance.FadeOut("MatchingScene");
+        if(Paswad == "")
+        {
+            PhotonManager.Instance.OnRandomJoinedRoom();
+        }
     }
 
     /// <summary>エラーメッセージを表示・非表示</summary>

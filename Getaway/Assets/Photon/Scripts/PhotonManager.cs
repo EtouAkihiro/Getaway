@@ -56,6 +56,12 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
         m_PhotonController.LeaveRoom();
     }
 
+    /// <summary>ルームに参加(ランダム)</summary>
+    public void OnRandomJoinedRoom()
+    {
+        m_PhotonController.OnRandomJoinedRoom();
+    }
+
     /// <summary>プレイヤー名を登録</summary>
     /// <param name="PlayerName">登録したいプレイヤー名</param>
     public void SetPlayerName(string PlayerName)
