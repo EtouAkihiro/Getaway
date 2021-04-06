@@ -1992,6 +1992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641d911e1c764d43b1621dc3f5a85b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TitleCanvasObject: {fileID: 1453753430}
 --- !u!4 &792671926
 Transform:
   m_ObjectHideFlags: 0
@@ -4619,11 +4620,11 @@ MonoBehaviour:
   m_Select: {fileID: 332721932}
   m_GameStart: {fileID: 1244857167}
   m_GameStartButton: {fileID: 1244857167}
-  m_RoomPaswadInput: {fileID: 51360894}
+  m_RoomNameInput: {fileID: 0}
   m_RoomCreationInput: {fileID: 1120013788}
   m_NameInputField: {fileID: 1298965952}
-  m_PaswadInputField: {fileID: 1482264554}
   m_RoomInputField: {fileID: 1782847719}
+  m_RoomNameInputField: {fileID: 0}
 --- !u!114 &1453753437
 MonoBehaviour:
   m_ObjectHideFlags: 0

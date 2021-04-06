@@ -108,6 +108,18 @@ public partial class PhotonController
         PhotonNetwork.Disconnect();
     }
 
+    /// <summary>ロビーに接続</summary>
+    public void JointLobby()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
+    /// <summary>ロビーから切断</summary>
+    public void LeaveLobby()
+    {
+        PhotonNetwork.LeaveLobby();
+    }
+
     /// <summary>ルームを作成</summary>
     /// <param name="RoomName">ルーム名</param>
     public void CreateRoom(string RoomName)
@@ -124,10 +136,11 @@ public partial class PhotonController
         PhotonNetwork.CreateRoom(RoomName, options, TypedLobby.Default);
     }
 
-    /// <summary>ルーム参加(パスワード)</summary>
-    /// <param name="passwad">パスワード</param>
-    public void OnJoinedRoom(string passwad)
+    /// <summary>ルーム参加(ルーム名)</summary>
+    /// <param name="RoomName">ルーム名</param>
+    public void OnJoinedRoom(string RoomName)
     {
+        PhotonNetwork.JoinRoom(RoomName);
     }
 
     /// <summary>ルーム参加(ランダム)</summary>

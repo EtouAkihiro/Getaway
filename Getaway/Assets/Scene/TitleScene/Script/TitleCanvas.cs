@@ -18,23 +18,26 @@ public class TitleCanvas : MonoBehaviour
     public GameObject m_GameStart;
     /// <summary>ゲームスタートボタン</summary>
     public GameObject m_GameStartButton;
-    /// <summary>ルームパスワードを入力する画面</summary>
-    public GameObject m_RoomPaswadInput;
+    /// <summary>ルーム名を入力する画面</summary>
+    public GameObject m_RoomNameInput;
     /// <summary>ルーム作成画面</summary>
     public GameObject m_RoomCreationInput;
 
     /// <summary>名前の入力</summary>
     public InputField m_NameInputField;
-    /// <summary>パスワードの入力</summary>
-    public InputField m_PaswadInputField;
     /// <summary>ルーム名の入力</summary>
     public InputField m_RoomInputField;
+    /// <summary>ルーム名(ルーム参加用)の入力</summary>
+    public InputField m_RoomNameInputField;
 
     /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
     GameStartButton m_GameStartButtonScript;
 
     /// <summary>アニメーター</summary>
     Animator m_Animator;
+
+    /// <summary>ゲームスタートボタンが押された状態のフラグ</summary>
+    bool m_GameStartButtonClickFrag = false;
 
     // アニメーションハッシュ
     int s_TitleDisPlayFrag = Animator.StringToHash("TiteDisPlayFrag");
@@ -109,6 +112,10 @@ public class TitleCanvas : MonoBehaviour
         SelectCanvasFade(true);
         // サーバーに接続
         PhotonManager.Instance.ConnectedToServer();
+        // ロビーに接続
+        PhotonManager.Instance.JointLobby();
+        // 押された状態にする。
+        m_GameStartButtonClickFrag = true;
     }
 
     /// <summary>タイトルに戻る</summary>
@@ -118,8 +125,12 @@ public class TitleCanvas : MonoBehaviour
         SelectCanvasFade(false);
         // タイトルを表示
         TltleCanvasFade(false);
+        // ロビーから切断
+        PhotonManager.Instance.LeaveLobby();
         // サーバーから切断
         PhotonManager.Instance.DisconnectSavar();
+        // 押されていない状態にする。
+        m_GameStartButtonClickFrag = false;
     }
 
     /// <summary>プレイヤーの名前を登録</summary>
@@ -198,14 +209,14 @@ public class TitleCanvas : MonoBehaviour
 
         // パスワードの入力画面が非表示だった場合、表示する。
         // パスワードの入力画面が表示だった場合、非表示する。
-        if(!m_RoomPaswadInput.activeSelf)
+        if(!m_RoomNameInput.activeSelf)
         {
-            m_RoomPaswadInput.SetActive(true);
+            m_RoomNameInput.SetActive(true);
             m_Select.SetActive(false);
         }
-        else if(m_RoomPaswadInput.activeSelf)
+        else if(m_RoomNameInput.activeSelf)
         {
-            m_RoomPaswadInput.SetActive(false);
+            m_RoomNameInput.SetActive(false);
             m_Select.SetActive(true);
         }
     }
@@ -225,12 +236,12 @@ public class TitleCanvas : MonoBehaviour
         }
 
         // 入力されたパスワードを取得
-        string Paswad = m_PaswadInputField.text;
+        string Paswad = m_RoomNameInputField.text;
 
         // もし、パスワード画面が表示されていて、
         // パスワードが入力された場合
         // パスワードを保存する。
-        if (Paswad != "" && m_RoomPaswadInput.activeSelf)
+        if (Paswad != "" && m_RoomNameInput.activeSelf)
         {
             GameController.Instance.Paswad = Paswad;
         }
@@ -265,5 +276,12 @@ public class TitleCanvas : MonoBehaviour
                 m_WarningTextObject.SetActive(false);
             });
         }
+    }
+
+    /// <summary>ゲームスタートボタンが押された状態を返す(プロパティ)</summary>
+    public bool GameStartButtonClickFrag
+    {
+        get { return m_GameStartButtonClickFrag; }
+        set { m_GameStartButtonClickFrag = value; }
     }
 }

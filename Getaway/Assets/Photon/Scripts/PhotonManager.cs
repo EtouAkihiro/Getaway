@@ -43,6 +43,18 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
         m_PhotonController.DisconnectSavar();
     }
 
+    /// <summary>ロビーに接続</summary>
+    public void JointLobby()
+    {
+        m_PhotonController.JointLobby();
+    }
+
+    /// <summary>ロビーから切断</summary>
+    public void LeaveLobby()
+    {
+        m_PhotonController.LeaveLobby();
+    }
+
     /// <summary>ルームを作成</summary>
     /// <param name="RoomName">ルーム名</param>
     public void CreateRoom(string RoomName)
@@ -54,6 +66,13 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     public void LeaveRoom()
     {
         m_PhotonController.LeaveRoom();
+    }
+
+    /// <summary>ルームに参加(ルーム名)</summary>
+    /// <param name="RoomName">ルーム名</param>
+    public void OnJoinedRoom(string RoomName)
+    {
+        m_PhotonController.OnJoinedRoom(RoomName);
     }
 
     /// <summary>ルームに参加(ランダム)</summary>
