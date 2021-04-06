@@ -4,12 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>タイトルキャンバスの管理</summary>
 public class TitleCanvas : MonoBehaviour
 {
-    /// <summary>エラーメッセージのオブジェクト</summary>
-    public GameObject m_WarningTextObject;
+    /// <summary>プレイヤー名が入力されていないというエラーメッセージのオブジェクト</summary>
+    public GameObject m_NoPlayerNameErrorMessageObject;
+    /// <summary>ルームがないというエラーメッセージのオブジェクト</summary>
+    public GameObject m_NoRoomErrorMessageObject;
     /// <summary>タイトルオブジェクト</summary>
     public GameObject m_Title;
     /// <summary>セレクトオブジェクト</summary>
@@ -161,7 +165,7 @@ public class TitleCanvas : MonoBehaviour
         // エラーメッセージを表示する。
         if (Name == "")
         {
-            WarningTextDisPlay();
+            NoPlayerNameErrorMessageTextDisPlay();
             return;
         }
 
@@ -194,7 +198,7 @@ public class TitleCanvas : MonoBehaviour
     }
 
     /// <summary>パスワードの入力画面を表示・非表示</summary>
-    public void OnRoomPasswordClick()
+    public void OnRoomNameClick()
     {
         // 入力された名前を取得
         string Name = m_NameInputField.text;
@@ -203,12 +207,12 @@ public class TitleCanvas : MonoBehaviour
         // エラーメッセージを表示する。
         if (Name == "")
         {
-            WarningTextDisPlay();
+            NoPlayerNameErrorMessageTextDisPlay();
             return;
         }
 
-        // パスワードの入力画面が非表示だった場合、表示する。
-        // パスワードの入力画面が表示だった場合、非表示する。
+        // ルーム名の入力画面が非表示だった場合、表示する。
+        // ルーム名の入力画面が表示だった場合、非表示する。
         if(!m_RoomNameInput.activeSelf)
         {
             m_RoomNameInput.SetActive(true);
@@ -231,49 +235,99 @@ public class TitleCanvas : MonoBehaviour
         // エラーメッセージを表示する。
         if (Name == "")
         {
-            WarningTextDisPlay();
+            NoPlayerNameErrorMessageTextDisPlay();
             return;
         }
 
         // 入力されたパスワードを取得
-        string Paswad = m_RoomNameInputField.text;
-
-        // もし、パスワード画面が表示されていて、
-        // パスワードが入力された場合
-        // パスワードを保存する。
-        if (Paswad != "" && m_RoomNameInput.activeSelf)
+        string RoomName = m_RoomNameInputField.text;
+        // 現在、存在するルームの数が0だった場合、
+        // エラーメッセージを表示
+        if (PhotonManager.Instance.RoomNames().Count == 0)
         {
-            GameController.Instance.Paswad = Paswad;
+            NoRoomErrorMessageMessageTextDisPlay();
+            return;
         }
 
-        if(Paswad == "")
+        PhotonManager.Instance.OnRandomJoinedRoom();
+    }
+
+    /// <summary>ルームに参加(ルーム名)</summary>
+    public void OnJointRoomClick()
+    {
+        // 入力されたパスワードを取得
+        string RoomName = m_RoomNameInputField.text;
+        // 現在のルームの数が0だった場合
+        // ルーム参加画面を非表示にし、
+        // エラーメッセージを表示
+        if(PhotonManager.Instance.RoomNames().Count == 0)
         {
-            PhotonManager.Instance.OnRandomJoinedRoom();
+            // ルーム参加画面が表示されていた場合、非表示にし、
+            // セレクト画面に戻る。
+            if (m_RoomNameInput.activeSelf)
+            {
+                m_RoomNameInput.SetActive(false);
+                m_Select.SetActive(true);
+            }
+            // エラーメッセージを表示
+            NoRoomErrorMessageMessageTextDisPlay();
+            // これ以降の処理を行わない
+            return;
         }
     }
 
-    /// <summary>エラーメッセージを表示・非表示</summary>
-    void WarningTextDisPlay()
+    /// <summary>プレイヤー名が入力されていないというエラーメッセージを表示・非表示</summary>
+    void NoPlayerNameErrorMessageTextDisPlay()
     {
         // テキストオブジェクトが非表示になってたら、表示する。
-        if (m_WarningTextObject.activeSelf == false) m_WarningTextObject.SetActive(true);
+        if (m_NoPlayerNameErrorMessageObject.activeSelf == false) m_NoPlayerNameErrorMessageObject.SetActive(true);
 
         // エラーメッセージのテキストを取得
-        Text WarningText = m_WarningTextObject.GetComponent<Text>();
+        // NoPlayerNameErrorMessageを省略
+        Text NPNEMText = m_NoPlayerNameErrorMessageObject.GetComponent<Text>();
 
         // 現在のテキストカラーを取得
-        Color WarningTextColor = WarningText.color;
+        // NoPlayerNameErrorMessageTextを省略
+        Color NPNEMTColor = NPNEMText.color;
         // Alpha値に1を入れる。
-        WarningTextColor.a = 1.0f;
+        NPNEMTColor.a = 1.0f;
         // テキストカラーを反映
-        WarningText.color = WarningTextColor;
+         NPNEMText.color = NPNEMTColor;
 
         // アルファ値が0だった場合
         // エラーメッセージをフェードインする。
-        if (WarningText.color.a == 1.0f)
+        if (NPNEMText.color.a == 1.0f)
         {
-            WarningText.DOFade(0.0f, 1.0f).OnComplete(() => {
-                m_WarningTextObject.SetActive(false);
+            NPNEMText.DOFade(0.0f, 1.0f).OnComplete(() => {
+                m_NoPlayerNameErrorMessageObject.SetActive(false);
+            });
+        }
+    }
+
+    /// <summary>ルームが存在しない時のエラーメッセージを表示・非表示</summary>
+    void NoRoomErrorMessageMessageTextDisPlay()
+    {
+        // テキストオブジェクトが非表示になってたら、表示する。
+        if (m_NoRoomErrorMessageObject.activeSelf == false) m_NoRoomErrorMessageObject.SetActive(true);
+
+        // エラーメッセージのテキストを取得
+        // NoRoomErrorMessageMessageを省略
+        Text NREMMText = m_NoRoomErrorMessageObject.GetComponent<Text>();
+
+        // 現在のテキストカラーを取得
+        // NoRoomErrorMessageMessageTextColorを省略
+        Color NREMMTColor = NREMMText.color;
+        // Alpha値に1を入れる。
+        NREMMTColor.a = 1.0f;
+        // テキストカラーを反映
+        NREMMText.color = NREMMTColor;
+
+        // アルファ値が0だった場合
+        // エラーメッセージをフェードインする。
+        if (NREMMText.color.a == 1.0f)
+        {
+            NREMMText.DOFade(0.0f, 1.0f).OnComplete(() => {
+                m_NoRoomErrorMessageObject.SetActive(false);
             });
         }
     }
