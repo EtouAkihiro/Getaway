@@ -26,6 +26,8 @@ public class RoomButtonController : MonoBehaviour
 
     /// <summary>選択されているステージの状態</summary>
     StageSelectStage m_StageSelectStage;
+    /// <summary>現在存在するステージのシーン名</summary>
+    List<string> m_StageSceneNameList = new List<string>();
 
     void Start()
     {
@@ -33,7 +35,8 @@ public class RoomButtonController : MonoBehaviour
         m_StageSelectStage = StageSelectStage.Random;
         // 地下のテキストオブジェクトを非表示にする
         m_SelectStageTextObjects[1].SetActive(false);
-
+        // 現在のステージのシーン名をリストに格納
+        m_StageSceneNameList.Add("UndergroundGamePlayScene");
     }
 
     /// <summary>ステージ選択の左側のボタンが押された時</summary>
@@ -55,6 +58,22 @@ public class RoomButtonController : MonoBehaviour
         if (m_StageSelectStage == StageSelectStage.Random)
         {
             StageSelectTextCange(m_StageSelectStage);
+        }
+    }
+
+    /// <summary>ゲームプレイボタンが押された時</summary>
+    public void GamePlayOnClick()
+    {
+        // 現在の選択の状態が、ランダムだった場合
+        if (m_StageSelectStage == StageSelectStage.Random)
+        {
+            // ランダムでステージのナンバーを取得
+            int RandomStageNumber = Random.Range(0, 0);
+            // ランダムで決まった値をリストの番号に指定し、シーン遷移する。
+            Fade.Instance.FadeOut(m_StageSceneNameList[RandomStageNumber]);
+        }
+        else
+        {
         }
     }
 

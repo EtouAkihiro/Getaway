@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 301171485}
   - component: {fileID: 301171484}
   m_Layer: 5
-  m_Name: GameStartButton
+  m_Name: GamePlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,7 +1469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: GameStart
+  m_Text: GamePlay
 --- !u!222 &1627240108
 CanvasRenderer:
   m_ObjectHideFlags: 0
