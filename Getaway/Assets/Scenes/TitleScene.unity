@@ -2736,7 +2736,7 @@ RectTransform:
   - {fileID: 1393951573}
   - {fileID: 1782847718}
   m_Father: {fileID: 1453753434}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3796,6 +3796,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357712493}
   m_CullTransparentMesh: 0
+--- !u!1 &1373891014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373891015}
+  - component: {fileID: 1373891017}
+  - component: {fileID: 1373891016}
+  m_Layer: 5
+  m_Name: InputNoRoomNameErrorMessageText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1373891015
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373891014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453753434}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -344, y: -0}
+  m_SizeDelta: {x: 1084.2711, y: 134.78009}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1373891016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373891014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ef1ae16df4f20b743b5e090d33258e88, type: 3}
+    m_FontSize: 80
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 0
+  m_Text: "\u5165\u529B\u3055\u308C\u305F\u30EB\u30FC\u30E0\u540D\u306F\u3001\u5B58\u5728\u3057\u307E\u305B\u3093\uFF01"
+--- !u!222 &1373891017
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373891014}
+  m_CullTransparentMesh: 0
 --- !u!1 &1383452434
 GameObject:
   m_ObjectHideFlags: 0
@@ -4576,6 +4654,7 @@ RectTransform:
   - {fileID: 51360895}
   - {fileID: 2077286953}
   - {fileID: 1649904000}
+  - {fileID: 1373891015}
   - {fileID: 1120013789}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -4618,6 +4697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoPlayerNameErrorMessageObject: {fileID: 2077286950}
   m_NoRoomErrorMessageObject: {fileID: 1649903997}
+  m_InputNoRoomNameErrorMessageObject: {fileID: 1373891014}
   m_Title: {fileID: 1504790001}
   m_Select: {fileID: 332721932}
   m_GameStart: {fileID: 1244857167}

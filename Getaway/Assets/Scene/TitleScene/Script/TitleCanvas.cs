@@ -14,6 +14,8 @@ public class TitleCanvas : MonoBehaviour
     public GameObject m_NoPlayerNameErrorMessageObject;
     /// <summary>ルームがないというエラーメッセージのオブジェクト</summary>
     public GameObject m_NoRoomErrorMessageObject;
+    /// <summary>入力されたルーム名が存在しないというエラーメッセージのオブジェクト</summary>
+    public GameObject m_InputNoRoomNameErrorMessageObject;
     /// <summary>タイトルオブジェクト</summary>
     public GameObject m_Title;
     /// <summary>セレクトオブジェクト</summary>
@@ -245,7 +247,7 @@ public class TitleCanvas : MonoBehaviour
         // エラーメッセージを表示
         if (PhotonManager.Instance.RoomNames().Count == 0)
         {
-            NoRoomErrorMessageMessageTextDisPlay();
+            NoRoomErrorMessageTextDisPlay();
             return;
         }
 
@@ -255,12 +257,14 @@ public class TitleCanvas : MonoBehaviour
     /// <summary>ルームに参加(ルーム名)</summary>
     public void OnJointRoomClick()
     {
+        // ルームカウンター
+        int RoomCount = 0;
         // 入力されたパスワードを取得
         string RoomName = m_RoomNameInputField.text;
-        // 現在のルームの数が0だった場合
+        // 現在のルームの数が0以下だった場合
         // ルーム参加画面を非表示にし、
         // エラーメッセージを表示
-        if(PhotonManager.Instance.RoomNames().Count == 0)
+        if(PhotonManager.Instance.RoomNames().Count <= 0)
         {
             // ルーム参加画面が表示されていた場合、非表示にし、
             // セレクト画面に戻る。
@@ -270,9 +274,53 @@ public class TitleCanvas : MonoBehaviour
                 m_Select.SetActive(true);
             }
             // エラーメッセージを表示
-            NoRoomErrorMessageMessageTextDisPlay();
+            NoRoomErrorMessageTextDisPlay();
             // これ以降の処理を行わない
             return;
+        }
+        // 現在のルームが0より大きい場合、
+        // ルームに参加する
+        else if(PhotonManager.Instance.RoomNames().Count > 0)
+        {
+            foreach(string RoomNames in PhotonManager.Instance.RoomNames())
+            {
+                // 現在のルームのルーム名と入力されたルーム名がどれか、一致したら
+                // ルームシーンに遷移する。
+                if(RoomName == RoomNames)
+                {
+                    // ルームに参加
+                    PhotonManager.Instance.OnJoinedRoom(RoomName);
+                    // ルームシーンに遷移
+                    Fade.Instance.FadeOut("RoomScene");
+                    // foreachから抜ける
+                    break;
+                }
+                // 現在のルームのルーム名と入力されたルーム名がどれかも一致しなかったら、
+                // ルームカウンターに加算
+                else
+                {
+                    RoomCount++;
+                }
+            }
+
+            // ルームカンターが現在のルーム名の数以上ある場合
+            // ルーム参加画面を非表示にし、
+            // エラーメッセージを表示
+            if(RoomCount >= PhotonManager.Instance.RoomNames().Count)
+            {
+                // ルーム参加画面が表示されていた場合、非表示にし、
+                // セレクト画面に戻る。
+                if (m_RoomNameInput.activeSelf)
+                {
+                    m_RoomNameInput.SetActive(false);
+                    m_Select.SetActive(true);
+                }
+
+                // エラーメッセージを表示
+                InputNoRoomNameErrorMessageTextDisPlay();
+                // これ以降の処理を行わない
+                return;
+            }
         }
     }
 
@@ -280,7 +328,7 @@ public class TitleCanvas : MonoBehaviour
     void NoPlayerNameErrorMessageTextDisPlay()
     {
         // テキストオブジェクトが非表示になってたら、表示する。
-        if (m_NoPlayerNameErrorMessageObject.activeSelf == false) m_NoPlayerNameErrorMessageObject.SetActive(true);
+        if (!m_NoPlayerNameErrorMessageObject.activeSelf) m_NoPlayerNameErrorMessageObject.SetActive(true);
 
         // エラーメッセージのテキストを取得
         // NoPlayerNameErrorMessageを省略
@@ -305,29 +353,60 @@ public class TitleCanvas : MonoBehaviour
     }
 
     /// <summary>ルームが存在しない時のエラーメッセージを表示・非表示</summary>
-    void NoRoomErrorMessageMessageTextDisPlay()
+    void NoRoomErrorMessageTextDisPlay()
     {
         // テキストオブジェクトが非表示になってたら、表示する。
-        if (m_NoRoomErrorMessageObject.activeSelf == false) m_NoRoomErrorMessageObject.SetActive(true);
+        if (!m_NoRoomErrorMessageObject.activeSelf) m_NoRoomErrorMessageObject.SetActive(true);
 
         // エラーメッセージのテキストを取得
-        // NoRoomErrorMessageMessageを省略
-        Text NREMMText = m_NoRoomErrorMessageObject.GetComponent<Text>();
+        // NoRoomErrorMessageを省略
+        Text NREMText = m_NoRoomErrorMessageObject.GetComponent<Text>();
 
         // 現在のテキストカラーを取得
         // NoRoomErrorMessageMessageTextColorを省略
-        Color NREMMTColor = NREMMText.color;
+        Color NREMTColor = NREMText.color;
         // Alpha値に1を入れる。
-        NREMMTColor.a = 1.0f;
+        NREMTColor.a = 1.0f;
         // テキストカラーを反映
-        NREMMText.color = NREMMTColor;
+        NREMText.color = NREMTColor;
 
         // アルファ値が0だった場合
         // エラーメッセージをフェードインする。
-        if (NREMMText.color.a == 1.0f)
+        if (NREMText.color.a == 1.0f)
         {
-            NREMMText.DOFade(0.0f, 1.0f).OnComplete(() => {
+            // 徐々に消える
+            NREMText.DOFade(0.0f, 1.0f).OnComplete(() => {
+                // 消えたら、非表示にする。
                 m_NoRoomErrorMessageObject.SetActive(false);
+            });
+        }
+    }
+
+    /// <summary>入力されたルーム名が存在しない時のエラーメッセージを表示・非表示</summary>
+    void InputNoRoomNameErrorMessageTextDisPlay()
+    {
+        // テキストオブジェクトが非表示になっていたら、表示する。
+        if (!m_InputNoRoomNameErrorMessageObject.activeSelf) m_InputNoRoomNameErrorMessageObject.SetActive(true);
+
+        // エラーメッセージのテキストを取得
+        // InputNoRoomNameErrorMessageを省略
+        Text INPNEMText = m_InputNoRoomNameErrorMessageObject.GetComponent<Text>();
+
+        // 現在のテキストカラーを取得
+        // InputNoRoomNameErrorMessageTextを省略
+        Color INPNEMTColor = INPNEMText.color;
+        // Alpha値に1を入れる。
+        INPNEMTColor.a = 1.0f;
+        // テキストカラーを反映
+        INPNEMText.color = INPNEMTColor;
+        // Alpha値が1だった場合
+        // エラーメッセージをフェードインする。
+        if (INPNEMText.color.a == 1.0f)
+        {
+            // 徐々に消える
+            INPNEMText.DOFade(0.0f, 1.0f).OnComplete(() => {
+                // 消えたら、非表示にする。
+                m_InputNoRoomNameErrorMessageObject.SetActive(false);
             });
         }
     }
