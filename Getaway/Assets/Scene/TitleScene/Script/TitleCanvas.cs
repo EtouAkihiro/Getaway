@@ -243,15 +243,22 @@ public class TitleCanvas : MonoBehaviour
 
         // 入力されたパスワードを取得
         string RoomName = m_RoomNameInputField.text;
-        // 現在、存在するルームの数が0だった場合、
+        // 現在、存在するルームの数が0以下だった場合、
         // エラーメッセージを表示
-        if (PhotonManager.Instance.RoomNames().Count == 0)
+        if (PhotonManager.Instance.RoomNames().Count <= 0)
         {
             NoRoomErrorMessageTextDisPlay();
             return;
         }
-
-        PhotonManager.Instance.OnRandomJoinedRoom();
+        // 現在、存在するルームの数が0より大きかっただった場合、
+        // ランダムマッチを行う
+        else if (PhotonManager.Instance.RoomNames().Count > 0)
+        {
+            // ランダムマッチを行う。
+            PhotonManager.Instance.OnRandomJoinedRoom();
+            // ルームシーンに遷移
+            Fade.Instance.FadeOut("RoomScene");
+        }
     }
 
     /// <summary>ルームに参加(ルーム名)</summary>
