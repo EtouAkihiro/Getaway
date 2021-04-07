@@ -243,16 +243,18 @@ public class TitleCanvas : MonoBehaviour
 
         // 入力されたパスワードを取得
         string RoomName = m_RoomNameInputField.text;
+        // 現在のルーム名のリストを取得
+        List<string> RoomNameList = PhotonManager.Instance.RoomNames();
         // 現在、存在するルームの数が0以下だった場合、
         // エラーメッセージを表示
-        if (PhotonManager.Instance.RoomNames().Count <= 0)
+        if (RoomNameList.Count <= 0)
         {
             NoRoomErrorMessageTextDisPlay();
             return;
         }
         // 現在、存在するルームの数が0より大きかっただった場合、
         // ランダムマッチを行う
-        else if (PhotonManager.Instance.RoomNames().Count > 0)
+        else if (RoomNameList.Count > 0)
         {
             // ランダムマッチを行う。
             PhotonManager.Instance.OnRandomJoinedRoom();
@@ -268,10 +270,12 @@ public class TitleCanvas : MonoBehaviour
         int RoomCount = 0;
         // 入力されたパスワードを取得
         string RoomName = m_RoomNameInputField.text;
+        // 現在のルーム名のリストを取得
+        List<string> RoomNameList = PhotonManager.Instance.RoomNames();
         // 現在のルームの数が0以下だった場合
         // ルーム参加画面を非表示にし、
         // エラーメッセージを表示
-        if(PhotonManager.Instance.RoomNames().Count <= 0)
+        if (RoomNameList.Count <= 0)
         {
             // ルーム参加画面が表示されていた場合、非表示にし、
             // セレクト画面に戻る。
@@ -287,9 +291,9 @@ public class TitleCanvas : MonoBehaviour
         }
         // 現在のルームが0より大きい場合、
         // ルームに参加する
-        else if(PhotonManager.Instance.RoomNames().Count > 0)
+        else if(RoomNameList.Count > 0)
         {
-            foreach(string RoomNames in PhotonManager.Instance.RoomNames())
+            foreach(string RoomNames in RoomNameList)
             {
                 // 現在のルームのルーム名と入力されたルーム名がどれか、一致したら
                 // ルームシーンに遷移する。
@@ -313,7 +317,7 @@ public class TitleCanvas : MonoBehaviour
             // ルームカンターが現在のルーム名の数以上ある場合
             // ルーム参加画面を非表示にし、
             // エラーメッセージを表示
-            if(RoomCount >= PhotonManager.Instance.RoomNames().Count)
+            if(RoomCount >= RoomNameList.Count)
             {
                 // ルーム参加画面が表示されていた場合、非表示にし、
                 // セレクト画面に戻る。
