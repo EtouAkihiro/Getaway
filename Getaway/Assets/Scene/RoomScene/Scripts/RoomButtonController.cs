@@ -9,6 +9,8 @@ public class RoomButtonController : MonoBehaviour
 {
     /// <summary>選択されるステージのテキストのオブジェクト</summary>
     public GameObject[] m_SelectStageTextObjects;
+    /// <summary>ステージの画像のオブジェクト</summary>
+    public GameObject[] m_StageImageObjects;
 
     /// <summary>表示されているかのフラグ</summary>
     bool m_DisPlayFrag = false;
@@ -35,6 +37,8 @@ public class RoomButtonController : MonoBehaviour
         m_StageSelectStage = StageSelectStage.Random;
         // 地下のテキストオブジェクトを非表示にする
         m_SelectStageTextObjects[1].SetActive(false);
+        // ステージのイメージ画像を表示
+        StageImageDisPlay();
         // 現在のステージのシーン名をリストに格納
         m_StageSceneNameList.Add("UndergroundGamePlayScene");
     }
@@ -74,6 +78,10 @@ public class RoomButtonController : MonoBehaviour
         }
         else
         {
+            switch (m_StageSelectStage)
+            {
+                case StageSelectStage.Underground : Fade.Instance.FadeOut(m_StageSceneNameList[0]); break;
+            }
         }
     }
 
@@ -112,6 +120,34 @@ public class RoomButtonController : MonoBehaviour
         {
             case 0 : m_StageSelectStage = StageSelectStage.Random; break;
             case 1 : m_StageSelectStage = StageSelectStage.Underground; break;
+        }
+
+        // ステージのイメージ画像を表示
+        StageImageDisPlay();
+    }
+
+    /// <summary>ステージのイメージ画像を表示</summary>
+    void StageImageDisPlay()
+    {
+        // ステージナンバー
+        int StageNumber = 0;
+
+        switch (m_StageSelectStage)
+        {
+            case StageSelectStage.Random : StageNumber = 0; break;
+            case StageSelectStage.Underground : StageNumber = 1; break;
+        }
+
+        for(int StageImageNumber = 0; StageImageNumber < m_StageImageObjects.Length; StageImageNumber++)
+        {
+            if (StageImageNumber == StageNumber)
+            {
+                m_StageImageObjects[StageImageNumber].SetActive(true);
+            }
+            else
+            {
+                m_StageImageObjects[StageImageNumber].SetActive(false);
+            }
         }
     }
 }
