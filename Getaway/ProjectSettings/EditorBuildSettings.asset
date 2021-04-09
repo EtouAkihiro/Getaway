@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoomScene.unity
     guid: 45fa9d78b0c6db944ba48a3e5184179f
+  - enabled: 1
+    path: Assets/Scenes/UndergroundGamePlayScene.unity
+    guid: 5e3383614e96a6542b59ae156947112a
   m_configObjects: {}
