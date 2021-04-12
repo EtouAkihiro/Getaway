@@ -16,6 +16,7 @@ TagManager:
   - BGMManager
   - SEManager
   - Creature
+  - UndergroundGameController
   layers:
   - Default
   - TransparentFX
