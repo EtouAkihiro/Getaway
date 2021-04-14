@@ -174,7 +174,7 @@ public partial class PhotonController
         // 現在ルーム分のルーム名を取得
         for(int Roomid = 0; Roomid < PhotonNetwork.CountOfRooms; Roomid++)
         {
-            RoomNames[Roomid] = m_RoomList[Roomid].Name;
+            RoomNames.Add(m_RoomList[Roomid].Name);
         }
 
         // 現在使用されているルーム分のルーム名を返します。
