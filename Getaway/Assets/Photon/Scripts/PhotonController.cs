@@ -87,6 +87,8 @@ public partial class PhotonController
     List<RoomInfo> m_RoomList = new List<RoomInfo>();
     /// <summary>ルーム名</summary>
     string m_RoomName;
+    /// <summary>プレイヤーがルームに入った時のフラグ</summary>
+    bool m_OnPlayerEnteredRoomFrag = false;
 
     /// <summary>Photonサーバーに接続する</summary>
     public void ConnectedToServer()
@@ -222,5 +224,12 @@ public partial class PhotonController
     {
         get { return m_RoomName; }
         set { m_RoomName = value; }
+    }
+
+    /// <summary>プレイヤーがルームに入った時のフラグ(プロパティ)</summary>
+    public bool OnPlayerEnteredRoomFrag
+    {
+        get { return m_OnPlayerEnteredRoomFrag; }
+        set { m_OnPlayerEnteredRoomFrag = value; }
     }
 }

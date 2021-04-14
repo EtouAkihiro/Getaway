@@ -108,4 +108,11 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     {
         return m_PhotonController.RoomName;
     }
+
+    /// <summary>プレイヤーがルームに入った時のフラグ(プロパティ)</summary>
+    public bool OnPlayerEnteredRoomFrag
+    {
+        get { return m_PhotonController.OnPlayerEnteredRoomFrag; }
+        set { m_PhotonController.OnPlayerEnteredRoomFrag = value; }
+    }
 }
