@@ -188,17 +188,20 @@ public partial class PhotonController
         // プレイヤー名一覧
         string[] PlayerNames = new string[PhotonNetwork.CountOfPlayers];
 
-        int id = 0;
+        // プレイヤーリストを取得
+        Photon.Realtime.Player[] Players = PhotonNetwork.PlayerList;
 
-        foreach(Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        // 現在のプレイヤー名を取得
+        for(int PlayerNumber = 0; PlayerNumber < Players.Length; PlayerNumber++)
         {
-            PlayerNames[id] = player.NickName;
-
-            if(PlayerNames[id] != null)
-            {
-                id++;
-            }
+            PlayerNames[PlayerNumber] = Players[PlayerNumber].NickName;
         }
+
+        // もしプレイヤー一覧の中身がなかった場合、nullで返す
+        if (PlayerNames == null) return null;
+
+        // もしプレイヤー一覧の中身があった場合、プレイヤー一覧を返す
+        return PlayerNames;
 
         // もし、何も追加されていない場合、nullで返す。
         if (PlayerNames == null) return null;
