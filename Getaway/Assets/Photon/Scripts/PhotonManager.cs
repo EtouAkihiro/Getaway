@@ -95,6 +95,13 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
         return m_PhotonController.RoomNames();
     }
 
+    /// <summary>ルームの一覧を返す。</summary>
+    /// <returns></returns>
+    public List<RoomInfo> RoomList()
+    {
+        return m_PhotonController.RoomList;
+    }
+
     /// <summary>現在のルームにいるプレイヤー分のプレイヤー名を返します。</summary>
     /// <returns></returns>
     public string[] PlayerNames()
@@ -107,12 +114,5 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     public string CurrentRoomName()
     {
         return m_PhotonController.RoomName;
-    }
-
-    /// <summary>プレイヤーがルームに入った時のフラグ(プロパティ)</summary>
-    public bool OnPlayerEnteredRoomFrag
-    {
-        get { return m_PhotonController.OnPlayerEnteredRoomFrag; }
-        set { m_PhotonController.OnPlayerEnteredRoomFrag = value; }
     }
 }
