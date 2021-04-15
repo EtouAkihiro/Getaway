@@ -13,20 +13,41 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     public GameObject[] m_PlayerNamesObjects;
     /// <summary>プレイヤーの名前のテキスト</summary>
     Text[] m_PlayerNameTexts = new Text[4];
+    /// <summary>現在のプレイヤー名</summary>
+    string[] m_CurrentPlayerNames;
 
     void Start()
     {
+        // 現在のプレイヤー名を取得
+        m_CurrentPlayerNames = PhotonManager.Instance.PlayerNames();
         // 現在のルーム名を取得
         m_RoomNameText.text = PhotonManager.Instance.CurrentRoomName();
         // 最初にプレイヤーを反映
-        NumberOfPlayerNamesDisPlay();
+        NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
+    }
+
+    void Update()
+    {
+        // プレイヤー名を取得
+        string[] PlayerNames = PhotonManager.Instance.PlayerNames();
+
+        // 現在のプレイヤー名の数とプレイヤー名の数を比較して、違いがある場合
+        // また、現在のプレイヤー名の数とプレイヤー名の数が4以下だった場合
+        // プレイヤー名を表示・非表示にする。
+        if(m_CurrentPlayerNames.Length != PlayerNames.Length ||
+           m_CurrentPlayerNames.Length <= 4 && PlayerNames.Length <= 4)
+        {
+            // 現在のプレイヤー名を反映
+            m_CurrentPlayerNames = PlayerNames;
+            // プレイヤー名を表示する。
+            NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
+        }
     }
 
     /// <summary>参加プレイヤー人数分のプレイヤー名を表示</summary>
-    public void NumberOfPlayerNamesDisPlay()
+    /// <param name="PlayerNames">プレイヤー名</param>
+    public void NumberOfPlayerNamesDisPlay(string[] PlayerNames)
     {
-        // 現在のルーム内にいるプレイヤー名を取得
-        string[] PlayerNames = PhotonManager.Instance.PlayerNames();
 
         // 参加していない分のテキストを非表示にする。
         // 表示する分のテキストを取得します。
