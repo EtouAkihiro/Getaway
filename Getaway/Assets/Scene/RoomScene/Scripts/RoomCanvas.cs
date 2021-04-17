@@ -14,12 +14,14 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     /// <summary>プレイヤー</summary>
     Photon.Realtime.Player[] m_Players;
     /// <summary>プレイヤーの名前のテキスト</summary>
-    Text[] m_PlayerNameTexts = new Text[PhotonNetwork.CurrentRoom.MaxPlayers];
+    Text[] m_PlayerNameTexts;
     /// <summary>現在のプレイヤー名</summary>
     string[] m_CurrentPlayerNames;
 
     void Start()
     {
+        // ルーム限界参加人数分のプレイヤー名のテキストを設定
+        m_PlayerNameTexts = new Text[PhotonNetwork.CurrentRoom.MaxPlayers];
         // 現在のプレイヤーを取得
         m_Players = PhotonNetwork.PlayerList;
         // 現在のプレイヤー名を取得
@@ -35,6 +37,8 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
         // プレイヤー名を取得
         string[] playernames = PlayerNames(m_Players);
 
+        // 保存したプレイヤー参加数と現在の参加数が異なり、
+        // 保存したプレイヤー感か数がルームの限界参加人数より少なかった場合
         if(m_Players != PhotonNetwork.PlayerList &&
            m_Players.Length < PhotonNetwork.CurrentRoom.MaxPlayers + 1)
         {
