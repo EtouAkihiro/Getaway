@@ -84,9 +84,8 @@ public class RoomButtonController : MonoBehaviour
 
             if (StageLevel == -1) return;
 
-            PhotonNetwork.LoadLevel(StageLevel);
             // ランダムで決まった値をリストの番号に指定し、シーン遷移する。
-            Fade.Instance.FadeOut(m_StageSceneNameList[RandomStageNumber]);
+            Fade.Instance.FadeOut(StageLevel);
         }
         else
         {
