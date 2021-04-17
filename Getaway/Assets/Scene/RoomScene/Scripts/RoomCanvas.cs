@@ -11,15 +11,19 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     public Text m_RoomNameText;
     /// <summary>プレイヤーの名前</summary>
     public GameObject[] m_PlayerNamesObjects;
+    /// <summary>プレイヤー</summary>
+    Photon.Realtime.Player[] m_Players;
     /// <summary>プレイヤーの名前のテキスト</summary>
-    Text[] m_PlayerNameTexts = new Text[4];
+    Text[] m_PlayerNameTexts = new Text[PhotonNetwork.CurrentRoom.MaxPlayers];
     /// <summary>現在のプレイヤー名</summary>
     string[] m_CurrentPlayerNames;
 
     void Start()
     {
+        // 現在のプレイヤーを取得
+        m_Players = PhotonNetwork.PlayerList;
         // 現在のプレイヤー名を取得
-        m_CurrentPlayerNames = PhotonManager.Instance.PlayerNames();
+        m_CurrentPlayerNames = PlayerNames(m_Players);
         // 現在のルーム名を取得
         m_RoomNameText.text = PhotonManager.Instance.CurrentRoomName();
         // 最初にプレイヤーを反映
@@ -29,18 +33,25 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     void Update()
     {
         // プレイヤー名を取得
-        string[] PlayerNames = PhotonManager.Instance.PlayerNames();
+        string[] playernames = PlayerNames(m_Players);
 
-        // 現在のプレイヤー名の数とプレイヤー名の数を比較して、違いがある場合
-        // また、現在のプレイヤー名の数とプレイヤー名の数が4以下だった場合
-        // プレイヤー名を表示・非表示にする。
-        if(m_CurrentPlayerNames.Length != PlayerNames.Length ||
-           m_CurrentPlayerNames.Length <= 4 && PlayerNames.Length <= 4)
+        if(m_Players != PhotonNetwork.PlayerList &&
+           m_Players.Length < PhotonNetwork.CurrentRoom.MaxPlayers + 1)
         {
+            // プレイヤーを反映
+            m_Players = PhotonNetwork.PlayerList;
             // 現在のプレイヤー名を反映
-            m_CurrentPlayerNames = PlayerNames;
+            m_CurrentPlayerNames = playernames;
             // プレイヤー名を表示する。
             NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
+            // 現在のルームを取得
+            Photon.Realtime.Room room = PhotonNetwork.CurrentRoom;
+
+            if( room.PlayerCount >= room.MaxPlayers)
+            {
+                // ルームを閉じる
+                room.IsOpen = false;
+            }
         }
     }
 
@@ -72,8 +83,44 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
 
             if (m_PlayerNamesObjects[PlayerCount].active)
             {
-                m_PlayerNameTexts[PlayerCount].text = PlayerNames[PlayerCount];
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    m_PlayerNameTexts[PlayerCount].text = PlayerNames[PlayerCount];
+                }
+                else
+                {
+                    m_PlayerNameTexts[PlayerCount].text = PlayerNames[PlayerCount];
+                }
             }
         }
+    }
+
+    /// <summary>現在のルームにいるプレイヤー名を返す</summary>
+    /// <returns></returns>
+    string[] PlayerNames(Photon.Realtime.Player[] players)
+    {
+        // プレイヤー名一覧
+        string[] PlayerNames = new string[PhotonNetwork.CountOfPlayers];
+
+        // プレイヤーリストを取得
+        Photon.Realtime.Player[] Players = PhotonNetwork.PlayerList;
+
+        // 現在のプレイヤー名を取得
+        for (int PlayerNumber = 0; PlayerNumber < Players.Length; PlayerNumber++)
+        {
+            PlayerNames[PlayerNumber] = Players[PlayerNumber].NickName;
+        }
+
+        // もしプレイヤー一覧の中身がなかった場合、nullで返す
+        if (PlayerNames == null) return null;
+
+        // もしプレイヤー一覧の中身があった場合、プレイヤー一覧を返す
+        return PlayerNames;
+
+        // もし、何も追加されていない場合、nullで返す。
+        if (PlayerNames == null) return null;
+
+        // 現在、参加しているプレイヤー分の名前を返す。
+        return PlayerNames;
     }
 }

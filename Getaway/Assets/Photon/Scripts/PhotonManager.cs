@@ -102,13 +102,6 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
         return m_PhotonController.RoomList;
     }
 
-    /// <summary>現在のルームにいるプレイヤー分のプレイヤー名を返します。</summary>
-    /// <returns></returns>
-    public string[] PlayerNames()
-    {
-        return m_PhotonController.PlayerNames();
-    }
-
     /// <summary>ルーム名を返します</summary>
     /// <returns></returns>
     public string CurrentRoomName()

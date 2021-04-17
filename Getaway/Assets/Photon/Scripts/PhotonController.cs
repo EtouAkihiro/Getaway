@@ -181,35 +181,6 @@ public partial class PhotonController
         return RoomNames;
     }
 
-    /// <summary>現在のルームにいるプレイヤー名を返す</summary>
-    /// <returns></returns>
-    public string[] PlayerNames()
-    {
-        // プレイヤー名一覧
-        string[] PlayerNames = new string[PhotonNetwork.CountOfPlayers];
-
-        // プレイヤーリストを取得
-        Photon.Realtime.Player[] Players = PhotonNetwork.PlayerList;
-
-        // 現在のプレイヤー名を取得
-        for(int PlayerNumber = 0; PlayerNumber < Players.Length; PlayerNumber++)
-        {
-            PlayerNames[PlayerNumber] = Players[PlayerNumber].NickName;
-        }
-
-        // もしプレイヤー一覧の中身がなかった場合、nullで返す
-        if (PlayerNames == null) return null;
-
-        // もしプレイヤー一覧の中身があった場合、プレイヤー一覧を返す
-        return PlayerNames;
-
-        // もし、何も追加されていない場合、nullで返す。
-        if (PlayerNames == null) return null;
-
-        // 現在、参加しているプレイヤー分の名前を返す。
-        return PlayerNames;
-    }
-
     /// <summary>ルーム一覧(プロパティ)</summary>
     public List<RoomInfo> RoomList
     {
