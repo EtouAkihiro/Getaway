@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Photon.Pun;
+using Photon.Realtime;
 
 /// <summary>ルームシーン内のボタンを管理するクラス</summary>
 public class RoomButtonController : MonoBehaviour
@@ -73,6 +75,16 @@ public class RoomButtonController : MonoBehaviour
         {
             // ランダムでステージのナンバーを取得
             int RandomStageNumber = Random.Range(0, 0);
+
+            int StageLevel = -1;
+            switch (RandomStageNumber)
+            {
+                case 0 : StageLevel = 2; break;
+            }
+
+            if (StageLevel == -1) return;
+
+            PhotonNetwork.LoadLevel(StageLevel);
             // ランダムで決まった値をリストの番号に指定し、シーン遷移する。
             Fade.Instance.FadeOut(m_StageSceneNameList[RandomStageNumber]);
         }
