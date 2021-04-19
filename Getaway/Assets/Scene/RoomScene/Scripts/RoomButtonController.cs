@@ -70,6 +70,9 @@ public class RoomButtonController : MonoBehaviour
     /// <summary>ゲームプレイボタンが押された時</summary>
     public void GamePlayOnClick()
     {
+        // ルームホストじゃあない場合、処理を行わない
+        if (!PhotonNetwork.IsMasterClient) return;
+
         // 現在の選択の状態が、ランダムだった場合
         if (m_StageSelectStage == StageSelectStage.Random)
         {

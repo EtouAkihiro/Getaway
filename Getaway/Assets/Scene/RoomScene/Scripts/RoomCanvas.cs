@@ -11,6 +11,8 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     public Text m_RoomNameText;
     /// <summary>プレイヤーの名前</summary>
     public GameObject[] m_PlayerNamesObjects;
+    /// <summary>ゲームスタートボタン</summary>
+    public GameObject m_GamePlayButton;
     /// <summary>プレイヤー</summary>
     Photon.Realtime.Player[] m_Players;
     /// <summary>プレイヤーの名前のテキスト</summary>
@@ -30,6 +32,8 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
         m_RoomNameText.text = PhotonManager.Instance.CurrentRoomName();
         // 最初にプレイヤーを反映
         NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
+
+        if (!PhotonNetwork.IsMasterClient) m_GamePlayButton.SetActive(false);
     }
 
     void Update()
