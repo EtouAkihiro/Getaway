@@ -89,9 +89,17 @@ public class RoomButtonController : MonoBehaviour
         }
         else
         {
+            int StageLevel = -1;
             switch (m_StageSelectStage)
             {
-                case StageSelectStage.Underground : Fade.Instance.FadeOut(m_StageSceneNameList[0]); break;
+                case StageSelectStage.Underground : StageLevel = 2; break;
+            }
+
+            if (StageLevel == -1) return;
+
+            switch (StageLevel)
+            {
+                case 2: Fade.Instance.FadeOut(StageLevel); break;
             }
         }
     }
