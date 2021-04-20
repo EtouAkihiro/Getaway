@@ -7221,12 +7221,64 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: Synchronization
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: observableSearch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: OwnershipTransfer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6486610372694320291, guid: 619b85b0a426adc48b38fb9f248fc5f7,
         type: 3}
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: Synchronization
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: observableSearch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: OwnershipTransfer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6543337362455339362, guid: 619b85b0a426adc48b38fb9f248fc5f7, type: 3}
+    - {fileID: 2718066838057912009, guid: 619b85b0a426adc48b38fb9f248fc5f7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 619b85b0a426adc48b38fb9f248fc5f7, type: 3}
 --- !u!1001 &6108192981563082714
 PrefabInstance:
