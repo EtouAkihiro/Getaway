@@ -13,6 +13,8 @@ public class Fade : SingletonMOnoBehaviour<Fade>
 
     /// <summary>キャンバス</summary>
     Canvas m_Canvas;
+    /// <summary>Photonビュー</summary>
+    PhotonView m_PhotonView;
 
     /// <summary>最大描画優先度</summary>
     int m_MaxSortOrder = 100;
@@ -38,6 +40,8 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     {
         // キャンバスを取得
         m_Canvas = GetComponent<Canvas>();
+        // Photonビューの取得
+        m_PhotonView = GetComponent<PhotonView>();
     }
 
     /// <summary>フェードイン</summary>
@@ -96,6 +100,21 @@ public class Fade : SingletonMOnoBehaviour<Fade>
             // シーン遷移
             PhotonNetwork.LoadLevel(SceneLaval);
         });
+    }
+
+    void RequestOwner()
+    {
+        if(m_PhotonView.IsMine == false)
+        {
+            if(m_PhotonView.OwnershipTransfer != OwnershipOption.Request)
+            {
+                Debug.LogError("OwnershipTransferをRequestに変更してください。");
+            }
+            else
+            {
+                m_PhotonView.RequestOwnership();
+            }
+        }
     }
 
     /// <summary>色を返す(プロパティ)</summary>
