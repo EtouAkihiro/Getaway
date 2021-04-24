@@ -43,6 +43,11 @@ public class GameOver : MonoBehaviour
     /// <summary>はいを押された</summary>
     public void YesOnClick()
     {
+        // ロビーから切断
+        PhotonManager.Instance.LeaveLobby();
+        // サーバーから切断
+        PhotonManager.Instance.DisconnectSavar();
+
         // Editorでも終了する。
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

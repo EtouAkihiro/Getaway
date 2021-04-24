@@ -85,6 +85,21 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         });
     }
 
+    /// <summary>フェードアウト(Photonバージョン)</summary>
+    /// <param name="SceneName">シーン名</param>
+    public void FadeOut_Photon(string SceneName)
+    {
+        if (m_Canvas.sortingOrder == m_MinSortOrder)
+        {
+            m_Canvas.sortingOrder = m_MaxSortOrder;
+        }
+
+        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
+            // シーン遷移
+            PhotonNetwork.LoadLevel(SceneName);
+        });
+    }
+
     /// <summary>フェードアウト(Photonシーン遷移付き)</summary>
     /// <param name="SceneLaval">シーンレベル</param>
     public void FadeOut(int SceneLaval)

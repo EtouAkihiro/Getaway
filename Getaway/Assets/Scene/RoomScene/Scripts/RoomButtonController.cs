@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Chat;
 
 /// <summary>ルームシーン内のボタンを管理するクラス</summary>
 public class RoomButtonController : MonoBehaviour
@@ -18,6 +19,9 @@ public class RoomButtonController : MonoBehaviour
     bool m_DisPlayFrag = false;
     /// <summary>非表示になっているかのフラグ</summary>
     bool m_DontDisPlayFrag = false;
+
+    // Photonビュー
+    PhotonView m_PhotonView;
 
     /// <summary>選択できるステージの状態</summary>
     enum StageSelectStage
@@ -41,6 +45,8 @@ public class RoomButtonController : MonoBehaviour
         m_SelectStageTextObjects[1].SetActive(false);
         // ステージのイメージ画像を表示
         StageImageDisPlay();
+        // PhotonViewを取得
+        m_PhotonView = GetComponent<PhotonView>();
         // 現在のステージのシーン名をリストに格納
         m_StageSceneNameList.Add("UndergroundGamePlayScene");
     }
@@ -168,5 +174,9 @@ public class RoomButtonController : MonoBehaviour
                 m_StageImageObjects[StageImageNumber].SetActive(false);
             }
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }
