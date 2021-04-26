@@ -258,8 +258,16 @@ public class TitleCanvas : MonoBehaviour
         {
             // ランダムマッチを行う。
             PhotonManager.Instance.OnRandomJoinedRoom();
-            // ルームシーンに遷移
-            Fade.Instance.FadeOut("RoomScene");
+
+            if (PhotonNetwork.InRoom)
+            {
+                // ルームシーンに遷移
+                Fade.Instance.FadeOut("RoomScene");
+            }
+            else
+            {
+                print("ルームに入れませんでした");
+            }
         }
     }
 
