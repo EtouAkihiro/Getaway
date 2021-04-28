@@ -8,7 +8,7 @@ using Photon.Realtime;
 using Photon.Chat;
 
 /// <summary>ルームシーン内のボタンを管理するクラス</summary>
-public class RoomButtonController : MonoBehaviour
+public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
 {
     /// <summary>選択されるステージのテキストのオブジェクト</summary>
     public GameObject[] m_SelectStageTextObjects;
@@ -34,6 +34,8 @@ public class RoomButtonController : MonoBehaviour
 
     /// <summary>選択されているステージの状態</summary>
     StageSelectStage m_StageSelectStage;
+    /// <summary>送信されたステージの状態</summary>
+    StageSelectStage m_ShareStageSelectStage;
     /// <summary>現在存在するステージのシーン名</summary>
     List<string> m_StageSceneNameList = new List<string>();
 
@@ -49,6 +51,17 @@ public class RoomButtonController : MonoBehaviour
         m_PhotonView = GetComponent<PhotonView>();
         // 現在のステージのシーン名をリストに格納
         m_StageSceneNameList.Add("UndergroundGamePlayScene");
+    }
+
+    void Update()
+    {
+        if (!PhotonNetwork.IsMasterClient && m_StageSelectStage != m_ShareStageSelectStage)
+        {
+            // 現在のステージの状態を更新
+            m_StageSelectStage = m_ShareStageSelectStage;
+            // そして、ステージセレクトを遷移する
+            StageSelectTextCange(m_StageSelectStage);
+        }
     }
 
     /// <summary>ステージ選択の左側のボタンが押された時</summary>
@@ -176,7 +189,8 @@ public class RoomButtonController : MonoBehaviour
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-    }
+        print("テスト");
+    } 
 }
