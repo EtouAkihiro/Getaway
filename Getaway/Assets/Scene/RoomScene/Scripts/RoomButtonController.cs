@@ -27,9 +27,9 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     enum StageSelectStage
     {
         /// <summary>ランダム</summary>
-        Random,
+        Random = 0,
         /// <summary>地下</summary>
-        Underground
+        Underground = 1,
     }
 
     /// <summary>選択されているステージの状態</summary>
@@ -189,8 +189,23 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    #region IPubObservable implementation
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        print("テスト");
-    } 
+        Debug.Log("来てるよ");
+
+        // 送信
+        if (stream.IsWriting)
+        {
+            stream.SendNext(m_StageSelectStage);
+        }
+        // 受信
+        else
+        {
+            m_ShareStageSelectStage = (StageSelectStage)stream.ReceiveNext();
+        }
+    }
+
+    #endregion
 }
