@@ -24,7 +24,7 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     PhotonView m_PhotonView;
 
     /// <summary>選択できるステージの状態</summary>
-    enum StageSelectStage
+    enum StageSelectState
     {
         /// <summary>ランダム</summary>
         Random = 0,
@@ -33,16 +33,16 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     /// <summary>選択されているステージの状態</summary>
-    StageSelectStage m_StageSelectStage;
+    StageSelectState m_StageSelectState;
     /// <summary>送信されたステージの状態</summary>
-    StageSelectStage m_ShareStageSelectStage;
+    StageSelectState m_ShareStageSelectState;
     /// <summary>現在存在するステージのシーン名</summary>
     List<string> m_StageSceneNameList = new List<string>();
 
     void Start()
     {
         // 最初はRandomを選択した状態にする。
-        m_StageSelectStage = StageSelectStage.Random;
+        m_StageSelectState = StageSelectState.Random;
         // 地下のテキストオブジェクトを非表示にする
         m_SelectStageTextObjects[1].SetActive(false);
         // ステージのイメージ画像を表示
@@ -55,12 +55,12 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-        if (!PhotonNetwork.IsMasterClient && m_StageSelectStage != m_ShareStageSelectStage)
+        if (!PhotonNetwork.IsMasterClient && m_StageSelectState != m_ShareStageSelectState)
         {
             // 現在のステージの状態を更新
-            m_StageSelectStage = m_ShareStageSelectStage;
+            m_StageSelectState = m_ShareStageSelectState;
             // そして、ステージセレクトを遷移する
-            StageSelectTextCange(m_StageSelectStage);
+            StageSelectTextCange(m_StageSelectState);
         }
     }
 
@@ -69,9 +69,9 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     {
         // 現在のステージ選択の状態が地下が選択された場合
         // 状態の遷移を行う。
-        if (m_StageSelectStage == StageSelectStage.Underground)
+        if (m_StageSelectState == StageSelectState.Underground)
         {
-            StageSelectTextCange(m_StageSelectStage);
+            StageSelectTextCange(m_StageSelectState);
         }
     }
 
@@ -80,9 +80,9 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     {
         // 現在のステージ選択の状態がランダムが選択された場合
         // 状態の遷移を行う。
-        if (m_StageSelectStage == StageSelectStage.Random)
+        if (m_StageSelectState == StageSelectState.Random)
         {
-            StageSelectTextCange(m_StageSelectStage);
+            StageSelectTextCange(m_StageSelectState);
         }
     }
 
@@ -90,7 +90,7 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     public void GamePlayOnClick()
     {
         // 現在の選択の状態が、ランダムだった場合
-        if (m_StageSelectStage == StageSelectStage.Random)
+        if (m_StageSelectState == StageSelectState.Random)
         {
             // ランダムでステージのナンバーを取得
             int RandomStageNumber = Random.Range(0, 0);
@@ -109,9 +109,9 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             int StageLevel = -1;
-            switch (m_StageSelectStage)
+            switch (m_StageSelectState)
             {
-                case StageSelectStage.Underground : StageLevel = 2; break;
+                case StageSelectState.Underground : StageLevel = 2; break;
             }
 
             if (StageLevel == -1) return;
@@ -125,7 +125,7 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
 
     /// <summary>ステージ選択のテキストの状態遷移</summary>
     /// <param name="stageSelectStage">ステージ選択の状態</param>
-    void StageSelectTextCange(StageSelectStage stageSelectStage)
+    void StageSelectTextCange(StageSelectState stageSelectStage)
     {
         // ステージ選択の状態を値で表すための変数
         int StateNumber = 0;
@@ -133,8 +133,8 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         // 次のステージ選択の値を取得
         switch (stageSelectStage)
         {
-            case StageSelectStage.Random : StateNumber = 1; break;
-            case StageSelectStage.Underground : StateNumber = 0; break; 
+            case StageSelectState.Random : StateNumber = 1; break;
+            case StageSelectState.Underground : StateNumber = 0; break; 
         }
 
         // 表示されるかどうか
@@ -156,8 +156,8 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         // 状態の値で状態遷移
         switch (StateNumber)
         {
-            case 0 : m_StageSelectStage = StageSelectStage.Random; break;
-            case 1 : m_StageSelectStage = StageSelectStage.Underground; break;
+            case 0 : m_StageSelectState = StageSelectState.Random; break;
+            case 1 : m_StageSelectState = StageSelectState.Underground; break;
         }
 
         // ステージのイメージ画像を表示
@@ -168,15 +168,9 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     void StageImageDisPlay()
     {
         // ステージナンバー
-        int StageNumber = 0;
+        int StageNumber = (int)m_StageSelectState;
 
-        switch (m_StageSelectStage)
-        {
-            case StageSelectStage.Random : StageNumber = 0; break;
-            case StageSelectStage.Underground : StageNumber = 1; break;
-        }
-
-        for(int StageImageNumber = 0; StageImageNumber < m_StageImageObjects.Length; StageImageNumber++)
+        for (int StageImageNumber = 0; StageImageNumber < m_StageImageObjects.Length; StageImageNumber++)
         {
             if (StageImageNumber == StageNumber)
             {
@@ -193,17 +187,17 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("来てるよ");
-
         // 送信
         if (stream.IsWriting)
         {
-            stream.SendNext(m_StageSelectStage);
+            stream.SendNext((int)m_StageSelectState);
+            print("送信");
         }
         // 受信
         else
         {
-            m_ShareStageSelectStage = (StageSelectStage)stream.ReceiveNext();
+            this.m_ShareStageSelectState = (StageSelectState)(int)stream.PeekNext();
+            print("受信");
         }
     }
 
