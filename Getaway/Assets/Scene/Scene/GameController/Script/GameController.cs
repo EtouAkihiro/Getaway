@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>データの共有</summary>
 public class GameController : SingletonMOnoBehaviour<GameController>
 {
     /// <summary>ロードの状態</summary>
     bool m_Loading = false;
-    /// <summary>パスワード</summary>
-    string m_Paswad;
+    /// <summary>ルームから退出</summary>
+    bool m_RoomExit = false;
 
     /// <summary>スクリプトのインスタンスがロードされたときに呼び出されます(Unityドキュメント参照)</summary>
     void Awake()
@@ -23,10 +24,10 @@ public class GameController : SingletonMOnoBehaviour<GameController>
         DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>パスワード(プロパティ)</summary>
-    public string Paswad
+    /// <summary>ルーム退出(プロパティ)</summary>
+    public bool RoomExit
     {
-        get { return m_Paswad; }
-        set { m_Paswad = value; }
+        get { return m_RoomExit; }
+        set { m_RoomExit = value; }
     }
 }

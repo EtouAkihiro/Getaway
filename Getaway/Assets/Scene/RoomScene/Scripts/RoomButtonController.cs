@@ -123,6 +123,17 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    /// <summary>ルーム退出</summary>
+    public void RoomExitOnClick()
+    {
+        // ルーム退出
+        PhotonManager.Instance.LeaveRoom();
+        // ルーム退出をtrue
+        GameController.Instance.RoomExit = true;
+        // タイトルシーンに遷移
+        Fade.Instance.FadeOut("TitleScene");
+    }
+
     /// <summary>ステージ選択のテキストの状態遷移</summary>
     /// <param name="stageSelectStage">ステージ選択の状態</param>
     void StageSelectTextCange(StageSelectState stageSelectStage)

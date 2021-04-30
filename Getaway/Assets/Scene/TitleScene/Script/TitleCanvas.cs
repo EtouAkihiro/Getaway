@@ -55,14 +55,27 @@ public class TitleCanvas : MonoBehaviour
         m_GameStartButtonScript = m_GameStartButton.GetComponent<GameStartButton>();
         // アニメーターの取得
         m_Animator = GetComponent<Animator>();
-        // セレクトオブジェクトを非表示にする
-        m_Select.SetActive(false);
 
+        // ルーム退出した場合
+        if (GameController.Instance.RoomExit)
+        {
+            // タイトルオブジェクトを非表示にする
+            m_Title.SetActive(false);
+            // セレクト画面を表示するアニメーションを再生
+            SelectCanvasFade(true);
+        }
+        else
+        {
+            // セレクトオブジェクトを非表示にする
+            m_Select.SetActive(false);
+            // タイトル画面を表示するアニメーションを再生
+            TitleCanvasFade(false);
+        }
     }
 
     /// <summary>タイトルのフェードをする(true:フェードアウト, false:フェードイン)</summary>
     /// <param name="Frag">フラグ</param>
-    public void TltleCanvasFade(bool Frag)
+    public void TitleCanvasFade(bool Frag)
     {
         m_Animator.SetBool(s_TitleDisPlayFrag, Frag);
     }
@@ -113,7 +126,7 @@ public class TitleCanvas : MonoBehaviour
         // ゲームスタートボタンのアニメーションを再生
         m_GameStartButtonScript.Play_OnClick_AnimatorBlinking();
         // ボタンを消す
-        TltleCanvasFade(true);
+        TitleCanvasFade(true);
         // セレクト画面を表示
         SelectCanvasFade(true);
         // サーバーに接続
@@ -130,7 +143,7 @@ public class TitleCanvas : MonoBehaviour
         // セレクト画面を非表示
         SelectCanvasFade(false);
         // タイトルを表示
-        TltleCanvasFade(false);
+        TitleCanvasFade(false);
         // ロビーから切断
         PhotonManager.Instance.LeaveLobby();
         // サーバーから切断

@@ -60,6 +60,11 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
                 // ルームを閉じる
                 room.IsOpen = false;
             }
+            else
+            {
+                // ルームを開ける
+                room.IsOpen = true;
+            }
         }
     }
 
