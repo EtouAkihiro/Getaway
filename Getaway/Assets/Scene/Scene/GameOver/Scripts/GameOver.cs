@@ -12,13 +12,27 @@ public class GameOver : MonoBehaviour
 
     void Awake()
     {
-        // ロード済みだった場合、処理を行わない
-        if (m_Loaded) return;
-
-        // ロード済みじゃなかった場合、ロード済みにする。
-        m_Loaded = true;
-        // シーン遷移で破棄されない
-        DontDestroyOnLoad(gameObject);
+        // GameOverCanvasタグを持っているオブジェクトを取得
+        GameObject[] GameOverCanvass = GameObject.FindGameObjectsWithTag("GameOverCanvas");
+        // GameOverCanvasタグを持っているオブジェクトが2個以上ある場合、
+        // 新しく生成されたオブジェクトを削除する。
+        if(GameOverCanvass.Length >= 2)
+        {
+            for(int i = 0; i < GameOverCanvass.Length; i++)
+            {
+                if(i != 0)
+                {
+                    Destroy(GameOverCanvass[i]);
+                }
+            }
+        }
+        // ２個未満だった場合、
+        // シーン遷移で破棄されないオブジェクトにする。
+        else
+        {
+            // シーン遷移で破棄されない
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Start()

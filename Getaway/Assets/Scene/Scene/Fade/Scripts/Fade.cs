@@ -23,17 +23,29 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     /// <summary>フェードのフラグ</summary>
     bool m_FadeFlag = false;
 
-    /// <summary>ロードされているか</summary>
-    static bool m_Loaded = false;
-
     void Awake()
     {
-        // ロードされた状態なら処理を行わない。
-        if (m_Loaded) return;
-        // ロードされた状態にする。
-        m_Loaded = true;
-        // シーン切り替えで破棄されない。
-        DontDestroyOnLoad(gameObject);
+        // 現在あるFadeタグを持っているオブジェクトを取得
+        GameObject[] Fades = GameObject.FindGameObjectsWithTag("Fade");
+        // Fadeタグを持っているオブジェクトが2個以上ある場合、
+        // 新しく生成されたオブジェクトを削除する。
+        if(Fades.Length >= 2)
+        {
+            for(int i = 0; i < Fades.Length; i++)
+            {
+                if(i != 0)
+                {
+                    Destroy(Fades[i]);
+                }
+            }
+        }
+        // ２個未満だった場合、
+        // シーン遷移で破棄されないオブジェクトにする。
+        else
+        {
+            // シーン切り替えで破棄されない。
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Start()

@@ -9,20 +9,29 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
     /// <summary>Photonコントローラー</summary>
     PhotonController m_PhotonController;
 
-    /// <summary>ロード済みかどうか</summary>
-    bool m_Loaded = false;
-
     void Awake()
     {
-        // ロード済みだった場合、何もしない
-        if (m_Loaded) return;
-
-        // ロード済みにする
-        m_Loaded = true;
-
-        // ロード済みじゃなかった場合は、
-        // シーン遷移で破棄されない。
-        DontDestroyOnLoad(gameObject);
+        // 現在あるPhotonControllerタグを持っているオブジェクトを取得
+        GameObject[] PhotonControllers = GameObject.FindGameObjectsWithTag("PhotonController");
+        // Photonタグを持っているオブジェクトが2個以上ある場合、
+        // 新しく生成されたオブジェクトを削除する。
+        if (PhotonControllers.Length >= 2)
+        {
+            for(int i = 0; i < PhotonControllers.Length; i++)
+            {
+                if(i != 0)
+                {
+                    Destroy(PhotonControllers[i]);
+                }
+            }
+        }
+        // ２個未満だった場合、
+        // シーン遷移で破棄されないオブジェクトにする。
+        else
+        {
+            // シーン遷移で破棄されない。
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     void Start()

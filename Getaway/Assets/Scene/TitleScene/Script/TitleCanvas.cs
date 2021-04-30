@@ -62,7 +62,7 @@ public class TitleCanvas : MonoBehaviour
             // タイトルオブジェクトを非表示にする
             m_Title.SetActive(false);
             // セレクト画面を表示するアニメーションを再生
-            SelectCanvasFade(true);
+            SelectCanvasFade(false);
         }
         else
         {

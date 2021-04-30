@@ -5,23 +5,33 @@ using UnityEngine;
 /// <summary>データの共有</summary>
 public class GameController : SingletonMOnoBehaviour<GameController>
 {
-    /// <summary>ロードの状態</summary>
-    bool m_Loading = false;
     /// <summary>ルームから退出</summary>
-    bool m_RoomExit = false;
+    public bool m_RoomExit = false;
 
     /// <summary>スクリプトのインスタンスがロードされたときに呼び出されます(Unityドキュメント参照)</summary>
     void Awake()
     {
-        // ロードされている状態だった場合
-        // 処理を行わない
-        if (m_Loading) return;
-
-        // ロードされていない場合
-        // ロードされた状態にする。
-        m_Loading = true;
-        // シーン切替時、破棄されない。
-        DontDestroyOnLoad(gameObject);
+        // 現在あるGameControllerタグを持っているオブジェクトを取得
+        GameObject[] GameControllers = GameObject.FindGameObjectsWithTag("GameController");
+        // GameControllerタグを持っているオブジェクトが2個以上ある場合、
+        // 新しく生成されたオブジェクトを削除する。
+        if (GameControllers.Length >= 2)
+        {
+            for (int i = 0; i < GameControllers.Length; i++)
+            {
+                if (i != 0)
+                {
+                    Destroy(GameControllers[i]);
+                }
+            }
+        }
+        // ２個未満だった場合、
+        // シーン遷移で破棄されないオブジェクトにする。
+        else
+        {
+            // シーン切り替えで破棄されない。
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     /// <summary>ルーム退出(プロパティ)</summary>

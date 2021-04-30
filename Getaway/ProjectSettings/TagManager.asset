@@ -17,6 +17,8 @@ TagManager:
   - SEManager
   - Creature
   - UndergroundGameController
+  - PhotonController
+  - GameOverCanvas
   layers:
   - Default
   - TransparentFX

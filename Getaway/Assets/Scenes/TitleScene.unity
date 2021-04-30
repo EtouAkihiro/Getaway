@@ -6295,7 +6295,7 @@ GameObject:
   - component: {fileID: 1929950280}
   m_Layer: 0
   m_Name: PhotonController
-  m_TagString: Untagged
+  m_TagString: PhotonController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6575,7 +6575,7 @@ GameObject:
   - component: {fileID: 1948813541}
   m_Layer: 5
   m_Name: GameOverCanvas
-  m_TagString: Untagged
+  m_TagString: GameOverCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7106,6 +7106,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 727163621402291504, guid: 619b85b0a426adc48b38fb9f248fc5f7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 727163621770886681, guid: 619b85b0a426adc48b38fb9f248fc5f7,
         type: 3}
       propertyPath: m_Pivot.x
