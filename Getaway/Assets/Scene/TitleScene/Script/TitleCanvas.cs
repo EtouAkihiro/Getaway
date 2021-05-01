@@ -36,6 +36,16 @@ public class TitleCanvas : MonoBehaviour
     /// <summary>ルーム名(ルーム参加用)の入力</summary>
     public InputField m_RoomNameInputField;
 
+    /// <summary>シーンの状態</summary>
+    public enum SceneState
+    {
+        Title = 0,
+        Select = 1,
+    }
+
+    /// <summary>シーンの状態</summary>
+    public SceneState m_SceneState = SceneState.Title;
+
     /// <summary>ゲームスタートボタンのスクリプトの参照</summary>
     GameStartButton m_GameStartButtonScript;
 
@@ -62,14 +72,14 @@ public class TitleCanvas : MonoBehaviour
             // タイトルオブジェクトを非表示にする
             m_Title.SetActive(false);
             // セレクト画面を表示するアニメーションを再生
-            SelectCanvasFade(false);
+            SelectCanvasFade(true);
         }
         else
         {
             // セレクトオブジェクトを非表示にする
             m_Select.SetActive(false);
             // タイトル画面を表示するアニメーションを再生
-            TitleCanvasFade(false);
+            TitleCanvasFade(true);
         }
     }
 
@@ -118,6 +128,10 @@ public class TitleCanvas : MonoBehaviour
             m_Title.SetActive(true);
             m_Select.SetActive(false);
         }
+
+        // シーンの状態
+        if (m_Title.activeSelf) m_SceneState = SceneState.Title;
+        if (m_Select.activeSelf) m_SceneState = SceneState.Select;
     }
 
     /// <summary> ゲームスタートボタンが押された時</summary>
@@ -126,7 +140,7 @@ public class TitleCanvas : MonoBehaviour
         // ゲームスタートボタンのアニメーションを再生
         m_GameStartButtonScript.Play_OnClick_AnimatorBlinking();
         // ボタンを消す
-        TitleCanvasFade(true);
+        TitleCanvasFade(false);
         // セレクト画面を表示
         SelectCanvasFade(true);
         // サーバーに接続
@@ -143,7 +157,7 @@ public class TitleCanvas : MonoBehaviour
         // セレクト画面を非表示
         SelectCanvasFade(false);
         // タイトルを表示
-        TitleCanvasFade(false);
+        TitleCanvasFade(true);
         // ロビーから切断
         PhotonManager.Instance.LeaveLobby();
         // サーバーから切断
