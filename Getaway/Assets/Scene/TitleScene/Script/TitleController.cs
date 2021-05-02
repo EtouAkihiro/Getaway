@@ -13,6 +13,8 @@ public class TitleController : MonoBehaviour
     /// <summary>タイトルキャンバスクラス</summary>
     TitleCanvas m_TitleCanvas;
 
+    // タイマー
+    float m_Time = 0.0f;
 
     void Start()
     {
@@ -25,11 +27,18 @@ public class TitleController : MonoBehaviour
     void Update()
     {
         // 現在のシーンがセレクトシーンだった場合
-        // ロビーに接続
-        if(m_TitleCanvas.m_SceneState == TitleCanvas.SceneState.Select)
+        // 1秒ごとにロビーに接続
+        if(m_TitleCanvas.m_SceneState == TitleCanvas.SceneState.Select && m_Time >= 1.0f)
         {
             // ロビーに接続
             PhotonManager.Instance.JointLobby();
+            // タイマーリセット
+            m_Time = 0.0f;
+        }
+        else
+        {
+            // 時間経過
+            m_Time += Time.deltaTime;
         }
     }
 }
