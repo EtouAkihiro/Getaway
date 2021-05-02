@@ -19,6 +19,8 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     bool m_DisPlayFrag = false;
     /// <summary>非表示になっているかのフラグ</summary>
     bool m_DontDisPlayFrag = false;
+    /// <summary>ゲーム開始するかのフラグ</summary>
+    bool m_GamePlayFrag = false;
 
     // Photonビュー
     PhotonView m_PhotonView;
@@ -43,6 +45,8 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     {
         // 最初はRandomを選択した状態にする。
         m_StageSelectState = StageSelectState.Random;
+        // 初期状態をRandomに設定
+        m_ShareStageSelectState = m_StageSelectState;
         // 地下のテキストオブジェクトを非表示にする
         m_SelectStageTextObjects[1].SetActive(false);
         // ステージのイメージ画像を表示
@@ -151,24 +155,47 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         // 表示されるかどうか
         for(int StageNumber = 0; StageNumber < m_SelectStageTextObjects.Length; StageNumber++)
         {
-            // ステージ選択の値とステージの値が等しい場合
-            // そのテキストを表示する。
-            // それ以外は、非表示にする。
-            if(StageNumber == StateNumber)
+            // ルームマスターだった場合
+            if (PhotonNetwork.IsMasterClient)
             {
-                m_SelectStageTextObjects[StageNumber].SetActive(true);
+                // ステージ選択の値とステージの値が等しい場合
+                // そのテキストを表示する。
+                // それ以外は、非表示にする。
+                if (StageNumber == StateNumber)
+                {
+                    m_SelectStageTextObjects[StageNumber].SetActive(true);
+                }
+                else
+                {
+                    m_SelectStageTextObjects[StageNumber].SetActive(false);
+                }
             }
+            // 参加者だった場合
             else
             {
-                m_SelectStageTextObjects[StageNumber].SetActive(false);
+                // ステージ選択の値とステージの値が異なる場合
+                // そのテキストを表示する。
+                // それ以外は、非表示にする。
+                if (StageNumber != StateNumber)
+                {
+                    m_SelectStageTextObjects[StageNumber].SetActive(true);
+                }
+                else
+                {
+                    m_SelectStageTextObjects[StageNumber].SetActive(false);
+                }
             }
         }
 
-        // 状態の値で状態遷移
-        switch (StateNumber)
+        // ルームマスターだった場合
+        if (PhotonNetwork.IsMasterClient)
         {
-            case 0 : m_StageSelectState = StageSelectState.Random; break;
-            case 1 : m_StageSelectState = StageSelectState.Underground; break;
+            // 状態の値で状態遷移
+            switch (StateNumber)
+            {
+                case 0: m_StageSelectState = StageSelectState.Random; break;
+                case 1: m_StageSelectState = StageSelectState.Underground; break;
+            }
         }
 
         // ステージのイメージ画像を表示

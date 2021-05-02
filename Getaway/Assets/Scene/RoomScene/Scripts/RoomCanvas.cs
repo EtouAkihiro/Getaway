@@ -32,7 +32,7 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
         m_RoomNameText.text = PhotonManager.Instance.CurrentRoomName();
         // 最初にプレイヤーを反映
         NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
-
+        // ルームマスターじゃあないだった場合、ゲームプレイボタンを非表示にする。
         if (!PhotonNetwork.IsMasterClient) m_GamePlayButton.SetActive(false);
     }
 
@@ -40,7 +40,7 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
     {
         // プレイヤー名を取得
         string[] playernames = PlayerNames(m_Players);
-
+        // 現在のルーム内にいるプレイヤー数が 0 以下だった場合、それ以降の処理を行わない
         if (PhotonNetwork.PlayerList.Length <= 0) return;
 
         // 保存したプレイヤー参加数と現在の参加数が異なり、
@@ -56,8 +56,9 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
             NumberOfPlayerNamesDisPlay(m_CurrentPlayerNames);
             // 現在のルームを取得
             Photon.Realtime.Room room = PhotonNetwork.CurrentRoom;
-
-            if( room.PlayerCount >= room.MaxPlayers)
+            // ルーム内にいるプレイヤー数が現在のルームに入れるプレイヤー数以上だった場合、
+            // ルームを閉じる。
+            if ( room.PlayerCount >= room.MaxPlayers)
             {
                 // ルームを閉じる
                 room.IsOpen = false;

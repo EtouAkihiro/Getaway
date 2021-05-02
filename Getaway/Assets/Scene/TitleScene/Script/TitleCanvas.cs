@@ -293,7 +293,7 @@ public class TitleCanvas : MonoBehaviour
             }
             else
             {
-                print("ルームに入れませんでした");
+                Debug.LogError("ルームに入れませんでした");
             }
         }
     }
