@@ -30,6 +30,8 @@ public class TitleController : MonoBehaviour
         // 1秒ごとにロビーに接続
         if(m_TitleCanvas.m_SceneState == TitleCanvas.SceneState.Select && m_Time >= 1.0f)
         {
+            // サーバーに接続する
+            PhotonManager.Instance.ConnectedToServer();
             // ロビーに接続
             PhotonManager.Instance.JointLobby();
             // タイマーリセット
