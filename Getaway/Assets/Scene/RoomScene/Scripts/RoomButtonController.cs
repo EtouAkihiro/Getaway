@@ -15,15 +15,12 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     /// <summary>ステージの画像のオブジェクト</summary>
     public GameObject[] m_StageImageObjects;
 
-    /// <summary>表示されているかのフラグ</summary>
-    bool m_DisPlayFrag = false;
-    /// <summary>非表示になっているかのフラグ</summary>
-    bool m_DontDisPlayFrag = false;
+    /// <summary>ステージレベル</summary>
+    int m_StageSceneNamesNumber = -1;
+    /// <summary>受信用のステージレベル</summary>
+    int m_ShareStageSceneNamesNumber = -1;
     /// <summary>ゲーム開始するかのフラグ</summary>
     bool m_GamePlayFrag = false;
-
-    // Photonビュー
-    PhotonView m_PhotonView;
 
     /// <summary>選択できるステージの状態</summary>
     enum StageSelectState
@@ -51,8 +48,6 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         m_SelectStageTextObjects[1].SetActive(false);
         // ステージのイメージ画像を表示
         StageImageDisPlay();
-        // PhotonViewを取得
-        m_PhotonView = GetComponent<PhotonView>();
         // 現在のステージのシーン名をリストに格納
         m_StageSceneNameList.Add("UndergroundGamePlayScene");
     }
@@ -65,6 +60,11 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
             m_StageSelectState = m_ShareStageSelectState;
             // そして、ステージセレクトを遷移する
             StageSelectTextCange(m_StageSelectState);
+        }
+
+        // 参加者用シーン遷移
+        if(!PhotonNetwork.IsMasterClient && m_GamePlayFrag)
+        {
         }
     }
 
@@ -97,32 +97,18 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         if (m_StageSelectState == StageSelectState.Random)
         {
             // ランダムでステージのナンバーを取得
-            int RandomStageNumber = Random.Range(0, 0);
-
-            int StageLevel = -1;
-            switch (RandomStageNumber)
-            {
-                case 0 : StageLevel = 2; break;
-            }
-
-            if (StageLevel == -1) return;
-
-            // ランダムで決まった値をリストの番号に指定し、シーン遷移する。
-            Fade.Instance.FadeOut(StageLevel);
+            int RandomStageNumber = Random.Range(0, m_StageSceneNameList.Count);
+            // ステージナンバーを保存
+            m_StageSceneNamesNumber = RandomStageNumber;
+            // そのシーン遷移
+            Fade.Instance.FadeOut(m_StageSceneNameList[m_StageSceneNamesNumber]);
         }
+        // 現在の選択状態が、選択されている場合
         else
         {
-            int StageLevel = -1;
             switch (m_StageSelectState)
             {
-                case StageSelectState.Underground : StageLevel = 2; break;
-            }
-
-            if (StageLevel == -1) return;
-
-            switch (StageLevel)
-            {
-                case 2: Fade.Instance.FadeOut(StageLevel); break;
+                case StageSelectState.Underground : Fade.Instance.FadeOut(m_StageSceneNameList[0]); break;
             }
         }
     }

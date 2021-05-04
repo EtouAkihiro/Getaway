@@ -94,54 +94,8 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
+            m_FadeFlag = false;
         });
-    }
-
-    /// <summary>フェードアウト(Photonバージョン)</summary>
-    /// <param name="SceneName">シーン名</param>
-    public void FadeOut_Photon(string SceneName)
-    {
-        if (m_Canvas.sortingOrder == m_MinSortOrder)
-        {
-            m_Canvas.sortingOrder = m_MaxSortOrder;
-        }
-
-        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
-            // シーン遷移
-            PhotonNetwork.LoadLevel(SceneName);
-        });
-    }
-
-    /// <summary>フェードアウト(Photonシーン遷移付き)</summary>
-    /// <param name="SceneLaval">シーンレベル</param>
-    public void FadeOut(int SceneLaval)
-    {
-        // 現在の描画優先度が最小描画優先度だった場合
-        // 描画優先度を最大描画優先度にする。
-        if (m_Canvas.sortingOrder == m_MinSortOrder)
-        {
-            m_Canvas.sortingOrder = m_MaxSortOrder;
-        }
-
-        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
-            // シーン遷移
-            PhotonNetwork.LoadLevel(SceneLaval);
-        });
-    }
-
-    void RequestOwner()
-    {
-        if(m_PhotonView.IsMine == false)
-        {
-            if(m_PhotonView.OwnershipTransfer != OwnershipOption.Request)
-            {
-                Debug.LogError("OwnershipTransferをRequestに変更してください。");
-            }
-            else
-            {
-                m_PhotonView.RequestOwnership();
-            }
-        }
     }
 
     /// <summary>色を返す(プロパティ)</summary>

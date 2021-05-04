@@ -111,12 +111,19 @@ public partial class PhotonController
     /// <summary>ロビーに接続</summary>
     public void JointLobby()
     {
+        // ロビーに接続されている場合は、処理を行わない
+        if (PhotonNetwork.InLobby) return;
+
+        // ロビーに接続する。
         PhotonNetwork.JoinLobby();
     }
 
     /// <summary>ロビーから切断</summary>
     public void LeaveLobby()
     {
+        // ロビーに接続されていない場合は、処理を行わない
+        if (!PhotonNetwork.InLobby) return;
+        // ロビーから切断する。
         PhotonNetwork.LeaveLobby();
     }
 
@@ -152,6 +159,9 @@ public partial class PhotonController
     /// <summary>ルームから退出</summary>
     public void LeaveRoom()
     {
+        // ルームに接続されていない場合は、処理を行わない
+        if (!PhotonNetwork.InRoom) return;
+        // ルームから退出
         PhotonNetwork.LeaveRoom();
     }
 
