@@ -41,7 +41,7 @@ public class RoomCanvas : SingletonMOnoBehaviour<RoomCanvas>
         // プレイヤー名を取得
         string[] playernames = PlayerNames(m_Players);
         // 現在のルーム内にいるプレイヤー数が 0 以下だった場合、それ以降の処理を行わない
-        if (PhotonNetwork.PlayerList.Length <= 0) return;
+        if (PhotonNetwork.PlayerList.Length <= 0 || PhotonNetwork.PlayerList == null) return;
 
         // 保存したプレイヤー参加数と現在の参加数が異なり、
         // 保存したプレイヤー感か数がルームの限界参加人数より少なかった場合

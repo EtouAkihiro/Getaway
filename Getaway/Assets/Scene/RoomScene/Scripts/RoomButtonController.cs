@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 using Photon.Pun;
@@ -21,7 +22,10 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
     int m_ShareStageSceneNamesNumber = -1;
     /// <summary>ゲーム開始するかのフラグ</summary>
     bool m_GamePlayFrag = false;
-
+    /// <summary>送信用のゲーム開始フラグ</summary>
+    bool m_ShareGamePlayFrag = false;
+    /// <summary>フェードアウトを一回にするフラグ</summary>
+    bool m_FadeFrag = true;
     /// <summary>選択できるステージの状態</summary>
     enum StageSelectState
     {
@@ -46,6 +50,8 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         m_ShareStageSelectState = m_StageSelectState;
         // 地下のテキストオブジェクトを非表示にする
         m_SelectStageTextObjects[1].SetActive(false);
+        // シーン遷移を共有
+        PhotonNetwork.AutomaticallySyncScene = true;
         // ステージのイメージ画像を表示
         StageImageDisPlay();
         // 現在のステージのシーン名をリストに格納
@@ -62,9 +68,12 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
             StageSelectTextCange(m_StageSelectState);
         }
 
-        // 参加者用シーン遷移
-        if(!PhotonNetwork.IsMasterClient && m_GamePlayFrag)
+        // シーン遷移
+        if(m_ShareStageSceneNamesNumber != -1 ||
+            m_StageSceneNamesNumber != -1 &&
+            m_GamePlayFrag || m_ShareGamePlayFrag)
         {
+            StageSceneLoad(m_ShareStageSceneNamesNumber);
         }
     }
 
@@ -100,17 +109,18 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
             int RandomStageNumber = Random.Range(0, m_StageSceneNameList.Count);
             // ステージナンバーを保存
             m_StageSceneNamesNumber = RandomStageNumber;
-            // そのシーン遷移
-            Fade.Instance.FadeOut(m_StageSceneNameList[m_StageSceneNamesNumber]);
         }
         // 現在の選択状態が、選択されている場合
         else
         {
             switch (m_StageSelectState)
             {
-                case StageSelectState.Underground : Fade.Instance.FadeOut(m_StageSceneNameList[0]); break;
+                case StageSelectState.Underground : m_StageSceneNamesNumber = 0; break;
             }
         }
+
+        // ゲームプレイボタンが押された
+        m_GamePlayFrag = true;
     }
 
     /// <summary>ルーム退出</summary>
@@ -122,6 +132,31 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         GameController.Instance.RoomExit = true;
         // タイトルシーンに遷移
         Fade.Instance.FadeOut("TitleScene");
+    }
+
+    /// <summary>シーン遷移</summary>
+    /// <param name="StageSceneNnumber">ステージシーンナンバー</param>
+    void StageSceneLoad(int StageSceneNnumber)
+    {
+        if (m_FadeFrag)
+        {
+            // フェードアウトする。
+            Fade.Instance.FadeOut();
+            // フィールドアウトを呼ばないようにする。
+            m_FadeFrag = false;
+        }
+
+        if (!Fade.Instance.FadeFrag && Fade.Instance.FadeImage.color.a >= 1)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                SceneManager.LoadScene(m_StageSceneNameList[StageSceneNnumber]);
+            }
+            else
+            {
+                PhotonNetwork.LoadLevel(m_StageSceneNameList[StageSceneNnumber]);
+            }
+        }
     }
 
     /// <summary>ステージ選択のテキストの状態遷移</summary>
@@ -215,12 +250,14 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext((int)m_StageSelectState);
+            stream.SendNext((int)m_StageSceneNamesNumber);
             print("送信");
         }
         // 受信
         else
         {
             this.m_ShareStageSelectState = (StageSelectState)(int)stream.PeekNext();
+            this.m_ShareStageSceneNamesNumber = (int)stream.PeekNext();
             print("受信");
         }
     }
