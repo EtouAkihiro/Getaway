@@ -27,7 +27,7 @@ public class ProblemController : SingletonMOnoBehaviour<ProblemController>
 
     /// <summary>問題を返す</summary>
     /// <returns></returns>
-    string GetProblem()
+    public string GetProblem()
     {
         // ランダムで問題の番号を取得
         int ProblemRandomNumber = Random.Range(0, m_Problems.Length);
@@ -55,7 +55,7 @@ public class ProblemController : SingletonMOnoBehaviour<ProblemController>
     /// <summary>答えを返す</summary>
     /// <param name="Problem">問題文</param>
     /// <returns></returns>
-    string GetAnswer(string Problem)
+    public string GetAnswer(string Problem)
     {
         // 問題の番号
         int ProblemNumver = -1;
