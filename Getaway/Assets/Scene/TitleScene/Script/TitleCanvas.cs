@@ -35,6 +35,8 @@ public class TitleCanvas : MonoBehaviour
     public InputField m_RoomInputField;
     /// <summary>ルーム名(ルーム参加用)の入力</summary>
     public InputField m_RoomNameInputField;
+    /// <summary>参加人数の入力</summary>
+    public InputField m_TheNumberOfParticipantsInputField;
 
     /// <summary>シーンの状態</summary>
     public enum SceneState
@@ -217,11 +219,15 @@ public class TitleCanvas : MonoBehaviour
     {
         // ルーム名を取得
         string RoomName = m_RoomInputField.text;
+        // 参加人数を取得
+        byte TheNumberOfParticipants = byte.Parse(m_TheNumberOfParticipantsInputField.text);
         // ルーム名が入力されていなかったら、シーン遷移しない
-        if(RoomName == "") return;
+        if (RoomName == "") return;
+        // ルームの参加人数が想定より大きくなった場合、シーン遷移しない
+        if (TheNumberOfParticipants > 4) return;
 
         // ルームを作成
-        PhotonManager.Instance.CreateRoom(RoomName);
+        PhotonManager.Instance.CreateRoom(RoomName, TheNumberOfParticipants);
         // ルームシーンに遷移
         Fade.Instance.FadeOut("RoomScene");
     }

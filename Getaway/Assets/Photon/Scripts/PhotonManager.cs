@@ -66,9 +66,10 @@ public class PhotonManager : SingletonMOnoBehaviour<PhotonManager>
 
     /// <summary>ルームを作成</summary>
     /// <param name="RoomName">ルーム名</param>
-    public void CreateRoom(string RoomName)
+    /// <param name="MaxPlayers">参加人数</param>
+    public void CreateRoom(string RoomName, byte MaxPlayers)
     {
-        m_PhotonController.CreateRoom(RoomName);
+        m_PhotonController.CreateRoom(RoomName, MaxPlayers);
     }
 
     /// <summary>ルームから退出</summary>

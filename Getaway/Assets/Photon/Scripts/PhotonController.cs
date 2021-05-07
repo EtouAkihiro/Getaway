@@ -129,12 +129,13 @@ public partial class PhotonController
 
     /// <summary>ルームを作成</summary>
     /// <param name="RoomName">ルーム名</param>
-    public void CreateRoom(string RoomName)
+    /// <param name="MaxPlayers">参加人数</param>
+    public void CreateRoom(string RoomName, byte MaxPlayers)
     {
         // ルームオプションを作成
         RoomOptions options = new RoomOptions();
-        // ルームのプレイ人数を4人に設定
-        options.MaxPlayers = 4;
+        // ルームのプレイ人数を人に設定
+        options.MaxPlayers = MaxPlayers;
         //ルームの入室を許可
         options.IsOpen = true;
         // ルームがロビーにリスト化
