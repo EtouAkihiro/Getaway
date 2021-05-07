@@ -8,6 +8,8 @@ public class Problem : MonoBehaviour
     string m_Problem;
     /// <summary>答え</summary>
     string m_Answer;
+    /// <summary>間違えの答え</summary>
+    string[] m_FalseAnswers = new string[3];
 
     void Start()
     {

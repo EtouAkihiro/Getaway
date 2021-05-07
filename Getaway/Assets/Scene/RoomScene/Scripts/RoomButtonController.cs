@@ -67,14 +67,6 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
             // そして、ステージセレクトを遷移する
             StageSelectTextCange(m_StageSelectState);
         }
-
-        // シーン遷移
-        if(m_ShareStageSceneNamesNumber != -1 ||
-            m_StageSceneNamesNumber != -1 &&
-            m_GamePlayFrag || m_ShareGamePlayFrag)
-        {
-            StageSceneLoad(m_ShareStageSceneNamesNumber);
-        }
     }
 
     /// <summary>ステージ選択の左側のボタンが押された時</summary>
@@ -119,8 +111,7 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        // ゲームプレイボタンが押された
-        m_GamePlayFrag = true;
+        Fade.Instance.FadeOut(m_StageSceneNameList[m_StageSceneNamesNumber]);
     }
 
     /// <summary>ルーム退出</summary>
@@ -132,31 +123,6 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         GameController.Instance.RoomExit = true;
         // タイトルシーンに遷移
         Fade.Instance.FadeOut("TitleScene");
-    }
-
-    /// <summary>シーン遷移</summary>
-    /// <param name="StageSceneNnumber">ステージシーンナンバー</param>
-    void StageSceneLoad(int StageSceneNnumber)
-    {
-        if (m_FadeFrag)
-        {
-            // フェードアウトする。
-            Fade.Instance.FadeOut();
-            // フィールドアウトを呼ばないようにする。
-            m_FadeFrag = false;
-        }
-
-        if (!Fade.Instance.FadeFrag && Fade.Instance.FadeImage.color.a >= 1)
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                SceneManager.LoadScene(m_StageSceneNameList[StageSceneNnumber]);
-            }
-            else
-            {
-                PhotonNetwork.LoadLevel(m_StageSceneNameList[StageSceneNnumber]);
-            }
-        }
     }
 
     /// <summary>ステージ選択のテキストの状態遷移</summary>
@@ -250,14 +216,12 @@ public class RoomButtonController : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext((int)m_StageSelectState);
-            stream.SendNext((int)m_StageSceneNamesNumber);
             print("送信");
         }
         // 受信
         else
         {
             this.m_ShareStageSelectState = (StageSelectState)(int)stream.PeekNext();
-            this.m_ShareStageSceneNamesNumber = (int)stream.PeekNext();
             print("受信");
         }
     }
