@@ -80,7 +80,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         });
     }
 
-    /// <summary>フェードアウト(シーン遷移付き)</summary>
+    /// <summary>フェードアウト(シーン遷移)</summary>
     /// <param name="SceneName">次のシーン名</param>
     public void FadeOut(string SceneName)
     {
@@ -94,6 +94,24 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
+            m_FadeFlag = false;
+        });
+    }
+
+    /// <summary>フェードアウト(Photonのシーン遷移)</summary>
+    /// <param name="SceneName">次のシーン名</param>
+    public void FadeOut_Photon(string SceneName)
+    {
+        // 現在の描画優先度が最小描画優先度だった場合
+        // 描画優先度を最大描画優先度にする。
+        if (m_Canvas.sortingOrder == m_MinSortOrder)
+        {
+            m_Canvas.sortingOrder = m_MaxSortOrder;
+        }
+
+        m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
+            // Photonのシーン遷移
+            PhotonNetwork.LoadLevel(SceneName);
             m_FadeFlag = false;
         });
     }
