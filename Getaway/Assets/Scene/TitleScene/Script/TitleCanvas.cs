@@ -151,6 +151,14 @@ public class TitleCanvas : MonoBehaviour
         PhotonManager.Instance.JointLobby();
         // 押された状態にする。
         m_GameStartButtonClickFrag = true;
+        // セーブしたプレイヤー名を取得
+        string PlayerNameSaveData = PlayerPrefs.GetString("PlayerNameData");
+        // セーブしたプレイヤー名がある場合、
+        // 最初からプレイヤー名が入力された状態にする。
+        if (PlayerNameSaveData != "")
+        {
+            m_NameInputField.text = PlayerNameSaveData;
+        }
     }
 
     /// <summary>タイトルに戻る</summary>
@@ -173,6 +181,16 @@ public class TitleCanvas : MonoBehaviour
     {
         // プレイヤーの名前を取得
         string PlayerName = m_NameInputField.text;
+        // セーブしたプレイヤー名を取得
+        string PlayerNameSaveData = PlayerPrefs.GetString("PlayerNameData");
+
+        // もし、プレイヤー名がセーブされていない、
+        // または、セーブしたプレイヤー名と異なる場合
+        // プレイヤー名をセーブする。
+        if(PlayerNameSaveData == ""　|| PlayerName != PlayerNameSaveData)
+        {
+            PlayerPrefs.SetString("PlayerNameData", PlayerName);
+        }
 
         // もし、名前が入力された場合
         if (PlayerName != "")
