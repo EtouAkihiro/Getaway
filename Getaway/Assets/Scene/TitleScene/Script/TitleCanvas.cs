@@ -75,6 +75,14 @@ public class TitleCanvas : MonoBehaviour
             m_Title.SetActive(false);
             // セレクト画面を表示するアニメーションを再生
             SelectCanvasFade(true);
+            // セーブしたプレイヤー名を取得
+            string PlayerNameSaveData = PlayerPrefs.GetString("PlayerNameData");
+            // セーブしたプレイヤー名がある場合、
+            // 最初からプレイヤー名が入力された状態にする。
+            if (PlayerNameSaveData != "")
+            {
+                m_NameInputField.text = PlayerNameSaveData;
+            }
         }
         else
         {
