@@ -20,8 +20,8 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     int m_MaxSortOrder = 100;
     /// <summary>最小描画優先度</summary>
     int m_MinSortOrder = -1;
-    /// <summary>フェードのフラグ</summary>
-    bool m_Fadeed = false;
+    /// <summary>フェードしたかどうか</summary>
+    bool m_Faded = false;
 
     void Awake()
     {
@@ -60,7 +60,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     public void FadeIn()
     {
         m_FadeImage.DOFade(0.0f, 1.0f).OnComplete(() => {
-            m_Fadeed = true;
+            m_Faded = true;
             m_Canvas.sortingOrder = m_MinSortOrder;
         });
     }
@@ -76,7 +76,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         }
 
         m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
-            m_Fadeed = false;
+            m_Faded = false;
         });
     }
 
@@ -94,7 +94,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             // シーン遷移
             SceneManager.LoadScene(SceneName);
-            m_Fadeed = false;
+            m_Faded = false;
         });
     }
 
@@ -112,7 +112,7 @@ public class Fade : SingletonMOnoBehaviour<Fade>
         m_FadeImage.DOFade(1.0f, 1.0f).OnComplete(() => {
             // Photonのシーン遷移
             PhotonNetwork.LoadLevel(SceneName);
-            m_Fadeed = false;
+            m_Faded = false;
         });
     }
 
@@ -125,8 +125,8 @@ public class Fade : SingletonMOnoBehaviour<Fade>
 
     /// <summary>フェードフラグを返す(プロパティ)</summary>
     /// <returns></returns>
-    public bool Fadeed
+    public bool Faded
     {
-        get { return m_Fadeed; }
+        get { return m_Faded; }
     }
 }
