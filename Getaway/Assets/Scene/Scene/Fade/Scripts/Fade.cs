@@ -9,12 +9,11 @@ using Photon.Pun;
 public class Fade : SingletonMOnoBehaviour<Fade>
 {
     /// <summary>Imageの参照</summary>
-    public Image m_FadeImage;
+    [SerializeField]
+    private Image m_FadeImage;
 
     /// <summary>キャンバス</summary>
     Canvas m_Canvas;
-    /// <summary>Photonビュー</summary>
-    PhotonView m_PhotonView;
 
     /// <summary>最大描画優先度</summary>
     int m_MaxSortOrder = 100;
@@ -52,8 +51,6 @@ public class Fade : SingletonMOnoBehaviour<Fade>
     {
         // キャンバスを取得
         m_Canvas = GetComponent<Canvas>();
-        // Photonビューの取得
-        m_PhotonView = GetComponent<PhotonView>();
     }
 
     /// <summary>フェードイン</summary>

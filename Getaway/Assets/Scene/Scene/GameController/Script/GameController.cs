@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameController : SingletonMOnoBehaviour<GameController>
 {
     /// <summary>ルームから退出</summary>
-    public bool m_RoomExit = false;
+    bool m_RoomExit = false;
 
     /// <summary>スクリプトのインスタンスがロードされたときに呼び出されます(Unityドキュメント参照)</summary>
     void Awake()

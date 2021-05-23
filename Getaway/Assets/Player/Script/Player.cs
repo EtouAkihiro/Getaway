@@ -9,22 +9,23 @@ public class Player : MonoBehaviour
     /// <summary>プレイヤーカメラ</summary>
     public GameObject m_PlayerCamera;
 
-    /// <summary>通常状態の歩く速度</summary>
-    public float m_Normal_WalkSpeed = 10.0f;
-    /// <summary>ダメージ状態の歩く速度</summary>
-    public float m_Damage_WalkSpeed = 5.0f;
-    /// <summary>通常状態の回転速度</summary>
-    public float m_Normal_RotateSpeed = 20.0f;
-    /// <summary>ダメージ状態の回転速度</summary>
-    public float m_Damage_RotateSpeed = 10.0f;
+    // 歩く速度・回転速度
+    [SerializeField,Header("通常状態の歩く速度")]
+    float m_NormalWalkSpeed = 5.0f;
+    [SerializeField,Header("ダメージ状態の歩く速度")]
+    float m_DamageWalkSpeed = 3.0f;
+    [SerializeField,Header("通常状態の回転速度")]
+    float m_NormalRotateSpeed = 20.0f;
+    [SerializeField,Header("ダメージ状態の回転速度")]
+    float m_DamageRotateSpeed = 10.0f;
 
     // SE
-    /// <summary>歩きのSE</summary>
-    public AudioClip m_WalkSE;
-    /// <summary>走りのSE</summary>
-    public AudioClip m_RunSE;
-    /// <summary>ダメージのSE</summary>
-    public AudioClip m_DamageSE;
+    [SerializeField,Header("歩きのSE")]
+    AudioClip m_WalkSE;
+    [SerializeField,Header("走りのSE")]
+    AudioClip m_RunSE;
+    [SerializeField,Header("ダメージのSE")]
+    AudioClip m_DamageSE;
 
     /// <summary>状態</summary>
     enum State
@@ -44,26 +45,26 @@ public class Player : MonoBehaviour
     State m_State = State.Normal;
 
     /// <summary>重力加速度</summary>
-    float m_Gravity = -9.81f;
+    const float m_Gravity = -9.81f;
     /// <summary>通常状態の回転量</summary>
-    Vector3 m_Normal_Rotate = new Vector3(0.0f, 0.0f, 0.0f);
+    Vector3 m_NormalRotate = new Vector3(0.0f, 0.0f, 0.0f);
     /// <summary>ダメージ状態の回転量</summary>
-    Vector3 m_Damage_Rotate = new Vector3(0.0f, 0.0f, 0.0f);
+    Vector3 m_DamageRotate = new Vector3(0.0f, 0.0f, 0.0f);
 
     /// <summary>複数のコントローラーの名前</summary>
     string[] m_CacheJoysticNames;
 
     // 通常状態のアニメーション
     /// <summary>通常状態のアニメーションのX軸の移動量</summary>
-    int s_Normal_VelocityX_AnimeHash = Animator.StringToHash("VelocityX");
+    int s_NormalVelocityXAnimeHash = Animator.StringToHash("VelocityX");
     /// <summary>通常状態のアニメーションのZ軸の移動量</summary>
-    int s_Normal_VelocityZ_AnimeHash = Animator.StringToHash("VelocityZ");
+    int s_NormalVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
 
     // ダメージ状態のアニメーション
     /// <summary>ダメージ状態のアニメーションのX軸の移動量</summary>
-    int s_Damage_VelocityX_AnimeHash = Animator.StringToHash("VelocityX");
+    int s_DamageVelocityXAnimeHash = Animator.StringToHash("VelocityX");
     /// <summary>ダメージ状態のアニメーションのZ軸の移動量</summary>
-    int s_Damage_VelocityZ_AnimeHash = Animator.StringToHash("VelocityZ");
+    int s_DamageVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
 
     void Start()
     {
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /// <summary>通常状態</summary>
+    /// <summary>通常状態の更新</summary>
     void Normal()
     {
         // 現在のコントローラーの名前を取得
@@ -109,32 +110,34 @@ public class Player : MonoBehaviour
 
         // プレイヤーの正面向きのベクトルを取得
         Vector3 forward = m_PlayerCamera.transform.forward;
+
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
         // 移動量
-        Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_Normal_WalkSpeed +
-                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_Normal_WalkSpeed;
+        // おかしい
+        Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_NormalWalkSpeed +
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalWalkSpeed;
 
         // 通常の歩きのアニメーション
-        m_Animator.SetFloat(s_Normal_VelocityX_AnimeHash, Velocity.x);
-        m_Animator.SetFloat(s_Normal_VelocityZ_AnimeHash, Velocity.z);
+        m_Animator.SetFloat(s_NormalVelocityXAnimeHash, Input.GetAxis("Horizontal"));
+        m_Animator.SetFloat(s_NormalVelocityZAnimeHash, Input.GetAxis("Vertical"));
 
         // コントローラーが接続されている場合
         if(m_CacheJoysticNames.Length < TheCurrentGameController.Length)
         {
             // コントローラーの回転量
-            m_Normal_Rotate.y = Input.GetAxis("AngleHorizontal") * m_Normal_RotateSpeed * Time.deltaTime;
+            m_NormalRotate.y = Input.GetAxis("AngleHorizontal") * m_NormalRotateSpeed * Time.deltaTime;
         }
         // コントローラーが接続されていない場合
         else
         {
             // マウスの回転量
-            m_Normal_Rotate.y = (Input.GetAxis("AngleMouseX") * m_Normal_RotateSpeed +
-                                Input.GetAxis("AngleMouseY") * m_Normal_RotateSpeed)  * Time.deltaTime;
+            m_NormalRotate.y = (Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed +
+                                Input.GetAxis("AngleMouseY") * m_NormalRotateSpeed)  * Time.deltaTime;
         }
 
         // 回転を反映
-        transform.Rotate(m_Normal_Rotate);
+        transform.Rotate(m_NormalRotate);
 
         // 地面に触れている場合
         if (m_CharacterController.isGrounded)
@@ -150,7 +153,7 @@ public class Player : MonoBehaviour
         m_CharacterController.Move(movement);
     }
 
-    /// <summary>ダメージ状態</summary>
+    /// <summary>ダメージ状態の更新</summary>
     void Damage()
     {
         // 現在のコントローラーの名前を取得
@@ -161,27 +164,27 @@ public class Player : MonoBehaviour
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
         // 移動量
-        Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_Damage_WalkSpeed +
-                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_Damage_WalkSpeed;
+        Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_DamageWalkSpeed +
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_DamageWalkSpeed;
 
         // ダメージ状態の歩きのアニメーション
-        m_Animator.SetFloat(s_Damage_VelocityX_AnimeHash, Velocity.x);
-        m_Animator.SetFloat(s_Damage_VelocityZ_AnimeHash, Velocity.z);
+        m_Animator.SetFloat(s_DamageVelocityXAnimeHash, Velocity.x);
+        m_Animator.SetFloat(s_DamageVelocityZAnimeHash, Velocity.z);
 
         // コントローラーが接続されている場合
         if (m_CacheJoysticNames.Length < TheCurrentGameController.Length)
         {
             // コントローラーの回転量
-            m_Damage_Rotate.y = Input.GetAxis("AngleHorizontal") * m_Normal_RotateSpeed * Time.deltaTime;
+            m_DamageRotate.y = Input.GetAxis("AngleHorizontal") * m_NormalRotateSpeed * Time.deltaTime;
         }
         // コントローラーが接続されていない場合
         else
         {
             // マウスの回転量
-            m_Damage_Rotate.y = Input.GetAxis("AngleMouseX") * m_Normal_RotateSpeed * Time.deltaTime;
+            m_DamageRotate.y = Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed * Time.deltaTime;
         }
         // 回転を反映
-        transform.Rotate(m_Damage_Rotate);
+        transform.Rotate(m_DamageRotate);
 
         // 地面に触れている場合
         if (m_CharacterController.isGrounded)

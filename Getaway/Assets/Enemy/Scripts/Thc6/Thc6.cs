@@ -21,9 +21,9 @@ public class Thc6 : MonoBehaviour
     float m_Time = 0.0f;
 
     /// <summary>移動量のアニメーションハッシュ</summary>
-    int s_moveingHash = Animator.StringToHash("moving");
+    int s_MoveingHash = Animator.StringToHash("moving");
     /// <summary>バトルのアニメーションハッシュ</summary>
-    int s_battleHash = Animator.StringToHash("battle");
+    int s_BattleHash = Animator.StringToHash("battle");
 
     void Start()
     {
@@ -55,7 +55,7 @@ public class Thc6 : MonoBehaviour
         }
 
         // アニメーションを反映
-        m_Animator.SetInteger(s_moveingHash, (int)m_NavMeshAgent.velocity.sqrMagnitude);
+        m_Animator.SetInteger(s_MoveingHash, (int)m_NavMeshAgent.velocity.sqrMagnitude);
     }
 
     /// <summary>次に向かう場所を決定</summary>
