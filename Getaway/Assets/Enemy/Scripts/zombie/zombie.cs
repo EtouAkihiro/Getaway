@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class zombie : MonoBehaviour
+public class Zombie : MonoBehaviour
 {
+    // 他の敵
+    [SerializeField, Header("Thc6")]
+    GameObject m_Thc6Object;
+    [SerializeField, Header("Creature")]
+    GameObject m_CreatureObject;
+
     /// <summary>徘徊ルート</summary>
     GameObject[] m_PatrolPoints;
 
@@ -15,6 +21,12 @@ public class zombie : MonoBehaviour
     /// <summary>アニメーター</summary>
     Animator m_Animator;
 
+    // 敵のスクリプト
+    /// <summary>Thc6のスクリプト</summary>
+    Thc6 m_Thc6;
+    /// <summary>Creatureのスクリプト</summary>
+    Creature m_Creature;
+
     /// <summary>現在の徘徊ルート</summary>
     int m_CurrentPatrolPointIndex = -1;
     /// <summary>前回の徘徊ルートの番号を保存する変数</summary>
@@ -24,6 +36,11 @@ public class zombie : MonoBehaviour
     float m_Time = 0.0f;
     /// <summary>立ち上がるアニメーションの終了</summary>
     bool m_StandUpAnimatorEnd = false;
+
+    /// <summary>Thc6のActiveの状態</summary>
+    bool m_Thc6IsActive;
+    /// <summary>CreatureのAciveの状態</summary>
+    bool m_CreatureIsActive;
 
     /// <summary>移動量のアニメーションハッシュ</summary>
     int s_moveingHash = Animator.StringToHash("moving");
@@ -124,5 +141,12 @@ public class zombie : MonoBehaviour
     bool isStandUpAnimatorEnd()
     {
         return m_StandUpAnimatorEnd = true;
+    }
+
+    /// <summary>現在の徘徊ルート番号</summary>
+    public int CurrentPatrolPontIndex
+    {
+        get { return m_CurrentPatrolPointIndex; }
+        set { m_CurrentPatrolPointIndex = value; }
     }
 }

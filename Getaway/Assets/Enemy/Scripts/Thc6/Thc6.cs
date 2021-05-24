@@ -112,4 +112,11 @@ public class Thc6 : MonoBehaviour
         // 結果を返す
         return Result;
     }
+
+    /// <summary>現在の徘徊ルート番号</summary>
+    public int CurrentPatrolPontIndex
+    {
+        get { return m_CurrentPatrolPointIndex; }
+        set { m_CurrentPatrolPointIndex = value; }
+    }
 }
