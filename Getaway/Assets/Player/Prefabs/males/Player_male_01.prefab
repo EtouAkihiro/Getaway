@@ -2575,10 +2575,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraPoint: {fileID: 6112888228751688684}
   m_PlayerCamera: {fileID: 6112888228233853430}
-  m_Normal_WalkSpeed: 2
-  m_Damage_WalkSpeed: 1
-  m_Normal_RotateSpeed: 20
-  m_Damage_RotateSpeed: 10
+  m_NormalWalkSpeed: 4
+  m_NormalRunSpeed: 8
+  m_DamageWalkSpeed: 2
+  m_NormalRotateSpeed: 10
+  m_DamageRotateSpeed: 5
   m_WalkSE: {fileID: 0}
   m_RunSE: {fileID: 0}
   m_DamageSE: {fileID: 0}

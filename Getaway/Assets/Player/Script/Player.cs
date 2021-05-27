@@ -11,13 +11,15 @@ public class Player : MonoBehaviour
 
     // 歩く速度・回転速度
     [SerializeField,Header("通常状態の歩く速度")]
-    float m_NormalWalkSpeed = 5.0f;
+    float m_NormalWalkSpeed = 0.0f;
+    [SerializeField,Header("通常状態の走る速度")]
+    float m_NormalRunSpeed = 0.0f;
     [SerializeField,Header("ダメージ状態の歩く速度")]
-    float m_DamageWalkSpeed = 3.0f;
+    float m_DamageWalkSpeed = 0.0f;
     [SerializeField,Header("通常状態の回転速度")]
-    float m_NormalRotateSpeed = 20.0f;
+    float m_NormalRotateSpeed = 0.0f;
     [SerializeField,Header("ダメージ状態の回転速度")]
-    float m_DamageRotateSpeed = 10.0f;
+    float m_DamageRotateSpeed = 0.0f;
 
     // SE
     [SerializeField,Header("歩きのSE")]
@@ -56,9 +58,12 @@ public class Player : MonoBehaviour
 
     // 通常状態のアニメーション
     /// <summary>通常状態のアニメーションのX軸の移動量</summary>
-    int s_NormalVelocityXAnimeHash = Animator.StringToHash("VelocityX");
+    int s_NormalWalkVelocityXAnimeHash = Animator.StringToHash("VelocityX");
     /// <summary>通常状態のアニメーションのZ軸の移動量</summary>
-    int s_NormalVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
+    int s_NormalWalkVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
+
+    // ダッシュ状態のアニメーション
+    int s_NormalRunInputValue = Animator.StringToHash("RunInputValue");
 
     // ダメージ状態のアニメーション
     /// <summary>ダメージ状態のアニメーションのX軸の移動量</summary>
@@ -114,13 +119,31 @@ public class Player : MonoBehaviour
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
         // 移動量
-        // おかしい
-        Vector3 Velocity = forward * Input.GetAxis("Vertical") * m_NormalWalkSpeed +
+        Vector3 Velocity;
+
+        // 走る時の左シフトキーの入力値
+        float RunInputValue = Input.GetAxis("Run");
+
+        // 入力値が0.9以上だった場合、走る
+        if (RunInputValue >= 0.9f)
+        {
+            Velocity = forward * Input.GetAxis("Vertical") * m_NormalRunSpeed +
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalRunSpeed;
+
+            // 通常状態の走りのアニメーション
+            m_Animator.SetFloat(s_NormalRunInputValue, RunInputValue);
+            m_Animator.SetFloat(s_NormalWalkVelocityXAnimeHash, Input.GetAxis("Horizontal"));
+            m_Animator.SetFloat(s_NormalWalkVelocityZAnimeHash, Input.GetAxis("Vertical"));
+        }
+        else
+        {
+            Velocity = forward * Input.GetAxis("Vertical") * m_NormalWalkSpeed +
                            m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalWalkSpeed;
 
-        // 通常の歩きのアニメーション
-        m_Animator.SetFloat(s_NormalVelocityXAnimeHash, Input.GetAxis("Horizontal"));
-        m_Animator.SetFloat(s_NormalVelocityZAnimeHash, Input.GetAxis("Vertical"));
+            // 通常の歩きのアニメーション
+            m_Animator.SetFloat(s_NormalWalkVelocityXAnimeHash, Input.GetAxis("Horizontal"));
+            m_Animator.SetFloat(s_NormalWalkVelocityZAnimeHash, Input.GetAxis("Vertical"));
+        }
 
         // コントローラーが接続されている場合
         if(m_CacheJoysticNames.Length < TheCurrentGameController.Length)
@@ -168,8 +191,8 @@ public class Player : MonoBehaviour
                            m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_DamageWalkSpeed;
 
         // ダメージ状態の歩きのアニメーション
-        m_Animator.SetFloat(s_DamageVelocityXAnimeHash, Velocity.x);
-        m_Animator.SetFloat(s_DamageVelocityZAnimeHash, Velocity.z);
+        m_Animator.SetFloat(s_DamageVelocityXAnimeHash, Input.GetAxis("Horizontal"));
+        m_Animator.SetFloat(s_DamageVelocityZAnimeHash, Input.GetAxis("Vertical"));
 
         // コントローラーが接続されている場合
         if (m_CacheJoysticNames.Length < TheCurrentGameController.Length)
