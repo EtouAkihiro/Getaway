@@ -58,9 +58,9 @@ public class Player : MonoBehaviour
 
     // 通常状態のアニメーション
     /// <summary>通常状態のアニメーションのX軸の移動量</summary>
-    int s_NormalWalkVelocityXAnimeHash = Animator.StringToHash("VelocityX");
+    int s_NormalVelocityXAnimeHash = Animator.StringToHash("VelocityX");
     /// <summary>通常状態のアニメーションのZ軸の移動量</summary>
-    int s_NormalWalkVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
+    int s_NormalVelocityZAnimeHash = Animator.StringToHash("VelocityZ");
 
     // ダッシュ状態のアニメーション
     int s_NormalRunInputValue = Animator.StringToHash("RunInputValue");
@@ -123,30 +123,27 @@ public class Player : MonoBehaviour
 
         // 走る時の左シフトキーの入力値
         float RunInputValue = Input.GetAxis("Run");
+        // 左シフトの入力値でダッシュの判定
+        m_Animator.SetFloat(s_NormalRunInputValue, RunInputValue);
 
         // 入力値が0.9以上だった場合、走る
-        if (RunInputValue >= 0.9f)
+        if (RunInputValue != 0.0f)
         {
             Velocity = forward * Input.GetAxis("Vertical") * m_NormalRunSpeed +
                            m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalRunSpeed;
-
-            // 通常状態の走りのアニメーション
-            m_Animator.SetFloat(s_NormalRunInputValue, RunInputValue);
-            m_Animator.SetFloat(s_NormalWalkVelocityXAnimeHash, Input.GetAxis("Horizontal"));
-            m_Animator.SetFloat(s_NormalWalkVelocityZAnimeHash, Input.GetAxis("Vertical"));
         }
         else
         {
             Velocity = forward * Input.GetAxis("Vertical") * m_NormalWalkSpeed +
                            m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalWalkSpeed;
-
-            // 通常の歩きのアニメーション
-            m_Animator.SetFloat(s_NormalWalkVelocityXAnimeHash, Input.GetAxis("Horizontal"));
-            m_Animator.SetFloat(s_NormalWalkVelocityZAnimeHash, Input.GetAxis("Vertical"));
         }
 
+        // 通常状態の歩き・走りのアニメーション
+        m_Animator.SetFloat(s_NormalVelocityXAnimeHash, Input.GetAxis("Horizontal"));
+        m_Animator.SetFloat(s_NormalVelocityZAnimeHash, Input.GetAxis("Vertical"));
+
         // コントローラーが接続されている場合
-        if(m_CacheJoysticNames.Length < TheCurrentGameController.Length)
+        if (m_CacheJoysticNames.Length < TheCurrentGameController.Length)
         {
             // コントローラーの回転量
             m_NormalRotate.y = Input.GetAxis("AngleHorizontal") * m_NormalRotateSpeed * Time.deltaTime;
@@ -173,7 +170,7 @@ public class Player : MonoBehaviour
         // 現在のフレームの移動量
         Vector3 movement = Velocity * Time.deltaTime;
         // 移動
-        m_CharacterController.Move(movement);
+        // m_CharacterController.Move(movement);
     }
 
     /// <summary>ダメージ状態の更新</summary>
