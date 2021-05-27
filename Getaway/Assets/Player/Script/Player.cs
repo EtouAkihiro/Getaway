@@ -118,25 +118,21 @@ public class Player : MonoBehaviour
 
         // Y軸のを無視して水平にする
         forward.y = 0.0f;
-        // 移動量
-        Vector3 Velocity;
+        // 移動スピード
+        float MoveSpeed;
 
         // 走る時の左シフトキーの入力値
         float RunInputValue = Input.GetAxis("Run");
         // 左シフトの入力値でダッシュの判定
         m_Animator.SetFloat(s_NormalRunInputValue, RunInputValue);
 
-        // 入力値が0.9以上だった場合、走る
-        if (RunInputValue != 0.0f)
-        {
-            Velocity = forward * Input.GetAxis("Vertical") * m_NormalRunSpeed +
-                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalRunSpeed;
-        }
-        else
-        {
-            Velocity = forward * Input.GetAxis("Vertical") * m_NormalWalkSpeed +
-                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * m_NormalWalkSpeed;
-        }
+        // 入力値が0だった場合、走る
+        if (RunInputValue != 0.0f) MoveSpeed = m_NormalRunSpeed;
+        else MoveSpeed = m_NormalWalkSpeed;
+
+        // 移動量
+        Vector3 Velocity = forward * Input.GetAxis("Vertical") * MoveSpeed +
+                           m_PlayerCamera.transform.right * Input.GetAxis("Horizontal") * MoveSpeed;
 
         // 通常状態の歩き・走りのアニメーション
         m_Animator.SetFloat(s_NormalVelocityXAnimeHash, Input.GetAxis("Horizontal"));
