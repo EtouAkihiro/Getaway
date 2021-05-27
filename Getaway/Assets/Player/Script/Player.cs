@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
         // 現在のフレームの移動量
         Vector3 movement = Velocity * Time.deltaTime;
         // 移動
-        // m_CharacterController.Move(movement);
+        m_CharacterController.Move(movement);
     }
 
     /// <summary>ダメージ状態の更新</summary>
