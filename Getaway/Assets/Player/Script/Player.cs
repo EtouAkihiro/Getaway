@@ -126,8 +126,9 @@ public class Player : MonoBehaviour
         // 左シフトの入力値でダッシュの判定
         m_Animator.SetFloat(s_NormalRunInputValue, RunInputValue);
 
-        // 入力値が0だった場合、走る
-        if (RunInputValue != 0.0f) MoveSpeed = m_NormalRunSpeed;
+        // 入力値が0より大きかった場合、移動スピードを走るスピード
+        // それ以外は、歩きスピード
+        if (RunInputValue > 0.0f) MoveSpeed = m_NormalRunSpeed;
         else MoveSpeed = m_NormalWalkSpeed;
 
         // 移動量
@@ -148,8 +149,8 @@ public class Player : MonoBehaviour
         else
         {
             // マウスの回転量
-            m_NormalRotate.y = (Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed +
-                                Input.GetAxis("AngleMouseY") * m_NormalRotateSpeed)  * Time.deltaTime;
+            //m_NormalRotate.y = (Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed +
+            //                    Input.GetAxis("AngleMouseY") * m_NormalRotateSpeed)  * Time.deltaTime;
         }
 
         // 回転を反映
@@ -166,7 +167,7 @@ public class Player : MonoBehaviour
         // 現在のフレームの移動量
         Vector3 movement = Velocity * Time.deltaTime;
         // 移動
-        m_CharacterController.Move(movement);
+        //m_CharacterController.Move(movement);
     }
 
     /// <summary>ダメージ状態の更新</summary>
