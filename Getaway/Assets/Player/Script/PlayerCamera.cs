@@ -14,6 +14,9 @@ public class PlayerCamera : MonoBehaviour
     /// <summary>右目のスキンメッシュのフィルター</summary>
     SkinnedMeshRenderer m_EveRightSkinnedMeshRenderer;
 
+    /// <summary>カメラのZ座標の補正値</summary>
+    const float m_CameraPosZCorrection = 0.1f;
+
     void Start()
     {
         // 左目のスキンメッシュを取得
@@ -30,6 +33,8 @@ public class PlayerCamera : MonoBehaviour
         Vector3 EveRightPosition = m_EveRightSkinnedMeshRenderer.bounds.center;
         // 左右の目の中心点を算出
         Vector3 CenterPoint = Vector3.Lerp(EveLiftPosition, EveRightPosition, 0.5f);
+        // カメラの位置を補正
+        CenterPoint.z = CenterPoint.z + m_CameraPosZCorrection;
         // 中心点を反映
         transform.position = CenterPoint;
     }

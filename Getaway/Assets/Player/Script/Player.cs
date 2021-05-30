@@ -149,8 +149,8 @@ public class Player : MonoBehaviour
         else
         {
             // マウスの回転量
-            //m_NormalRotate.y = (Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed +
-            //                    Input.GetAxis("AngleMouseY") * m_NormalRotateSpeed)  * Time.deltaTime;
+            m_NormalRotate.y = (Input.GetAxis("AngleMouseX") * m_NormalRotateSpeed +
+                                Input.GetAxis("AngleMouseY") * m_NormalRotateSpeed) * Time.deltaTime;
         }
 
         // 回転を反映
@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
         // 現在のフレームの移動量
         Vector3 movement = Velocity * Time.deltaTime;
         // 移動
-        //m_CharacterController.Move(movement);
+        m_CharacterController.Move(movement);
     }
 
     /// <summary>ダメージ状態の更新</summary>
