@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    /// <summary>カメラ位置</summary>
-    public GameObject m_CameraPoint;
     /// <summary>プレイヤーカメラ</summary>
     public GameObject m_PlayerCamera;
 
