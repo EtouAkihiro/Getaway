@@ -3203,8 +3203,8 @@ MonoBehaviour:
   m_NormalWalkSpeed: 4
   m_NormalRunSpeed: 8
   m_DamageWalkSpeed: 2
-  m_NormalRotateSpeed: 10
-  m_DamageRotateSpeed: 5
+  m_NormalRotateSpeed: 150
+  m_DamageRotateSpeed: 100
   m_WalkSE: {fileID: 0}
   m_RunSE: {fileID: 0}
   m_DamageSE: {fileID: 0}

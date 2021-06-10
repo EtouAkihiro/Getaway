@@ -27,6 +27,13 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
+        // カメラ位置更新
+        CameraPosUpdate();
+    }
+
+    /// <summary>カメラ位置更新</summary>
+    void CameraPosUpdate()
+    {
         // 左目の位置を取得
         Vector3 EveLiftPosition = m_EveLeftSkinnedMeshRenderer.bounds.center;
         // 右目の位置を取得

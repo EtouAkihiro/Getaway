@@ -2588,13 +2588,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1774080f9508284a81c3f255406400c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraPoint: {fileID: 0}
   m_PlayerCamera: {fileID: 6112888228233853430}
   m_NormalWalkSpeed: 4
   m_NormalRunSpeed: 8
   m_DamageWalkSpeed: 2
-  m_NormalRotateSpeed: 10
-  m_DamageRotateSpeed: 5
+  m_NormalRotateSpeed: 150
+  m_DamageRotateSpeed: 100
   m_WalkSE: {fileID: 0}
   m_RunSE: {fileID: 0}
   m_DamageSE: {fileID: 0}
